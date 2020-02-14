@@ -145,6 +145,10 @@ UEFI
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
+ Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
+ Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==VirtualSMC.efi "!**VirtualSMC.efi** should not be here!"
  Drivers==* " **{$value}**"
 
 :Input
