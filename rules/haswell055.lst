@@ -153,10 +153,18 @@ UEFI
  TimerResolution=50000
 
 :Protocols
+ AppleBootPolicy=no
+ AppleEvent=no
+ AppleImageConversion=no
+ AppleKeyMap=no
  AppleSmcIo=no
+ AppleUserInterfaceTheme=no
  ConsoleControl=no
+ DataHub=no
+ DeviceProperties=no
  FirmwareVolume=no
  HashServices=no
+ OSInfo=no
  UnicodeCollation=no
 
 :Quirks
