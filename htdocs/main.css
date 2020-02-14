@@ -1,0 +1,43 @@
+body {
+    background-color: #ccc;
+}
+
+.good:before {
+  content:'\2611';
+  display:inline-block;
+  color:green;
+  padding:0 6px 0 0;
+}
+
+.err:before {
+  content:'\2612';
+  display:inline-block;
+  color:red;
+  padding:0 6px 0 0;
+}
+
+.warn:before {
+  content:'\2610';
+  display:inline-block;
+  color:yellow;
+  padding:0 6px 0 0;
+}
+
+ul li {
+  list-style-type:none;
+  font-size:1.2em;
+}
+
+.dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    background-color: #ccc;
+}

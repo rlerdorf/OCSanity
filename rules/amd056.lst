@@ -1,0 +1,201 @@
+# AMD OC 0.5.6
+# Generic config suitable for initial installation
+=# OpenCore 0.5.6 AMD Sanity Check
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#acpi
+=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
+=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
+=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#platforminfo
+
+ACPI
+:Add
+ count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
+ [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. It is in your firmware already."
+ [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
+ [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
+ [Path]==* " **{$Path}**Make sure this file is in your OC/ACPI directory" 
+
+:Quirks
+ count==5 
+ FadtEnableReset=no
+ NormalizeHeaders=no
+ RebaseRegions=no 
+ ResetHwSig=no
+ ResetLogoStatus=no
+
+:Patch
+ count>15 "!You may have added the kernel patches in the wrong section. They should be in the Kernel section. Please review the [Kernel Docs][kernel]"
+
+Booter
+
+:Quirks
+ AvoidRuntimeDefrag=yes
+ DevirtualiseMmio=no
+ DisableSingleUser=no
+ DisableVariableWrite=no
+ DiscardHibernateMap=no
+ EnableSafeModeSlide=yes
+ EnableWriteUnprotector=yes
+ ForceExitBootServices=no
+ ProtectCsmRegion=no
+ ProtectSecureBoot=no
+ ProvideCustomSlide=yes
+ SetupVirtualMap=yes
+ ShrinkMemoryMap=no
+ SignalAppleOs=no
+
+DeviceProperties
+
+Kernel
+
+:Add
+ count==0 "!You have no Kexts. You definitely need at least Lilu.kext and VirtualSMC.kext. Please review the [Kexts Docs][kexts]"
+ [BundlePath]!=Lilu.kext "!**Lilu.kext** is missing. Add it to the top of this list":" **Lilu.kext** make sure this Kext is in your **OC/Kexts** directory and the first kext listed here"
+ [BundlePath]==FakeSMC.kext&VirtualSMC.kext "-**{$BundlePath}** don't use both **FakeSMC.kext** and **VirtualSMC.kext**"
+ [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
+ [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
+ [BundlePath]==SMCProcessor.kext       "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
+ [BundlePath]==SMCSuperIO.kext         "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
+ [BundlePath]==IntelMausiEthernet.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
+ [BundlePath]==NullCPUPowerManagment.kext "!**{$BundlePath}** set the **DummyPowerManagement** quirk instead of using this kext"
+ [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
+
+:Patch
+ count<20 "!**{$count}** patches found - Did you apply the kernel patches correctly? Please review the [Kernel Docs][kernel]"
+ count>19 " AMD kernel patches"
+
+:Quirks
+ AppleCpuPmCfgLock=no
+ AppleXcpmCfgLock=no
+ AppleXcpmExtraMsrs=no
+ AppleXcpmForceBoost=no
+ CustomSMBIOSGuid=no
+ DisableIOMapper=no
+ DummyPowerManagement=yes
+ ExternalDiskIcons=yes
+ IncreasePciBarSize=no
+ LapicKernelPanic=no
+ PanicNoKextDump=yes
+ PowerTimeoutKernelPanic=yes
+ ThirdPartyDrives=no
+ XhciPortLimit=yes " **{$setting}** turn off after USB port mapping":" **{$setting}** enable if you have USB issues"
+
+Misc
+:Boot
+ BuiltinTextRenderer=? "-This shouldn't be here"
+ HideSelf=yes
+ PollAppleHotKeys=no
+ ShowPicker=yes
+ TakeoffDelay=0
+ HibernateMode=None
+ PickerMode=Builtin
+ PickerAttributes=0
+ Timeout=5
+ TakeoffDelay=0
+
+:Debug
+ DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
+ Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
+ DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
+
+:Security
+ AllowNvramReset=yes
+ AllowSetDefault=yes
+ AuthRestart=yes
+ RequireSignature=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
+ RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
+ Vault=Optional
+ ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
+ ScanPolicy=0 :"-**{$setting}** Normally you want 0 here, but check the [ScanPolicy Docs][scanpolicy] to see why it can be useful to change this"
+
+:Tools
+ count==0 " You removed the tool EFIs":"-You can remove the tool EFIs here"
+
+NVRAM
+ LegacyEnable=no
+ LegacyOverwrite=no
+ WriteFlash=yes
+
+:Add
+::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+ UIScale=bin:01 " **{$setting}** set to **{$value}**":" **{$setting}** {$value} is usually set to 01 but 02 is ok too"
+
+::7C436110-AB2A-4BBB-A880-FE41995C9F82
+ boot-args="-v keepsyms=1" " **{$setting}** set to **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}**"
+ csr-active-config=bin:00000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
+ nvda_drv="" " **{$setting}** set to 1 if you have a supported nvidia card":" **{$setting}** normally &lt;blank&gt; unless you have a supported nvidia card"
+ prev-lang:kbd=ru-RU:252 "!**{$setting}** set to **{$value}**. Unless you speak Russian, leave this blank":" **{$setting}** set to **{$value}**"
+
+PlatformInfo
+ Automatic=yes
+ UpdateDataHub=yes
+ UpdateNVRAM=yes
+ UpdateSMBIOS=yes
+ UpdateSMBIOSMode=Create
+
+:Generic
+ SpoofVendor=yes
+ AdviseWindows=no
+ SystemProductName="" "!**{$setting}** You need to set this. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
+ MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
+ ROM=bin:112233000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
+ SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
+ SystemUUID=00000000-0000-0000-0000-000000000000 "!**{$setting}** should be set to your generated SmUUID. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
+
+UEFI
+ ConnectDrivers=yes
+ Drivers==VBoxHfs.efi|HfsPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HfsPlus.efi** here"
+ Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
+ Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
+ Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
+ Drivers==* " **{$value}**"
+
+:Input
+ KeyForgetThreshold=5
+ KeyMergeThreshold=2
+ KeySupport=yes
+ KeySupportMode=Auto
+ KeySwap=no
+ PointerSupport=""
+ PointerSupportMode=""
+ TimerResolution=50000
+
+:Protocols
+ AppleSmcIo=no
+ ConsoleControl=yes "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ FirmwareVolume=no
+ HashServices=no
+ UnicodeCollation=no
+
+:Output
+ TextRenderer=BuiltinGraphics
+ ConsoleMode=""
+ Resolution=Max
+ ClearScreenOnModeSwitch=no
+ IgnoreTextInGraphics=no
+ ProvideConsoleGop=yes
+ ProvideEarlyConsole=yes
+ ReconnectOnResChange=no
+ SanitiseClearScreen=no
+ Scale=100
+ ReplaceTabWithSpace=no
+ ClearScreenOnModeSwitch=no
+
+:Quirks
+ AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ExitBootServicesDelay=0
+ IgnoreInvalidFlexRatio=no
+ IgnoreTextInGraphics=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ProvideConsoleGop=yes "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReleaseUsbOwnership=no
+ RequestBootVarFallback=yes
+ RequestBootVarRouting=yes
+ ReplaceTabWithSpace=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ SanitiseClearScreen=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ClearScreenOnModeSwitch=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ UnblockFsConnect=no
+

@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+use Garden\Cli\Cli;
+require "vendor/autoload.php";
+
+$cli = new Cli();
+$cli->description('OpenCore config.plist sanity checker')
+    ->opt('ruleset:r', 'Rule set to check against', true, 'string')
+    ->arg('plist', 'config.plist to sanity check', true);
+$args = $cli->parse($argv);
+
+$plist = $args->getArg('plist');
+$rules = $args->getOpt('ruleset');
+
+$pd = new ParsedownExtra();
+
+$results = function() use($plist,$rules) {
+               ob_start(function($buf) { 
+                   $pd = new ParsedownExtra();
+                   return $pd->text($buf);
+               });
+               $oc = new OpenCorePlist($plist);
+               $oc->parse(new Rules($rules));
+               ob_end_flush();
+};
+$results();

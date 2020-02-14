@@ -1,0 +1,14 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "require": {
+        "rodneyrehm/plist": "^2.0",
+        "vanilla/garden-cli": "^2.2",
+        "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.8.1"
+    },
+    "autoload": {
+        "psr-4": {"": "src"}
+    }
+}
