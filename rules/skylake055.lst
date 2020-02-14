@@ -16,6 +16,7 @@ ACPI
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EC-USBX.aml|SSDT-EC.aml "-**SSDT-EC-USBX.aml** or **SSDT-EC** is missing. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml "-**{$BundlePath}** don't use both **SSDT-EC-USBX** and **SSDT-EC**"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
 
 :Quirks
