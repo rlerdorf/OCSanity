@@ -149,7 +149,7 @@ PlatformInfo
 
 UEFI
  ConnectDrivers=yes
- Drivers==VBoxHfs.efi|HfsPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HfsPlus.efi** here"
+ Drivers==VBoxHfs.efi|HFSPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
