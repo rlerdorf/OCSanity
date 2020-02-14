@@ -1,12 +1,12 @@
-# Haswell OC 0.5.5
+# Ivy Bridge OC 0.5.5
 # Generic config suitable for initial installation
-=# OpenCore 0.5.5 Intel Haswell Sanity Check
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#acpi
+=# OpenCore 0.5.5 Intel Ivy Bridge Sanity Check
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#platforminfo
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#platforminfo
 
 ACPI
 :Add
@@ -14,9 +14,8 @@ ACPI
  [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. It is in your firmware already."
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
- [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]!=SSDT-EHCx_OFF.aml "-**SSDT-EHCx_OFF.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-CPU-PM.aml "-**SSDT-CPU-PM.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
 
 :Quirks
@@ -159,7 +158,7 @@ UEFI
  AppleKeyMap=no
  AppleSmcIo=no
  AppleUserInterfaceTheme=no
- ConsoleControl=no
+ ConsoleControl=yes
  DataHub=no
  DeviceProperties=no
  FirmwareVolume=no
