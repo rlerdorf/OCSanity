@@ -39,6 +39,7 @@ Booter
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
  ProtectCsmRegion=no
+ ProvideConsoleGop=yes "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
@@ -90,9 +91,12 @@ Misc
  ShowPicker=yes
  TakeoffDelay=0
  UsePicker=yes
+ PickerMode=Builtin "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
+ PickerAttributes=0 "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  HibernateMode=None
  Timeout=5
  TakeoffDelay=0
+ Resolution=""
 
 :Debug
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
@@ -105,6 +109,7 @@ Misc
  AuthRestart=yes
  RequireSignature=no 
  RequireVault=no
+ Vault=Optional "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
  ScanPolicy=0 :"-**{$setting}** Normally you want 0 here, but check the [Scanpolicy Docs][scanpolicy] to see why it can be useful to change this"
 
@@ -161,23 +166,32 @@ UEFI
  TimerResolution=50000
 
 :Protocols
+ AppleBootPolicy=no
+ AppleEvent=no
+ AppleImageConversion=no
+ AppleKeyMap=no
  AppleSmcIo=no
+ AppleUserInterfaceTheme=no
  ConsoleControl=yes
+ DataHub=no
+ DeviceProperties=no
  FirmwareVolume=no
  HashServices=no
+ OSInfo=no
  UnicodeCollation=no
 
 :Quirks
  AvoidHighAlloc=no
+ ClearScreenOnModeSwitch=no
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
+ ReconnectOnResChange=no
  ReleaseUsbOwnership=no
+ ReplaceTabWithSpace=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace=no
  SanitiseClearScreen=no
- ClearScreenOnModeSwitch=no
  UnblockFsConnect=no
 

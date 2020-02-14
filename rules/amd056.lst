@@ -165,10 +165,18 @@ UEFI
  TimerResolution=50000
 
 :Protocols
+ AppleBootPolicy=no
+ AppleEvent=no
+ AppleImageConversion=no
+ AppleKeyMap=no
  AppleSmcIo=no
+ AppleUserInterfaceTheme=no
+ DataHub=no
+ DeviceProperties=no
  ConsoleControl=yes "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  FirmwareVolume=no
  HashServices=no
+ OSInfo=no
  UnicodeCollation=no
 
 :Output
@@ -178,12 +186,11 @@ UEFI
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
- ProvideEarlyConsole=yes
+ DirectGopRendering=no
  ReconnectOnResChange=no
+ ReplaceTabWithSpace=no
  SanitiseClearScreen=no
  Scale=100
- ReplaceTabWithSpace=no
- ClearScreenOnModeSwitch=no
 
 :Quirks
  AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
