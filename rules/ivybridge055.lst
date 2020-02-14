@@ -41,9 +41,13 @@ Booter
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
- SignalAppleOs=no
+ SignalAppleOS=no
 
 DeviceProperties
+
+:Add
+::PciRoot(0x0)/Pci(0x2,0x0)
+ AAPL,ig-platform-id~="((\x0A\x00\x66\x01)" " **{$setting}** iGPU set":"-**{$setting}** iGPU not set correctly"
 
 Kernel
 
@@ -55,7 +59,8 @@ Kernel
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
  [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
- [BundlePath]==VoodooHDA.kext "!**VoodooHDA.kext** this is an AMD-specific kext, don't use on Intel"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
 
 :Quirks
@@ -139,6 +144,10 @@ UEFI
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
+ Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
+ Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==VirtualSMC.efi "!**VirtualSMC.efi** should not be here!"
  Drivers==* " **{$value}**"
 
 :Input

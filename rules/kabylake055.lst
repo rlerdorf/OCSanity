@@ -15,7 +15,8 @@ ACPI
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]!=SSDT-EC-USBX.aml "-**SSDT-EC-USBX.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-EC-USBX.aml|SSDT-EC.aml "-**SSDT-EC-USBX.aml** or **SSDT-EC** is missing. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX** and **SSDT-EC**"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
 
 :Quirks
@@ -41,9 +42,13 @@ Booter
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
- SignalAppleOs=no
+ SignalAppleOS=no
 
 DeviceProperties
+
+:Add
+::PciRoot(0x0)/Pci(0x2,0x0)
+ AAPL,ig-platform-id~="((\x00\x00\x12\x59)|(\x03\x00\x12\x59))" " **{$setting}** iGPU set":"-**{$setting}** iGPU not set correctly"
 
 Kernel
 
@@ -55,7 +60,8 @@ Kernel
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
  [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
- [BundlePath]==VoodooHDA.kext "!**VoodooHDA.kext** this is an AMD-specific kext, don't use on Intel"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
 
 :Quirks
@@ -139,6 +145,10 @@ UEFI
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
+ Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
+ Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==VirtualSMC.efi "!**VirtualSMC.efi** should not be here!"
  Drivers==* " **{$value}**"
 
 :Input
