@@ -351,7 +351,7 @@ class SettingRule extends Rule {
             }
         }
 
-        if($check_missing && ($this->op == '=' || $this->op == '~=') && empty($ret)) {
+        if(empty($this->msgtrue) && $check_missing && ($this->op == '=' || $this->op == '~=') && empty($ret)) {
             $right = $this->right;
             if($right === true) $right="Yes";
             else if($right === false) $right = "No";

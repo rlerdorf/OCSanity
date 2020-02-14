@@ -74,7 +74,7 @@ Kernel
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
- DisableIOMapper=no
+ DisableIoMapper=no
  DummyPowerManagement=yes
  ExternalDiskIcons=yes
  IncreasePciBarSize=no
@@ -86,7 +86,7 @@ Kernel
 
 Misc
 :Boot
- BuiltinTextRenderer=? "-This shouldn't be here"
+ BuiltinTextRenderer=no "-This shouldn't be here"
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
