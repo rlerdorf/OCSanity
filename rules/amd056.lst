@@ -43,7 +43,7 @@ Booter
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
- SignalAppleOs=no
+ SignalAppleOS=no
 
 DeviceProperties
 
