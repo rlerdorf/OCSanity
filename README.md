@@ -32,3 +32,8 @@ explanation mark ***!*** is an error (red).
 
 See the rules directory for full examples.
 
+## Installation
+
+`composer install` then from the command line you can run `./ocs -m -r rules/amd055.lst Sample.plist` to test it from the command line.
+
+For a web install, point set your docroot to the htdocs directory and make sure you have PHP 7.x enabled.

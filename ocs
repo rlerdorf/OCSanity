@@ -6,16 +6,19 @@ require "vendor/autoload.php";
 $cli = new Cli();
 $cli->description('OpenCore config.plist sanity checker')
     ->opt('ruleset:r', 'Rule set to check against', true, 'string')
+    ->opt('markdown:m', 'Leave output in markdown format', false, 'boolean')
     ->arg('plist', 'config.plist to sanity check', true);
 $args = $cli->parse($argv);
 
 $plist = $args->getArg('plist');
 $rules = $args->getOpt('ruleset');
+$md = $args->getOpt('markdown');
 
 $pd = new ParsedownExtra();
 
-$results = function() use($plist,$rules) {
-               ob_start(function($buf) { 
+$results = function() use($plist,$rules,$md) {
+               ob_start(function($buf) use($md) {
+                   if($md) return $buf;
                    $pd = new ParsedownExtra();
                    return $pd->text($buf);
                });
