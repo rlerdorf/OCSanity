@@ -36,7 +36,7 @@ if($fpath) {
             return $pd->text($buf);
         });
         $oc = new OpenCorePlist($fpath);
-        $oc->parse(new Rules("../rules/{$rs}.lst"));
+        $oc->applyRules(new Rules("../rules/{$rs}.lst"));
         ob_end_flush();
     };
 } else {

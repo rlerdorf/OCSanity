@@ -34,7 +34,9 @@ See the rules directory for full examples.
 
 ## Installation
 
-`composer install` then run `./ocs -m -r rules/amd055.lst Sample.plist` to test it from the command line.
+`composer install` then run `vendor/bin/phpunit` to run the tests.
+
+`./ocs -m -r rules/amd055.lst Sample.plist` to run a rule against a plist file on the command line with output in markdown format.
 
 For a web install, point set your docroot to the htdocs directory and make sure you have PHP 7.x enabled.
 

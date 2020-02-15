@@ -1,26 +1,19 @@
 <?php
-class OpenCorePlist {
-    /** @var CFPropertyList\CFPropertyList */
-    private $pList;
-    /** @var array */
-    private $pArray;
-    /** @var string */
-    protected $group;
-    /** @var string */
-    protected $section;
 
+class OpenCorePlist extends CFPropertyList\CFPropertyList {
     function __construct(string $filename) {
         if(!file_exists($filename)) {
             throw new \Exception('File not found');
         }
-        $this->pList = new CFPropertyList\CFPropertyList($filename, CFPropertyList\CFPropertyList::FORMAT_XML);
-        $this->pArray = $this->pList->toArray();
+        parent::__construct($filename, CFPropertyList\CFPropertyList::FORMAT_XML);
     }
 
-    function parse(Rules $rules) {
+    function applyRules(Rules $rules) {
         $last_title = '';
-        foreach($this->pArray as $group=>$d) {
-            $this->group = $group;
+        foreach(array_keys(array_diff_key($rules->rule, $this->toArray())) as $missing_group) {
+            $this->print_msg("-*$missing_group* group is missing");
+        }
+        foreach($this->toArray() as $group=>$d) {
             if (!array_key_exists($group, $rules->rule)) {
                 $this->print_msg("-*$group* this shouldn't be here");
                 continue;
@@ -29,7 +22,7 @@ class OpenCorePlist {
             if(!empty($rules->rule[$group]["top"])) {
                 foreach($rules->rule[$group]["top"] as $rule) {
                     if(!empty($rule)) {
-                        $msgs = $rule->exec($d);
+                        $msgs = $rule->exec($d, $this->value[0]->{$group});
                         if($rule->title && $last_title!=$rule->title) {
                             echo "\n###".$rule->title."\n";
                             $last_title = $rule->title;
@@ -55,7 +48,6 @@ class OpenCorePlist {
             }
 
             foreach($d as $section=>$dd) {
-                $this->section = ":$section";
                 if($last_title!=$section) {
                     echo "\n###$section\n";
                     $last_title = $section;
@@ -63,7 +55,7 @@ class OpenCorePlist {
                 if(!empty($rules->rule[$group][":$section"])) {
                     foreach($rules->rule[$group][":$section"] as $rule) {
                         if(!empty($rule)) {
-                            $msgs = $rule->exec($dd);
+                            $msgs = $rule->exec($dd, $this->value[0]->{$group}->{$section});
                             foreach($msgs as $k=>$msg) {
                                 if(!empty($msg)) {
                                     $this->print_msg($msg);
@@ -80,7 +72,7 @@ class OpenCorePlist {
                         if(!empty($rules->rule[$group]["::$ssection"])) {
                             foreach($rules->rule[$group]["::$ssection"] as $rule) {
                                 if(!empty($rule)) {
-                                    $msgs = $rule->exec($ddd, false);
+                                    $msgs = $rule->exec($ddd, $this->value[0]->{$group}->{$section}->{$ssection}, false);
                                     foreach($msgs as $k=>$msg) {
                                         if(!empty($msg)) {
                                             $this->print_msg($msg);
@@ -94,6 +86,23 @@ class OpenCorePlist {
                     }
                 }
             }
+        }
+    }
+
+    function get_obj(...$args) {
+        switch(count($args)) {
+            case 0:
+                return $this->value[0];
+            case 1:
+                return $this->value[0]->{$args[0]};
+            case 2:
+                return $this->value[0]->{$args[0]}->{$args[1]};
+            case 3:
+                return $this->value[0]->{$args[0]}->{$args[1]}->{$args[2]};
+            case 4:
+                return $this->value[0]->{$args[0]}->{$args[1]}->{$args[2]}->{$args[3]};
+            case 5:
+                return $this->value[0]->{$args[0]}->{$args[1]}->{$args[2]}->{$args[3]}->{$args[4]};
         }
     }
 

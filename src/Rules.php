@@ -14,6 +14,7 @@ class Rules {
         $group = null;
         $vars = $rule = [];
         foreach($rls as $line) {
+            if(!strlen($line)) continue;
             switch($line[0]) {
                 case '#': case "\n": break;
                 case '=': echo substr($line,1); break;
@@ -94,6 +95,26 @@ class Rule {
         }
         return new SettingRule($op, $left, $right, $msgtrue, $msgfalse, $vars);
     }
+
+    static function valStr($val, $node=null) {
+        if($val === true) $ret = "Yes";
+        else if($val === false) $ret = "No";
+        else if($val === "") $ret = "<blank>";
+        else if($node && $node instanceof CFPropertyList\CFData) $ret = bin2hex($val);
+        else $ret = $val;
+        return $ret;
+    }
+
+    static function valCast($val, $node=null) {
+        if($node instanceof CFPropertyList\CFString) {
+            return (string)$val;
+        } else if($node instanceof CFPropertyList\CFNumber) {
+            return (int)$val;
+        } else if($node instanceof CFPropertyList\CFData) {
+            return bin2hex($val);
+        }
+        return $val;
+    }
 }
 
 class CountRule extends Rule {
@@ -112,7 +133,7 @@ class CountRule extends Rule {
         $this->title = '';
     }
 
-    public function exec($arg, $unused_check_missing=true):array {
+    public function exec($arg, $unused_node, $unused_check_missing=true):array {
         $count = count($arg);
         $vars = $this->vars + [ '{$count}' => $count ];
         $msgtrue = strtr((string)$this->msgtrue, $vars);
@@ -149,7 +170,7 @@ class AttrValueRule extends Rule {
         else $this->right = trim($right,'"');
     }
 
-    public function exec($arg, $unused_check_missing=true):array {
+    public function exec($arg, $node, $unused_check_missing=true):array {
         $vars = $this->vars;
         $ret = [];
         $lop = null;
@@ -157,7 +178,7 @@ class AttrValueRule extends Rule {
         // Special case, * matches all remaining attributes that haven't matched a previous rule
         if($this->op == '==' && $this->right === '*') {
             foreach($arg as $key=>$v) {
-                foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => is_bool($vv) ? ($vv?'Yes':'No') : $vv ]);
+                foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
                 $msgtrue = strtr((string)$this->msgtrue, $vars);
                 $ret[$key+1] = $msgtrue;
             }
@@ -198,7 +219,7 @@ class AttrValueRule extends Rule {
         if($lop=='&' && $found_count >= count($lookfor)) $found = true;
         else if((!$lop || $lop=='|') && $found_count) $found = true;
 
-        foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => is_bool($vv) ? ($vv?'Yes':'No') : $vv ]);
+        foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
         $msgtrue = strtr((string)$this->msgtrue, $vars);
         $msgfalse = strtr((string)$this->msgfalse, $vars);
 
@@ -231,17 +252,10 @@ class SettingRule extends Rule {
         $this->vars = $vars;
         if(strtolower($right)=='yes') $this->right = true;
         else if(strtolower($right)=='no') $this->right = false;
-        else {
-            $tmp = trim($right, '"');
-            if(is_numeric($tmp) && ($tmp[0]!=0 || strlen($tmp)==1)) {
-                if(strstr($tmp, '.') === false) $tmp = (int)$tmp;
-                else $tmp = (float)$tmp;
-            }
-            $this->right = $tmp;
-        }
+        else $this->right = trim($right,'"');
     }
 
-    public function exec($arg, $check_missing=true):array {
+    public function exec($arg, $node, $check_missing=true):array {
         $vars = $this->vars;
         $ret = [];
         $msgtrue = $msgfalse = "";
@@ -249,24 +263,10 @@ class SettingRule extends Rule {
         foreach($arg as $key=>$val) {
             if($this->op == '=' || $this->op == '~=') {
                 if($this->left === $key) {
-                    // Look for modifiers and apply
-                    @[$type,$v] = preg_split('@"[^"]*"(*SKIP)(*F)|:@', $this->right);
-                    if(!empty($v)) {
-                        switch($type) {
-                            case 'bin':
-                                $val = bin2hex($val);
-                                $right = $v;
-                                break;
-                            default:
-                                $right = $this->right;
-                                break;
-                        }
-                    } else {
-                        $right = $this->right;
-                    }
+                    $right = $this->right;
 
                     // Populate local symbol table
-                    $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => $val ];
+                    $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($val, $node->{$key}) ];
                     if(!empty($this->msgtrue)) {
                         $msgtrue = strtr($this->msgtrue, $vars);
                     }
@@ -274,16 +274,13 @@ class SettingRule extends Rule {
                         $msgfalse = strtr($this->msgfalse, $vars);
                     }
 
+                    $cmp = Rule::valCast($val, $node->{$key});
                     // Apply condition
-                    if(($this->op == '=' && $right === $val) || ($this->op == '~=' && preg_match('@'.$right.'@', $val))) {
-                        $ret[$key] = empty($msgtrue) ? " **$key**" : $msgtrue;
+                    if(($this->op == '=' && $right == $cmp) || ($this->op == '~=' && preg_match('@'.$right.'@', $cmp))) {
+                        $ret[$key] = empty($msgtrue) ? " **$key** = **".Rule::valStr($val, $node->{$key})."**" : $msgtrue;
                     } else {
                         if(empty($msgfalse)) {
-                            $ret[$key] = "-**$key** should normally be ";
-                            if($right === true) $ret[$key].="**Yes**";
-                            else if($right === false) $ret[$key].="**No**";
-                            else if($right === "") $ret[$key].="**<blank>**";
-                            else $ret[$key].="*{$right}*";
+                            $ret[$key] = "-**$key** should normally be **".Rule::valStr($right)."**";
                         } else {
                             $ret[$key] = $msgfalse;
                         }
@@ -297,7 +294,7 @@ class SettingRule extends Rule {
                 // Special case, * matches all remaining attributes that haven't matched a previous rule
                 if($this->op == '==' && $this->right === '*') {
                     foreach($val as $k=>$v) {
-                        $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => $v ];
+                        $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($v, $node->{$k}) ];
                         $msgtrue = strtr($this->msgtrue, $vars);
                         $ret[":$key:$k"] = $msgtrue;
                     }
@@ -327,11 +324,12 @@ class SettingRule extends Rule {
                 $fv = '';
 
                 foreach($val as $k=>$v) {
+                    $cmp = Rule::valCast($v, $node->{$k});
                     foreach($lookfor as $look) {
                         if(!$lop || $lop=='|') {
-                            if($v === $look) { $found_count++; $fkey = $k; $fv = $v; }
+                            if($cmp === $look) { $found_count++; $fkey = $k; $fv = $cmp; }
                         } else if($lop=='&') {
-                            if($v === $look) { $found_count++; $fkey = $k; $fv = $v; }
+                            if($cmp === $look) { $found_count++; $fkey = $k; $fv = $cmp; }
                         }
                     }
                 }
@@ -353,10 +351,7 @@ class SettingRule extends Rule {
         }
 
         if(empty($this->msgtrue) && $check_missing && ($this->op == '=' || $this->op == '~=') && empty($ret)) {
-            $right = $this->right;
-            if($right === true) $right="Yes";
-            else if($right === false) $right = "No";
-            else if($right === "") $right = "<blank>";
+            $right = Rule::valStr($this->right);
 
             $vars = $this->vars + [ '{$setting}' => $this->left, '{$value}' => $right ];
             // Overriding user-supplied msgfalse in this missing setting case

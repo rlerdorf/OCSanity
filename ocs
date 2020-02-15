@@ -23,7 +23,7 @@ $results = function() use($plist,$rules,$md) {
                    return $pd->text($buf);
                });
                $oc = new OpenCorePlist($plist);
-               $oc->parse(new Rules($rules));
+               $oc->applyRules(new Rules($rules));
                ob_end_flush();
 };
 $results();
