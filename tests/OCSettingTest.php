@@ -72,7 +72,7 @@ final class OCSettingTest extends TestCase {
         $rules = <<< 'RULES'
         PlatformInfo
         :Generic
-         ROM~=(123|112233000000) " {$setting} {$value}"
+         ROM~="(123|112233000000)" " {$setting} {$value}"
 
         RULES;
 
@@ -102,5 +102,27 @@ final class OCSettingTest extends TestCase {
         $this->assertStringContainsString('"good">**KeySwap** = **No**', $buf);
         $this->assertStringContainsString('"warn">**PointerSupportMode** should normally be **<blank>**', $buf);
         $this->assertStringContainsString('"warn">**SanitiseClearScreen** is missing. Normally set to **Yes**', $buf);
+    }
+
+    public function testSettingNested(): void {
+        $rules = <<< 'RULES'
+        NVRAM
+        :Add
+        ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+         UIScale~=(01|02) " Good {$setting} = {$value}":" {$setting} = {$value} is usually set to 01 or 02"
+        ::7C436110-AB2A-4BBB-A880-FE41995C9F82
+         boot-args="-v keepsyms=1" " {$setting} = {$value} If you have a navi10 GPU add **agdpmod=pikera**":" {$setting} = {$value}"
+         csr-active-config=00000000 " Good {$setting} = {$value}":" Bad {$setting} = {$value}"
+         nvda_drv="" " {$setting} = 1 if you have a supported nvidia card":" {$setting} is {$value}"
+         prev-lang:kbd=72752d52553a323532 "!{$setting} = ru-RU:252. Unless you speak Russian, leave this blank":" {$setting} = {$value}"
+
+        RULES;
+
+        $buf = $this->applyRules($rules);
+        $this->assertStringContainsString('Good UIScale = 01', $buf);
+        $this->assertStringContainsString('boot-args = -v keepsyms=1', $buf);
+        $this->assertStringContainsString('Good csr-active-config = 00000000', $buf);
+        $this->assertStringContainsString('nvda_drv is 31', $buf);
+        $this->assertStringContainsString('prev-lang:kbd = ru-RU:252. Unless', $buf);
     }
 }

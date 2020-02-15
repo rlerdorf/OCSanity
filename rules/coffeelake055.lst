@@ -116,13 +116,13 @@ NVRAM
 
 :Add
 ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
- UIScale=bin:01 " **{$setting}** set to **{$value}**":" **{$setting}** {$value} is usually set to 01 but 02 is ok too"
+ UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
- boot-args="-v keepsyms=1" " **{$setting}** set to **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}**"
- csr-active-config=bin:00000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
+ boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **$value**"
+ csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  nvda_drv="" " **{$setting}** set to 1 if you have a supported nvidia card":" **{$setting}** normally &lt;blank&gt; unless you have a supported nvidia card"
- prev-lang:kbd=ru-RU:252 "!**{$setting}** set to **{$value}**. Unless you speak Russian, leave this blank":" **{$setting}** set to **{$value}**"
+ prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} (ru-RU:252)**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value}**"
 
 PlatformInfo
  Automatic=yes
@@ -134,9 +134,9 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SystemProductName="" "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
- MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
- ROM=bin:112233000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
+ SystemProductName="" "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ ROM=112233000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemUUID=00000000-0000-0000-0000-000000000000 "!**{$setting}** should be set to your generated SmUUID. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
 
