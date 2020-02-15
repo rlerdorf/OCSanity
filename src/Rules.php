@@ -3,11 +3,14 @@ class Rules {
     /** @var array */
     public $rule = [];
 
-    function __construct(string $filename) {
-        if(!file_exists($filename)) {
-            throw new \Exception('File not found');
+    /** An array of rules can be passed in for testing purposes */
+    function __construct(string $filename, array $rls = []) {
+        if(empty($rls)) {
+            if(!file_exists($filename)) {
+                throw new \Exception('File not found');
+            }
+            $rls = file($filename);
         }
-        $rls = file($filename);
         $group = null;
         $vars = $rule = [];
         foreach($rls as $line) {
@@ -132,7 +135,7 @@ class AttrValueRule extends Rule {
     private $right;
     private $msgtrue;
     private $msgfalse;
-    private $vars;
+    private $vars = [];
 
     function __construct(string $op, string $left, string $right, ?string $msgtrue, ?string $msgfalse, array $vars) {
         $this->op = $op;
@@ -185,9 +188,9 @@ class AttrValueRule extends Rule {
                     if(preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
                 } else {
                     if(!$lop || $lop=='|') {
-                        if($v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
+                        if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
                     } else if($lop=='&') {
-                        if($v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
+                        if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
                     }
                 }
             }
