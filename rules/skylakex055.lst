@@ -66,7 +66,7 @@ Kernel
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
- DisableIOMapper=yes
+ DisableIoMapper=yes
  DummyPowerManagement=no
  ExternalDiskIcons=yes
  IncreasePciBarSize=no
@@ -128,7 +128,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SystemProductName="" "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  ROM=112233000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -143,7 +143,7 @@ UEFI
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
- Drivers==VirtualSMC.efi "!**VirtualSMC.efi** should not be here!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
 :Input
