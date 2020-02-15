@@ -127,7 +127,7 @@ PlatformInfo
 
 :Generic
  SpoofVendor=yes
- AdviseWindows=yes
+ AdviseWindows=no
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
  ROM=bin:112233000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
