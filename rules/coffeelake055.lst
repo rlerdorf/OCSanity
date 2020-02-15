@@ -91,7 +91,6 @@ Misc
  UsePicker=yes
  HibernateMode=None
  Timeout=5
- TakeoffDelay=0
 
 :Debug
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
@@ -159,7 +158,7 @@ UEFI
  KeySupport=yes
  KeySupportMode=Auto
  KeySwap=no
- PointerSupport=false
+ PointerSupport=no
  PointerSupportMode=""
  TimerResolution=50000
 

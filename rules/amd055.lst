@@ -97,7 +97,6 @@ Misc
  PickerAttributes=0 "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  HibernateMode=None
  Timeout=5
- TakeoffDelay=0
  Resolution=""
 
 :Debug
@@ -167,7 +166,7 @@ UEFI
  KeySupport=yes
  KeySupportMode=Auto
  KeySwap=no
- PointerSupport=false
+ PointerSupport=no
  PointerSupportMode=""
  TimerResolution=50000
 
