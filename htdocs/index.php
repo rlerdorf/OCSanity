@@ -2,8 +2,14 @@
 require '../vendor/autoload.php';
 $default_ruleset = 'amd055';  // Update when this gets too old
 
+// Support old-style URL oc param
+
+if(empty($_GET['rs']) && !empty($_GET['oc'])) {
+    $rs = ($_GET['oc'] == '0.5.6') ? 'amd056' : 'amd055';
+} else {
 // Sanitize user input
-$rs = preg_replace('/[^a-zA-Z0-9_]+/', '-', $_GET['rs'] ?? $default_ruleset);
+    $rs = preg_replace('/[^a-zA-Z0-9_]+/', '-', $_GET['rs'] ?? $default_ruleset);
+}
 $fn = basename($_GET['file']);
 $fpath = __DIR__."/../uploads/$fn";
 if(!$fn || !file_exists($fpath)) {
