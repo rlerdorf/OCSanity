@@ -108,7 +108,7 @@ Misc
 :Security
  AllowNvramReset=yes
  AllowSetDefault=yes
- AuthRestart=yes
+ AuthRestart=no
  RequireSignature=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
  RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
  Vault=Optional

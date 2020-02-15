@@ -109,7 +109,7 @@ Misc
 :Security
  AllowNvramReset=yes
  AllowSetDefault=yes
- AuthRestart=yes
+ AuthRestart=no
  RequireSignature=no 
  RequireVault=no
  Vault=Optional "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
