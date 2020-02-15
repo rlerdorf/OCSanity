@@ -100,7 +100,7 @@ final class OCSettingTest extends TestCase {
         $this->assertStringContainsString('"good">**XhciPortLimit** = **No**', $buf);
         $this->assertStringContainsString('"good">**KeyForgetThreshold** = **5**', $buf);
         $this->assertStringContainsString('"good">**KeySwap** = **No**', $buf);
-        $this->assertStringContainsString('"warn">**PointerSupportMode** should normally be **<blank>**', $buf);
+        $this->assertStringContainsString('"warn">**PointerSupportMode** = **ASUS** but should normally be **_&lt;blank&gt;_**', $buf);
         $this->assertStringContainsString('"warn">**SanitiseClearScreen** is missing. Normally set to **Yes**', $buf);
     }
 

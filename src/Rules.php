@@ -280,7 +280,7 @@ class SettingRule extends Rule {
                         $ret[$key] = empty($msgtrue) ? " **$key** = **".Rule::valStr($val, $node->{$key})."**" : $msgtrue;
                     } else {
                         if(empty($msgfalse)) {
-                            $ret[$key] = "-**$key** should normally be **".Rule::valStr($right)."**";
+                            $ret[$key] = "-**$key** = **".Rule::valStr($val, $node->{$key})."** but should normally be **".Rule::valStr($right)."**";
                         } else {
                             $ret[$key] = $msgfalse;
                         }

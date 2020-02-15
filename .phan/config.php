@@ -21,7 +21,7 @@ return [
     // Thus, both first-party and third-party code being used by
     // your application should be included in this list.
     'directory_list' => [
-        'src', 'htdocs'
+        '.phan/stubs', 'src', 'htdocs'
     ],
 
     // A directory list that defines files that will be excluded
@@ -40,7 +40,8 @@ return [
     ],
 
     'suppress_issue_types' => [
-        'PhanUndeclaredClassMethod','PhanUndeclaredGlobalVariable', 'PhanUndeclaredTypeProperty', 'PhanUndeclaredClassConstant'
+        'PhanUndeclaredGlobalVariable'
+//        'PhanUndeclaredClassMethod','PhanUndeclaredGlobalVariable', 'PhanUndeclaredTypeProperty', 'PhanUndeclaredClassConstant'
     ],
     // A list of plugin files to execute.
     // Plugins which are bundled with Phan can be added here by providing their name
