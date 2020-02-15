@@ -167,7 +167,7 @@ UEFI
  KeySupport=yes
  KeySupportMode=Auto
  KeySwap=no
- PointerSupport=""
+ PointerSupport=false
  PointerSupportMode=""
  TimerResolution=50000
 
