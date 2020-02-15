@@ -63,12 +63,14 @@ Kernel
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==IntelMausiEthernet.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
  [BundlePath]==NullCPUPowerManagment.kext "!**{$BundlePath}** set the **DummyPowerManagement** quirk instead of using this kext"
+ [BundlePath]==USBInjectAll.kext "!**{$BundlePath}** Does not work on AMD"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
 
 :Patch
  count<20 "!**{$count}** patches found - Did you apply the kernel patches correctly? Please review the [Kernel Docs][kernel]"
  count>19 " AMD kernel patches"
+ [MatchOS]=?? :"!You have used Clover patches, not OpenCore"
 
 :Quirks
  AppleCpuPmCfgLock=no
@@ -76,7 +78,7 @@ Kernel
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
- DisableIOMapper=no
+ DisableIoMapper=no
  DummyPowerManagement=yes
  ExternalDiskIcons=yes
  IncreasePciBarSize=no
@@ -142,7 +144,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SystemProductName="" "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
+ SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
  ROM=bin:112233000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -157,7 +159,7 @@ UEFI
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
- Drivers==VirtualSMC.efi "!**VirtualSMC.efi** should not be here!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
 :Input

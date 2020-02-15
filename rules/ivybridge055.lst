@@ -12,11 +12,15 @@ ACPI
 :Add
  count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
  [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. It is in your firmware already."
+ [Path]==SSDT-PLUG.aml "-**{$Path}** SSDT-PLUG.aml doesn not work on Sandy and Ivy Bridge systems."
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-CPU-PM.aml "-**SSDT-CPU-PM.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
+
+:Block
+ [Enabled]==no "!Patch is **disabled**! Please enable this to make sure SSDT-CPU-PM works."
 
 :Quirks
  count==5 
@@ -69,7 +73,7 @@ Kernel
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
- DisableIOMapper=yes
+ DisableIoMapper=yes
  DummyPowerManagement=no
  ExternalDiskIcons=yes
  IncreasePciBarSize=no
@@ -131,7 +135,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SystemProductName="" "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
+ SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** set to **{$value}**"
  ROM=bin:112233000000 " **{$setting}** set to **{$value}**":" **{$setting}** set to **{$value}**"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -146,7 +150,7 @@ UEFI
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
- Drivers==VirtualSMC.efi "!**VirtualSMC.efi** should not be here!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
 :Input
