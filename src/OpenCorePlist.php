@@ -3,7 +3,7 @@
 class OpenCorePlist extends CFPropertyList\CFPropertyList {
     function __construct(string $filename) {
         if(!file_exists($filename)) {
-            throw new \Exception('File not found - $filename');
+            throw new \Exception("File not found - $filename");
         }
         parent::__construct($filename, CFPropertyList\CFPropertyList::FORMAT_XML);
     }
