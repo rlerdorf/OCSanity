@@ -16,7 +16,7 @@ $id = 1;
 $select_rules = '';
 foreach($rules as $fn=>$rule) {
     if($rs==$fn) $checked = 'checked';
-    else $checked = ''; 
+    else $checked = '';
     $select_rules .= "<label for=\"radio{$id}\">{$rule['short']}</label>\n";
     $select_rules .= "<input type=\"radio\" name=\"ruleset\" value=\"{$fn}\" id=\"radio{$id}\" $checked>\n";
     $id++;

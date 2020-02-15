@@ -6,11 +6,10 @@ class Rules {
     function __construct(string $filename) {
         if(!file_exists($filename)) {
             throw new \Exception('File not found');
-            return;
         }
         $rls = file($filename);
         $group = null;
-        $vars = [];
+        $vars = $rule = [];
         foreach($rls as $line) {
             switch($line[0]) {
                 case '#': case "\n": break;
@@ -47,6 +46,7 @@ class Rules {
     }
 
     static function getList(string $path) {
+        $ret = [];
         $dir = new DirectoryIterator($path);
         foreach ($dir as $fileinfo) {
             if($fileinfo->getExtension() === 'lst') {
@@ -112,22 +112,23 @@ class CountRule extends Rule {
     public function exec($arg, $unused_check_missing=true):array {
         $count = count($arg);
         $vars = $this->vars + [ '{$count}' => $count ];
-        $msgtrue = strtr($this->msgtrue, $vars);
-        $msgfalse = strtr($this->msgfalse, $vars);
-        $this->hit = true;
+        $msgtrue = strtr((string)$this->msgtrue, $vars);
+        $msgfalse = strtr((string)$this->msgfalse, $vars);
 
         switch($this->op) {
             case '==': return ($count==$this->right) ? [$msgtrue]:[$msgfalse];
             case '!=': return ($count!=$this->right) ? [$msgtrue]:[$msgfalse];
             case '<':  return ($count<$this->right)  ? [$msgtrue]:[$msgfalse];
             case '>':  return ($count>$this->right)  ? [$msgtrue]:[$msgfalse];
-            default: break;
+            default:
+                throw new \Exception("Invalid operator in count expression");
         }
     }
 }
 
 class AttrValueRule extends Rule {
     private $op;
+    private $left;
     private $right;
     private $msgtrue;
     private $msgfalse;
@@ -149,13 +150,12 @@ class AttrValueRule extends Rule {
         $vars = $this->vars;
         $ret = [];
         $lop = null;
-        $this->hit = true;
 
         // Special case, * matches all remaining attributes that haven't matched a previous rule
         if($this->op == '==' && $this->right === '*') {
             foreach($arg as $key=>$v) {
                 foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => is_bool($vv) ? ($vv?'Yes':'No') : $vv ]);
-                $msgtrue = strtr($this->msgtrue, $vars);
+                $msgtrue = strtr((string)$this->msgtrue, $vars);
                 $ret[$key+1] = $msgtrue;
             }
             return $ret;
@@ -176,7 +176,7 @@ class AttrValueRule extends Rule {
         }
 
         $found = false;
-        $found_count = 0;
+        $found_count = $fkey = 0;
         $fv = [];
 
         foreach($arg as $key=>$v) {
@@ -196,8 +196,8 @@ class AttrValueRule extends Rule {
         else if((!$lop || $lop=='|') && $found_count) $found = true;
 
         foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => is_bool($vv) ? ($vv?'Yes':'No') : $vv ]);
-        $msgtrue = strtr($this->msgtrue, $vars);
-        $msgfalse = strtr($this->msgfalse, $vars);
+        $msgtrue = strtr((string)$this->msgtrue, $vars);
+        $msgfalse = strtr((string)$this->msgfalse, $vars);
 
         if($this->op == '!=') {
             if(!$found) $ret = [$msgtrue];
@@ -218,7 +218,6 @@ class SettingRule extends Rule {
     private $msgtrue = "";
     private $msgfalse = "";
     private $vars = [];
-    public $hit = false;
 
     function __construct(string $op, string $left, string $right, ?string $msgtrue, ?string $msgfalse, array $vars) {
         $this->op = $op;
@@ -243,7 +242,6 @@ class SettingRule extends Rule {
         $vars = $this->vars;
         $ret = [];
         $msgtrue = $msgfalse = "";
-        $this->hit = true;
 
         foreach($arg as $key=>$val) {
             if($this->op == '=' || $this->op == '~=') {
@@ -252,7 +250,7 @@ class SettingRule extends Rule {
                     @[$type,$v] = preg_split('@"[^"]*"(*SKIP)(*F)|:@', $this->right);
                     if(!empty($v)) {
                         switch($type) {
-                            case 'bin': 
+                            case 'bin':
                                 $val = bin2hex($val);
                                 $right = $v;
                                 break;
@@ -322,7 +320,7 @@ class SettingRule extends Rule {
                 }
 
                 $found = false;
-                $found_count = 0;
+                $found_count = $fkey = 0;
                 $fv = '';
 
                 foreach($val as $k=>$v) {

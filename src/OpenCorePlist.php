@@ -1,6 +1,6 @@
 <?php
 class OpenCorePlist {
-    /** @var CFPropertyList */
+    /** @var CFPropertyList\CFPropertyList */
     private $pList;
     /** @var array */
     private $pArray;
@@ -12,9 +12,8 @@ class OpenCorePlist {
     function __construct(string $filename) {
         if(!file_exists($filename)) {
             throw new \Exception('File not found');
-            return;
         }
-        $this->pList = new \CFPropertyList\CFPropertyList($filename, \CFPropertyList\CFPropertyList::FORMAT_XML); 
+        $this->pList = new CFPropertyList\CFPropertyList($filename, CFPropertyList\CFPropertyList::FORMAT_XML);
         $this->pArray = $this->pList->toArray();
     }
 
@@ -30,7 +29,7 @@ class OpenCorePlist {
             if(!empty($rules->rule[$group]["top"])) {
                 foreach($rules->rule[$group]["top"] as $rule) {
                     if(!empty($rule)) {
-                        $msgs = $rule->exec($d); 
+                        $msgs = $rule->exec($d);
                         if($rule->title && $last_title!=$rule->title) {
                             echo "\n###".$rule->title."\n";
                             $last_title = $rule->title;
@@ -39,14 +38,17 @@ class OpenCorePlist {
                             if(!empty($msg)) {
                                 $this->print_msg($msg);
                                 // Make sure we don't match more rules to the same entry
-                                if(is_int($k) && $k) { 
+                                if(is_int($k) && $k) {
                                     unset($d[$k-1]);
-                                } else if($k[0]==':') {
+                                }
+                                // @phan-suppress-next-line PhanTypeArraySuspicious
+                                else if($k[0]==':') {
+                                    // @phan-suppress-next-line PhanTypeMismatchArgumentInternal
                                     [,$sec,$tk] = explode(':',$k,3);
                                     unset($d[$sec][$tk]);
                                 }
                                 else if($k) unset($d[$k]);
-                            } 
+                            }
                         }
                     }
                 }
@@ -61,13 +63,13 @@ class OpenCorePlist {
                 if(!empty($rules->rule[$group][":$section"])) {
                     foreach($rules->rule[$group][":$section"] as $rule) {
                         if(!empty($rule)) {
-                            $msgs = $rule->exec($dd); 
+                            $msgs = $rule->exec($dd);
                             foreach($msgs as $k=>$msg) {
                                 if(!empty($msg)) {
                                     $this->print_msg($msg);
                                     if(is_int($k) && $k) unset($dd[$k-1]);  // Make sure we don't match more rules to the same entry
                                     else if($k) unset($dd[$k]);
-                                } 
+                                }
                             }
                         }
                     }

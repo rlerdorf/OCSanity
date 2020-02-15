@@ -19,7 +19,7 @@
 <div class="jumbotron text-center">
   <h3>OpenCore config.plist Sanity Checker</h3>
 </div>
-  
+
 <div class="container">
   <div class="row">
     <div class="col-md-12">
