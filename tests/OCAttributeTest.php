@@ -9,7 +9,7 @@ final class OCAttributeTest extends TestCase {
 
     public static function setUpBeforeClass(): void {
         self::$pd = new ParsedownExtra();
-        self::$oc = new OpenCorePlist('./Sample.plist');
+        self::$oc = new OpenCorePlist(__DIR__.'/Sample.plist');
     }
     
     private function applyRules(string $rules) {
