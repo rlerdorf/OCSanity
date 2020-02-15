@@ -1,4 +1,7 @@
+[![Build Status](https://travis-ci.org/rlerdorf/OCSanity.svg?branch=master)](https://travis-ci.org/rlerdorf/OCSanity)
+
 # OpenCore Sanity Checker
+
 This provides a way to apply rulesets to OpenCore config.plist files.
 
 The rule sets are written in a simplified schema language loosely based on PHP
