@@ -99,7 +99,7 @@ class Rule {
     static function valStr($val, $node=null) {
         if($val === true) $ret = "Yes";
         else if($val === false) $ret = "No";
-        else if($val === "") $ret = "<blank>";
+        else if($val === "") $ret = "_&lt;blank&gt;_";
         else if($node && $node instanceof CFPropertyList\CFData) $ret = bin2hex($val);
         else $ret = $val;
         return $ret;
