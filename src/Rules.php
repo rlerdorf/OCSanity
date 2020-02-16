@@ -96,22 +96,25 @@ class Rule {
         return new SettingRule($op, $left, $right, $msgtrue, $msgfalse, $vars);
     }
 
-    static function valStr($val, $node=null) {
+    static function valStr($val, $node=null, $raw_binary = false) {
         if($val === true) $ret = "Yes";
         else if($val === false) $ret = "No";
         else if($val === "") $ret = "_&lt;blank&gt;_";
-        else if($node && $node instanceof CFPropertyList\CFData) $ret = bin2hex($val);
-        else $ret = $val;
+        else if($node && $node instanceof CFPropertyList\CFData) {
+            if($raw_binary) $ret = $val;
+            else $ret = bin2hex($val);
+        } else $ret = $val;
         return $ret;
     }
 
-    static function valCast($val, $node=null) {
+    static function valCast($val, $node=null, $raw_binary=false) {
         if($node instanceof CFPropertyList\CFString) {
             return (string)$val;
         } else if($node instanceof CFPropertyList\CFNumber) {
             return (int)$val;
         } else if($node instanceof CFPropertyList\CFData) {
-            return bin2hex($val);
+            if(!$raw_binary) return bin2hex($val);
+            else return $val;
         }
         return $val;
     }
@@ -178,6 +181,7 @@ class AttrValueRule extends Rule {
         // Special case, * matches all remaining attributes that haven't matched a previous rule
         if($this->op == '==' && $this->right === '*') {
             foreach($arg as $key=>$v) {
+                print_r($v);
                 foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
                 $msgtrue = strtr((string)$this->msgtrue, $vars);
                 $ret[$key+1] = $msgtrue;
@@ -266,7 +270,7 @@ class SettingRule extends Rule {
                     $right = $this->right;
 
                     // Populate local symbol table
-                    $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($val, $node->{$key}) ];
+                    $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($val, $node->{$key}), '{@value}' => Rule::valStr($val, $node->{$key}, true) ];
                     if(!empty($this->msgtrue)) {
                         $msgtrue = strtr($this->msgtrue, $vars);
                     }
@@ -294,7 +298,7 @@ class SettingRule extends Rule {
                 // Special case, * matches all remaining attributes that haven't matched a previous rule
                 if($this->op == '==' && $this->right === '*') {
                     foreach($val as $k=>$v) {
-                        $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($v, $node->{$k}) ];
+                        $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($v, $node->{$k}), '{@value}' => Rule::valStr($v, $node->{$k}, true) ];
                         $msgtrue = strtr($this->msgtrue, $vars);
                         $ret[":$key:$k"] = $msgtrue;
                     }

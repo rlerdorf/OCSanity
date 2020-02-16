@@ -114,7 +114,7 @@ final class OCSettingTest extends TestCase {
          boot-args="-v keepsyms=1" " {$setting} = {$value} If you have a navi10 GPU add **agdpmod=pikera**":" {$setting} = {$value}"
          csr-active-config=00000000 " Good {$setting} = {$value}":" Bad {$setting} = {$value}"
          nvda_drv="" " {$setting} = 1 if you have a supported nvidia card":" {$setting} is {$value}"
-         prev-lang:kbd=72752d52553a323532 "!{$setting} = ru-RU:252. Unless you speak Russian, leave this blank":" {$setting} = {$value}"
+         prev-lang:kbd=72752d52553a323532 "!{$setting} = {@value}. Unless you speak Russian, leave this blank":" {$setting} = {$value}"
 
         RULES;
 
