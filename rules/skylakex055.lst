@@ -20,10 +20,10 @@ ACPI
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
 
 :Quirks
- count==5 
+ count==5
  FadtEnableReset=no
  NormalizeHeaders=no
- RebaseRegions=no 
+ RebaseRegions=no
  ResetHwSig=no
  ResetLogoStatus=no
 
@@ -115,7 +115,7 @@ NVRAM
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- nvda_drv="" " **{$setting}** set to 1 if you have a supported nvidia card":" **{$setting}** normally **_&lt;blank&gt;_** unless you have a supported nvidia card"
+ nvda_drv="" " **{$setting}** set to **1** if you have a supported nvidia card":" **{$setting}** normally **_&lt;blank&gt;_** unless you have a supported nvidia card"
  prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} (ru-RU:252)**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value}**"
 
 PlatformInfo
