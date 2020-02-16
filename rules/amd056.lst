@@ -113,7 +113,7 @@ Misc
  RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
  Vault=Optional
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
- ScanPolicy=0 :"-**{$setting}** Normally you want 0 here, but check the [ScanPolicy Docs][scanpolicy] to see why it can be useful to change this"
+ ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
 
 :Tools
  count==0 " You removed the tool EFIs":"-You can remove the tool EFIs here"

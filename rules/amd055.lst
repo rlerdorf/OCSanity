@@ -114,7 +114,7 @@ Misc
  RequireVault=no
  Vault=Optional "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
- ScanPolicy=0 :"-**{$setting}** Normally you want 0 here, but check the [Scanpolicy Docs][scanpolicy] to see why it can be useful to change this"
+ ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
 
 :Tools
  count==0 " You removed the tool EFIs":"-You can remove the tool EFIs here"
