@@ -74,7 +74,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
                                 if(!empty($rule)) {
                                     $msgs = $rule->exec($ddd, $this->value[0]->{$group}->{$section}->{$ssection}, false);
                                     foreach($msgs as $k=>$msg) {
-                                        if(!empty($msg)) {
+                                        if(!empty($msg) && $msg!='""') {
                                             $this->print_msg($msg);
                                             if(is_int($k) && $k) unset($ddd[$k-1]);  // Make sure we don't match more rules to the same entry
                                             else if($k) unset($ddd[$k]);

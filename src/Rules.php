@@ -68,6 +68,7 @@ class Rules {
 
 class Rule {
     public $title = '';
+    public static $symbol_table = []; // This is the symbol table populated in by variables set in msgtrue/msgfalse as they trigger
 
     static function make (string $line, array $varstrs) {
         @[$rulestr,$msgstr] = preg_split('@"[^"]*"(*SKIP)(*F)|\s+@', $line);
@@ -118,6 +119,17 @@ class Rule {
         }
         return $val;
     }
+
+    static function setVars(string $str):string {
+        $tmp = trim($str, '"');
+        if($tmp[0] == '$') {
+            if(preg_match("@^(\\\$\w+)=(.*(?:'[^']*'(*SKIP)(*F)|;))(.*)\$@", $tmp, $matches)) {
+                static::$symbol_table['{'.$matches[1].'}'] = trim(trim($matches[2],';'),"'");
+                $str = '"'.$matches[3].'"';
+            }
+        }
+        return $str;
+    }
 }
 
 class CountRule extends Rule {
@@ -139,17 +151,18 @@ class CountRule extends Rule {
     public function exec($arg, $unused_node, $unused_check_missing=true):array {
         $count = count($arg);
         $vars = $this->vars + [ '{$count}' => $count ];
-        $msgtrue = strtr((string)$this->msgtrue, $vars);
-        $msgfalse = strtr((string)$this->msgfalse, $vars);
+        $msgtrue = strtr((string)$this->msgtrue, $vars + Rule::$symbol_table);
+        $msgfalse = strtr((string)$this->msgfalse, $vars + Rule::$symbol_table);
 
         switch($this->op) {
-            case '==': return ($count==$this->right) ? [$msgtrue]:[$msgfalse];
-            case '!=': return ($count!=$this->right) ? [$msgtrue]:[$msgfalse];
-            case '<':  return ($count<$this->right)  ? [$msgtrue]:[$msgfalse];
-            case '>':  return ($count>$this->right)  ? [$msgtrue]:[$msgfalse];
+            case '==': $ret = ($count==$this->right) ? [$msgtrue]:[$msgfalse]; break;
+            case '!=': $ret = ($count!=$this->right) ? [$msgtrue]:[$msgfalse]; break;
+            case '<':  $ret = ($count<$this->right)  ? [$msgtrue]:[$msgfalse]; break;
+            case '>':  $ret = ($count>$this->right)  ? [$msgtrue]:[$msgfalse]; break;
             default:
                 throw new \Exception("Invalid operator in count expression");
         }
+        return [Rule::setVars($ret[0])];
     }
 }
 
@@ -182,7 +195,7 @@ class AttrValueRule extends Rule {
         if($this->op == '==' && $this->right === '*') {
             foreach($arg as $key=>$v) {
                 foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
-                $msgtrue = strtr((string)$this->msgtrue, $vars);
+                $msgtrue = strtr(Rule::setVars((string)$this->msgtrue), $vars + Rule::$symbol_table);
                 $ret[$key+1] = $msgtrue;
             }
             return $ret;
@@ -208,6 +221,7 @@ class AttrValueRule extends Rule {
 
         foreach($arg as $key=>$v) {
             foreach($lookfor as $look) {
+                $look = strtr($look, $vars + Rule::$symbol_table);
                 if($this->op == '~=') {
                     if(array_key_exists($this->left, $v) && preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
                 } else {
@@ -223,15 +237,15 @@ class AttrValueRule extends Rule {
         else if((!$lop || $lop=='|') && $found_count) $found = true;
 
         foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
-        $msgtrue = strtr((string)$this->msgtrue, $vars);
-        $msgfalse = strtr((string)$this->msgfalse, $vars);
+        $msgtrue = strtr((string)$this->msgtrue, $vars + Rule::$symbol_table);
+        $msgfalse = strtr((string)$this->msgfalse, $vars + Rule::$symbol_table);
 
         if($this->op == '!=') {
-            if(!$found) $ret = [$msgtrue];
-            else $ret[$fkey+1] = $msgfalse;  // return with index to remove match from list
+            if(!$found) $ret = [Rule::setVars($msgtrue)];
+            else $ret[$fkey+1] = Rule::setVars($msgfalse);  // return with index to remove match from list
         } else {
-            if($found) $ret[$fkey+1] = $msgtrue;   // return with index to remove match from list
-            else $ret = [$msgfalse];
+            if($found) $ret[$fkey+1] = Rule::setVars($msgtrue);   // return with index to remove match from list
+            else $ret = [Rule::setVars($msgfalse)];
         }
 
         return $ret;
@@ -266,26 +280,25 @@ class SettingRule extends Rule {
         foreach($arg as $key=>$val) {
             if($this->op == '=' || $this->op == '~=') {
                 if($this->left === $key) {
-                    $right = $this->right;
-
                     // Populate local symbol table
                     $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($val, $node->{$key}), '{@value}' => Rule::valStr($val, $node->{$key}, true) ];
                     if(!empty($this->msgtrue)) {
-                        $msgtrue = strtr($this->msgtrue, $vars);
+                        $msgtrue = strtr($this->msgtrue, $vars + Rule::$symbol_table);
                     }
                     if(!empty($this->msgfalse)) {
-                        $msgfalse = strtr($this->msgfalse, $vars);
+                        $msgfalse = strtr($this->msgfalse, $vars + Rule::$symbol_table);
                     }
 
+                    $right = strtr($this->right, $vars + Rule::$symbol_table);
                     $cmp = Rule::valCast($val, $node->{$key});
                     // Apply condition
                     if(($this->op == '=' && $right == $cmp) || ($this->op == '~=' && preg_match('@'.$right.'@', $cmp))) {
-                        $ret[$key] = empty($msgtrue) ? " **$key** = **".Rule::valStr($val, $node->{$key})."**" : $msgtrue;
+                        $ret[$key] = empty($msgtrue) ? " **$key** = **".Rule::valStr($val, $node->{$key})."**" : Rule::setVars($msgtrue);
                     } else {
                         if(empty($msgfalse)) {
                             $ret[$key] = "-**$key** = **".Rule::valStr($val, $node->{$key})."** but should normally be **".Rule::valStr($right)."**";
                         } else {
-                            $ret[$key] = $msgfalse;
+                            $ret[$key] = Rule::setVars($msgfalse);
                         }
                     }
                 }
@@ -298,8 +311,8 @@ class SettingRule extends Rule {
                 if($this->op == '==' && $this->right === '*') {
                     foreach($val as $k=>$v) {
                         $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($v, $node->{$k}), '{@value}' => Rule::valStr($v, $node->{$k}, true) ];
-                        $msgtrue = strtr($this->msgtrue, $vars);
-                        $ret[":$key:$k"] = $msgtrue;
+                        $msgtrue = strtr($this->msgtrue, $vars + Rule::$symbol_table);
+                        $ret[":$key:$k"] = Rule::setvars($msgtrue);
                     }
                     return $ret;
                 }
@@ -327,6 +340,7 @@ class SettingRule extends Rule {
                 $fv = '';
 
                 foreach($val as $k=>$v) {
+                    $look = strtr($look, $vars + Rule::$symbol_table);
                     $cmp = Rule::valCast($v, $node->{$k});
                     foreach($lookfor as $look) {
                         if(!$lop || $lop=='|') {
@@ -340,15 +354,15 @@ class SettingRule extends Rule {
                 else if((!$lop || $lop=='|') && $found_count) $found = true;
 
                 $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => $fv ];
-                $msgtrue = strtr($this->msgtrue, $vars);
-                $msgfalse = strtr($this->msgfalse, $vars);
+                $msgtrue = strtr($this->msgtrue, $vars + Rule::$symbol_table);
+                $msgfalse = strtr($this->msgfalse, $vars + Rule::$symbol_table);
 
                 if($this->op == '!=') {
-                    if(!$found) $ret = [$msgtrue];
-                    else $ret[":$key:$fkey"] = $msgfalse;  // return with full encoded index to remove match from list
+                    if(!$found) $ret = [Rule::setVars($msgtrue)];
+                    else $ret[":$key:$fkey"] = Rule::setVars($msgfalse);  // return with full encoded index to remove match from list
                 } else {
-                    if($found) $ret[":$key:$fkey"] = $msgtrue;   // return with full encoded index to remove match from list
-                    else $ret = [$msgfalse];
+                    if($found) $ret[":$key:$fkey"] = Rule::setVars($msgtrue);   // return with full encoded index to remove match from list
+                    else $ret = [Rule::setVars($msgfalse)];
                 }
             }
         }

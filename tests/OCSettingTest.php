@@ -11,7 +11,7 @@ final class OCSettingTest extends TestCase {
         self::$pd = new ParsedownExtra();
         self::$oc = new OpenCorePlist(__DIR__.'/Sample.plist');
     }
-    
+
     private function applyRules(string $rules) {
         ob_start();
         self::$oc->applyRules(new Rules("",explode("\n", $rules)));
@@ -124,5 +124,25 @@ final class OCSettingTest extends TestCase {
         $this->assertStringContainsString('Good csr-active-config = 00000000', $buf);
         $this->assertStringContainsString('nvda_drv is 31', $buf);
         $this->assertStringContainsString('prev-lang:kbd = ru-RU:252. Unless', $buf);
+    }
+
+    public function testSettingVarConditional(): void {
+        $rules = <<< 'RULES'
+        Kernel
+        :Add
+         [BundlePath]==AppleALC.kext "$bootargs=alcid; **{$BundlePath}** Success"
+
+        NVRAM
+        :Add
+        ::7C436110-AB2A-4BBB-A880-FE41995C9F82
+         boot-args~="{$bootargs}" "":"-{$setting} = {$value} - Since you are using AppleALC, you should be adding **{$bootargs}=N** here"
+         boot-args="-v keepsyms=1" " {$setting} = {$value} If you have a navi10 GPU add **agdpmod=pikera**":" {$setting} = {$value}"
+
+        RULES;
+
+        $buf = $this->applyRules($rules);
+        $this->assertStringContainsString('**AppleALC.kext** Success', $buf);
+        $this->assertStringContainsString('alcid=N', $buf);
+        $this->assertStringNotContainsString('pikera', $buf);
     }
 }
