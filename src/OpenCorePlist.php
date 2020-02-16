@@ -28,7 +28,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
                             $last_title = $rule->title;
                         }
                         foreach($msgs as $k=>$msg) {
-                            if(!empty($msg)) {
+                            if(!empty($msg) && $msg!='""') {
                                 $this->print_msg($msg);
                                 // Make sure we don't match more rules to the same entry
                                 if(is_int($k) && $k) {
@@ -57,7 +57,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
                         if(!empty($rule)) {
                             $msgs = $rule->exec($dd, $this->value[0]->{$group}->{$section});
                             foreach($msgs as $k=>$msg) {
-                                if(!empty($msg)) {
+                                if(!empty($msg) && $msg!='""') {
                                     $this->print_msg($msg);
                                     if(is_int($k) && $k) unset($dd[$k-1]);  // Make sure we don't match more rules to the same entry
                                     else if($k) unset($dd[$k]);

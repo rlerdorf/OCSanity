@@ -130,19 +130,20 @@ final class OCSettingTest extends TestCase {
         $rules = <<< 'RULES'
         Kernel
         :Add
-         [BundlePath]==AppleALC.kext "$bootargs=alcid; **{$BundlePath}** Success"
+         [BundlePath]==AppleALC.kext "$alc='-**{$setting}** = **{$value}** You need to add **alcid=N** here since you are using AppleALC.kext';":"$alc=;"
+         [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
         NVRAM
         :Add
         ::7C436110-AB2A-4BBB-A880-FE41995C9F82
-         boot-args~="{$bootargs}" "":"-{$setting} = {$value} - Since you are using AppleALC, you should be adding **{$bootargs}=N** here"
-         boot-args="-v keepsyms=1" " {$setting} = {$value} If you have a navi10 GPU add **agdpmod=pikera**":" {$setting} = {$value}"
+         boot-args~="^(?:(?!alcid).)*$" "{$alc}":""
+         boot-args~="-v keepsyms=1" " {$setting} = {$value} If you have a navi10 GPU add **agdpmod=pikera**":" {$setting} = {$value}"
 
         RULES;
 
         $buf = $this->applyRules($rules);
-        $this->assertStringContainsString('**AppleALC.kext** Success', $buf);
-        $this->assertStringContainsString('alcid=N', $buf);
+        $this->assertStringContainsString('**AppleALC.kext** make sure', $buf);
+        $this->assertStringContainsString('You need to add **alcid=N', $buf);
         $this->assertStringNotContainsString('pikera', $buf);
     }
 }

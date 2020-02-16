@@ -57,6 +57,7 @@ Kernel
  [BundlePath]==FakeSMC.kext&VirtualSMC.kext "-**{$BundlePath}** don't use both **FakeSMC.kext** and **VirtualSMC.kext**"
  [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
+ [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=N** here since you are using AppleALC.kext';":"$alcbootarg=;"
  [BundlePath]==SMCProcessor.kext       "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==SMCSuperIO.kext         "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
@@ -65,7 +66,7 @@ Kernel
  [BundlePath]==NullCPUPowerManagement.kext "!**{$BundlePath}** set the **DummyPowerManagement** quirk instead of using this kext"
  [BundlePath]==USBInjectAll.kext "!**{$BundlePath}** Does not work on AMD"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
- [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Patch
  count<20 "!**{$count}** patches found - Did you apply the kernel patches correctly? Please review the [Kernel Docs][kernel]"
@@ -110,7 +111,7 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- RequireSignature=no 
+ RequireSignature=no
  RequireVault=no
  Vault=Optional "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
@@ -129,6 +130,7 @@ NVRAM
  UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
+ boot-args~="^(?:(?!alcid).)*$" "{$alc}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  nvda_drv~="(^$)|(00)" " **{$setting}** = **{$value}**. Set to **1** if you have a supported nvidia card":" **{$setting}** = **{$value}**. Normally **_&lt;blank&gt;_** unless you have a supported nvidia card"

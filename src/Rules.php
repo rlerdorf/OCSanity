@@ -130,6 +130,13 @@ class Rule {
         }
         return $str;
     }
+
+    static function repVars(string $str, array $vars):string {
+        $str = strtr($str, $vars + static::$symbol_table);
+        // Allow for vars to contain vars, so do it again
+        $str = strtr($str, $vars + static::$symbol_table);
+        return $str;
+    }
 }
 
 class CountRule extends Rule {
@@ -151,8 +158,8 @@ class CountRule extends Rule {
     public function exec($arg, $unused_node, $unused_check_missing=true):array {
         $count = count($arg);
         $vars = $this->vars + [ '{$count}' => $count ];
-        $msgtrue = strtr((string)$this->msgtrue, $vars + Rule::$symbol_table);
-        $msgfalse = strtr((string)$this->msgfalse, $vars + Rule::$symbol_table);
+        $msgtrue = Rule::repVars((string)$this->msgtrue, $vars);
+        $msgfalse = Rule::repVars((string)$this->msgfalse, $vars);
 
         switch($this->op) {
             case '==': $ret = ($count==$this->right) ? [$msgtrue]:[$msgfalse]; break;
@@ -195,7 +202,7 @@ class AttrValueRule extends Rule {
         if($this->op == '==' && $this->right === '*') {
             foreach($arg as $key=>$v) {
                 foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
-                $msgtrue = strtr(Rule::setVars((string)$this->msgtrue), $vars + Rule::$symbol_table);
+                $msgtrue = Rule::repVars(Rule::setVars((string)$this->msgtrue), $vars);
                 $ret[$key+1] = $msgtrue;
             }
             return $ret;
@@ -221,7 +228,7 @@ class AttrValueRule extends Rule {
 
         foreach($arg as $key=>$v) {
             foreach($lookfor as $look) {
-                $look = strtr($look, $vars + Rule::$symbol_table);
+                $look = Rule::repVars($look, $vars);
                 if($this->op == '~=') {
                     if(array_key_exists($this->left, $v) && preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
                 } else {
@@ -237,8 +244,8 @@ class AttrValueRule extends Rule {
         else if((!$lop || $lop=='|') && $found_count) $found = true;
 
         foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
-        $msgtrue = strtr((string)$this->msgtrue, $vars + Rule::$symbol_table);
-        $msgfalse = strtr((string)$this->msgfalse, $vars + Rule::$symbol_table);
+        $msgtrue = Rule::repVars((string)$this->msgtrue, $vars);
+        $msgfalse = Rule::repVars((string)$this->msgfalse, $vars);
 
         if($this->op == '!=') {
             if(!$found) $ret = [Rule::setVars($msgtrue)];
@@ -283,13 +290,13 @@ class SettingRule extends Rule {
                     // Populate local symbol table
                     $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($val, $node->{$key}), '{@value}' => Rule::valStr($val, $node->{$key}, true) ];
                     if(!empty($this->msgtrue)) {
-                        $msgtrue = strtr($this->msgtrue, $vars + Rule::$symbol_table);
+                        $msgtrue = Rule::repVars($this->msgtrue, $vars);
                     }
                     if(!empty($this->msgfalse)) {
-                        $msgfalse = strtr($this->msgfalse, $vars + Rule::$symbol_table);
+                        $msgfalse = Rule::repVars($this->msgfalse, $vars);
                     }
 
-                    $right = strtr($this->right, $vars + Rule::$symbol_table);
+                    $right = Rule::repVars($this->right, $vars);
                     $cmp = Rule::valCast($val, $node->{$key});
                     // Apply condition
                     if(($this->op == '=' && $right == $cmp) || ($this->op == '~=' && preg_match('@'.$right.'@', $cmp))) {
@@ -311,7 +318,7 @@ class SettingRule extends Rule {
                 if($this->op == '==' && $this->right === '*') {
                     foreach($val as $k=>$v) {
                         $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($v, $node->{$k}), '{@value}' => Rule::valStr($v, $node->{$k}, true) ];
-                        $msgtrue = strtr($this->msgtrue, $vars + Rule::$symbol_table);
+                        $msgtrue = Rule::repVars($this->msgtrue, $vars);
                         $ret[":$key:$k"] = Rule::setvars($msgtrue);
                     }
                     return $ret;
@@ -340,9 +347,9 @@ class SettingRule extends Rule {
                 $fv = '';
 
                 foreach($val as $k=>$v) {
-                    $look = strtr($look, $vars + Rule::$symbol_table);
                     $cmp = Rule::valCast($v, $node->{$k});
                     foreach($lookfor as $look) {
+                        $look = Rule::repVars($look, $vars);
                         if(!$lop || $lop=='|') {
                             if($cmp === $look) { $found_count++; $fkey = $k; $fv = $cmp; }
                         } else if($lop=='&') {
@@ -354,8 +361,8 @@ class SettingRule extends Rule {
                 else if((!$lop || $lop=='|') && $found_count) $found = true;
 
                 $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => $fv ];
-                $msgtrue = strtr($this->msgtrue, $vars + Rule::$symbol_table);
-                $msgfalse = strtr($this->msgfalse, $vars + Rule::$symbol_table);
+                $msgtrue = Rule::repVars($this->msgtrue, $vars);
+                $msgfalse = Rule::repVars($this->msgfalse, $vars);
 
                 if($this->op == '!=') {
                     if(!$found) $ret = [Rule::setVars($msgtrue)];
