@@ -21,6 +21,7 @@
 </div>
 
 <div class="container">
+  <?php if($show_upload):?>
   <div class="row">
     <div class="col-md-12">
       <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="file-upload">
@@ -34,6 +35,7 @@
       </form>
     </div>
   </div>
+  <?php endif;?>
   <?= $results(); ?>
 </div>
 

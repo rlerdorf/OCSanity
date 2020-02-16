@@ -41,6 +41,19 @@ if($fpath) {
     };
 } else {
     $results = function() { };
+    $show_upload = true;
+    // Grab the last 10 uploaded files
+    $dir = new DirectoryIterator('../uploads');
+    foreach ($dir as $fileinfo) {
+        if(!$fileinfo->isDot()) {
+            $fn = $fileinfo->getFilename();
+            $mtime = $fileinfo->getMTime();
+            if(time()-$mtime < 360000) {
+                $uploads[$fn] = $mtime;
+            }
+        }
+    }
+    arsort($uploads);
 }
 
 require './main.php';
