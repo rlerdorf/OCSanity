@@ -181,7 +181,6 @@ class AttrValueRule extends Rule {
         // Special case, * matches all remaining attributes that haven't matched a previous rule
         if($this->op == '==' && $this->right === '*') {
             foreach($arg as $key=>$v) {
-                print_r($v);
                 foreach($v as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
                 $msgtrue = strtr((string)$this->msgtrue, $vars);
                 $ret[$key+1] = $msgtrue;
