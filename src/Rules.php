@@ -206,7 +206,7 @@ class AttrValueRule extends Rule {
         foreach($arg as $key=>$v) {
             foreach($lookfor as $look) {
                 if($this->op == '~=') {
-                    if(preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
+                    if(array_key_exists($this->left, $v) && preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
                 } else {
                     if(!$lop || $lop=='|') {
                         if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
