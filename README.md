@@ -37,7 +37,7 @@ See the rules directory for full examples.
 
 ## Installation
 
-`composer install` then run `vendor/bin/phpunit` to run the tests.
+`composer install` then run `vendor/bin/phpunit` to run the unit tests and `vendor/bin/phan` to run a static analysis scan.
 
 `./ocs -m -r rules/amd055.lst Sample.plist` to run a rule against a plist file on the command line with output in markdown format.
 
