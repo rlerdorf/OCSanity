@@ -49,7 +49,7 @@ if($fpath) {
         if(!$fileinfo->isDot()) {
             $fn = $fileinfo->getFilename();
             $mtime = $fileinfo->getMTime();
-            if(time()-$mtime < 7200) {
+            if(time()-$mtime < 14400) {
                 $uploads[$fn] = $mtime;
             }
         }

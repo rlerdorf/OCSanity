@@ -40,7 +40,7 @@
       <?=$links;?>
     </div>
     <?php else:?>
-    <div class="col-md-12 results">
+    <div class="col-md-12 col-centered results">
       <?= $results(); ?>
     </div>
     <?php endif; ?>
@@ -51,7 +51,7 @@
   $( function() { $("#file-upload input[type='radio']").checkboxradio(); } );
   jQuery("time.timeago").timeago();
   Dropzone.options.fileUpload = {
-    dictDefaultMessage: "<hr> Then choose your config.plist or drag it here",
+  dictDefaultMessage: "<hr><h4>Then choose your config.plist or drag it here</h4>",
     maxFilesize:1,
     acceptedFiles: ".plist",
     success: function(file, response) {
