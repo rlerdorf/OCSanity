@@ -9,6 +9,13 @@ body {
   padding:0 6px 0 0;
 }
 
+.info:before {
+  content:'\1f6c8';
+  display:inline-block;
+  color:#4242d2;
+  padding:0 6px 0 0;
+}
+
 .err:before {
   content:'\2612';
   display:inline-block;

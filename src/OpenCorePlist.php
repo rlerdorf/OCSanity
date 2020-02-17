@@ -112,6 +112,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
             case ' ': $sev = 'good'; $msg = substr($msg,1); break;
             case '-': $sev = 'warn'; $msg = substr($msg,1); break;
             case '!': $sev = 'err'; $msg = substr($msg,1); break;
+            case '%': $sev = 'info'; $msg = substr($msg,1); break;
             default: $sev = 'good'; break;
         }
         echo "* <span class=\"{$sev}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css

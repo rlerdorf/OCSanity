@@ -30,8 +30,8 @@ ACPI
 ```
 
 The main non-self explanatory thing in the above is that the first character of the true/false strings
-define the severity. A ***\<space\>*** means *good* (green), a hyphen ***-*** is a *warning* (yellow) and an
-explanation mark ***!*** is an error (red).
+define the severity. A ***\<space\>*** means *good* (green), a hyphen ***-*** is a *warning* (yellow), an
+explanation mark ***!*** is an error (red), and a percent sign *%* is a blue info message.
 
 See the rules directory for full examples.
 
