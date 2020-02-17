@@ -244,8 +244,9 @@ class AttrValueRule extends Rule {
             }
         }
 
+        echo $found_count;
         if($lop=='&' && $found_count >= count($lookfor)) $found = true;
-        else if($found_count) $found = true;
+        else if($lop!='&' && $found_count) $found = true;
 
         if(!$found) {
             $ret = [Rule::setVars($this->msgfalse)];
