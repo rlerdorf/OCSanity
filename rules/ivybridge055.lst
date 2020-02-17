@@ -59,7 +59,7 @@ Kernel
 
 :Add
  count==0 "!You have no Kexts. You definitely need at least Lilu.kext and VirtualSMC.kext. Please review the [Kexts Docs][kexts]"
- [BundlePath]!=Lilu.kext "!**Lilu.kext** is missing. Add it to the top of this list":" **Lilu.kext** make sure this Kext is in your **OC/Kexts** directory and the first kext listed here"
+ [BundlePath]==Lilu.kext " **Lilu.kext** make sure this Kext is in your **OC/Kexts** directory and the first kext listed here":"!**Lilu.kext** is missing. Add it to the top of this list"
  [BundlePath]==FakeSMC.kext&VirtualSMC.kext "-**{$BundlePath}** don't use both **FakeSMC.kext** and **VirtualSMC.kext**"
  [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"

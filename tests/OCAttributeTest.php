@@ -78,7 +78,6 @@ final class OCAttributeTest extends TestCase {
         ACPI
         :Add
          [Path]==SSDT-EC-USBX.aml|SSDT-EC.aml " {$Path} Ok":"!{$Path} Bad"
-         [Path]==SSDT-EC-USBX.aml|SSDT-EC.aml " {$Path} Ok":"!{$Path} Bad"
          [Path]==SSDT-EC-USBX.aml|SSDT-EC.aml " {$Path} Ok":"!Bad1"
          [Path]==SSDT-EC-USBX-BAR.aml|SSDT-EC-FOO.aml|SSDT-EC-NOTHERE.aml " {$Path} Ok":"!Bad2"
 
@@ -119,5 +118,6 @@ final class OCAttributeTest extends TestCase {
         $buf = $this->applyRules($rules);
         $this->assertStringContainsString('Good no dsl files here', $buf);
         $this->assertStringContainsString('SSDT-PMC.aml good aml', $buf);
+        $this->assertStringContainsString('SSDT-PLUG.aml good aml', $buf);
     }
 }
