@@ -59,7 +59,7 @@ The leading space in front of `[Enabled]` is important.  Here are what the diffe
 | **:**   | Enter section                    |
 | **::**  | Enter sub-section                |
 | **$**   | Assign a variable: `$var=data`   |
-| **\<space\>** | Define a rule to be run in current block group.section |
+| **\<space\>** | Define a rule to be run in current block group/section |
 |         | Anything else defines a group    |
 
 ## Rules
@@ -67,7 +67,7 @@ The leading space in front of `[Enabled]` is important.  Here are what the diffe
 A rule has this basic format:
 
 ```
- Setting=value " True message":"!False message" 
+ Setting=value " True message":"!False message"
 ```
 
 That is, if the **Setting** is set to **value** then the **" True message"** is printed. Otherwise
