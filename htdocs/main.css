@@ -13,7 +13,13 @@ body {
   content:'\2139';
   display:inline-block;
   color:#4242d2;
-  padding:0 6px 0 0;
+  padding:0 4px 0 4px;
+  border-radius:50%;
+  border:2px solid;
+  line-height: 1em;
+  font-size: 0.9em;
+  margin-left: -2px;
+  margin-right: 4px;
 }
 
 .err:before {
