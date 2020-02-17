@@ -10,7 +10,7 @@ body {
 }
 
 .info:before {
-  content:'\1f6c8';
+  content:'\2139';
   display:inline-block;
   color:#4242d2;
   padding:0 6px 0 0;
