@@ -117,7 +117,7 @@ You can check it using syntax like this:
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
 ```
 
-That scans the array and if it finds **VirualSmc.efi` it will print that error message. There is a special wildcard case that looks like this:
+That scans the array and if it finds **VirualSmc.efi** it will print that error message. There is a special wildcard case that looks like this:
 
 ```
  Drivers==* " **{$value}**"
