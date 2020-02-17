@@ -8,41 +8,50 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css"/>
-  <link rel="stylesheet" href="main.css" type="text/css"/>
+  <link rel="stylesheet" href="main.css?version=1" type="text/css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
 </head>
 <body>
 
-<div class="jumbotron text-center">
-  <h3>OpenCore config.plist Sanity Checker</h3>
-</div>
+<br>
+<br>
 
 <div class="container">
-  <?php if($show_upload):?>
   <div class="row">
-    <div class="col-md-12">
+  <?php if($show_upload):?>
+    <div class="col-md-8">
       <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="file-upload">
+      <h2>Sanity Checker</h2>
         <div>
           <fieldset>
             <legend>Choose platform and OpenCore version: </legend>
             <?=$select_rules?>
           </fieldset>
-
         </div>
       </form>
     </div>
+    <div class="col-sm-4 recent">
+      <h3>Recent Checks</h3>
+      <hr>
+      <?=$links;?>
+    </div>
+    <?php else:?>
+    <div class="col-md-12 results">
+      <?= $results(); ?>
+    </div>
+    <?php endif; ?>
   </div>
-  <?php endif;?>
-  <?= $results(); ?>
 </div>
 
 <script type="text/javascript">
   $( function() { $("#file-upload input[type='radio']").checkboxradio(); } );
+  jQuery("time.timeago").timeago();
   Dropzone.options.fileUpload = {
-    dictDefaultMessage: "Then drop your config.plist file or click to select",
+    dictDefaultMessage: "<hr> Then choose your config.plist or drag it here",
     maxFilesize:1,
     acceptedFiles: ".plist",
     success: function(file, response) {

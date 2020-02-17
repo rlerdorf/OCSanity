@@ -39,6 +39,7 @@ if($fpath) {
         $oc->applyRules(new Rules("../rules/{$rs}.lst"));
         ob_end_flush();
     };
+    $links = false;
 } else {
     $results = function() { };
     $show_upload = true;
@@ -48,12 +49,19 @@ if($fpath) {
         if(!$fileinfo->isDot()) {
             $fn = $fileinfo->getFilename();
             $mtime = $fileinfo->getMTime();
-            if(time()-$mtime < 360000) {
+            if(time()-$mtime < 7200) {
                 $uploads[$fn] = $mtime;
             }
         }
     }
     arsort($uploads);
+    $links = '';
+    foreach($uploads as $fn=>$mtime) {
+        foreach($rules as $rf=>$rule) {
+            if(strpos($fn, $rf) === 0) $links.= "<a href=\"/?file={$fn}&rs={$rf}\"\>{$rule['short']} (<time class=\"timeago\" datetime=\"".date('c',$mtime)."\">".date('r')."</time>)</a><br>\n";
+        }
+    }
+    $links .= "<br>\n";
 }
 
 require './main.php';
