@@ -214,4 +214,4 @@ Don't forget to still include the leading character that denotes the severity of
 
 For a web install, point set your docroot to the htdocs directory and make sure you have PHP 7.x enabled.
 
-You can see it running at https://opencore-dev.slowgeek.com
+You can see it running at https://opencore.slowgeek.com
