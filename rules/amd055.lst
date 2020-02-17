@@ -64,6 +64,7 @@ Kernel
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==IntelMausiEthernet.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
+ [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==NullCPUPowerManagement.kext "!**{$BundlePath}** set the **DummyPowerManagement** quirk instead of using this kext"
  [BundlePath]==USBInjectAll.kext "!**{$BundlePath}** Does not work on AMD"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
