@@ -103,7 +103,7 @@ class Rule {
         else if($val === "") $ret = "_&lt;blank&gt;_";
         else if($node && $node instanceof CFPropertyList\CFData) {
             if($raw_binary) $ret = $val;
-            else $ret = bin2hex($val);
+            else $ret = bin2hex((string)$val);
         } else $ret = $val;
         return $ret;
     }
@@ -120,8 +120,10 @@ class Rule {
         return $val;
     }
 
-    static function setVars(string $str):string {
+    static function setVars(?string $str):?string {
+        if(empty($str)) return $str;
         $tmp = trim($str, '"');
+        if(empty($tmp)) return $str;
         if($tmp[0] == '$') {
             if(preg_match("@^(\\\$\w+)=(.*(?:'[^']*'(*SKIP)(*F)|;))(.*)\$@", $tmp, $matches)) {
                 static::$symbol_table['{'.$matches[1].'}'] = trim(trim($matches[2],';'),"'");
@@ -131,7 +133,8 @@ class Rule {
         return $str;
     }
 
-    static function repVars(string $str, array $vars):string {
+    static function repVars(?string $str, array $vars):?string {
+        if(empty($str)) return $str;
         $str = strtr($str, $vars + static::$symbol_table);
         // Allow for vars to contain vars, so do it again
         $str = strtr($str, $vars + static::$symbol_table);

@@ -45,6 +45,7 @@ if($fpath) {
     $show_upload = true;
     // Grab the last 10 uploaded files
     $dir = new DirectoryIterator('../uploads');
+    $uploads = [];
     foreach ($dir as $fileinfo) {
         if(!$fileinfo->isDot()) {
             $fn = $fileinfo->getFilename();
