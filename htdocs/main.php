@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css"/>
-  <link rel="stylesheet" href="main.css?version=1" type="text/css"/>
+  <link rel="stylesheet" href="main.css?version=1.1" type="text/css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
@@ -51,7 +51,7 @@
   $( function() { $("#file-upload input[type='radio']").checkboxradio(); } );
   jQuery("time.timeago").timeago();
   Dropzone.options.fileUpload = {
-  dictDefaultMessage: "<hr><h4>Then choose your config.plist or drag it here</h4>",
+  dictDefaultMessage: "<hr><div class=\"clickhere\">Then click here to choose<br>your config.plist or drag it here</div>",
     maxFilesize:1,
     acceptedFiles: ".plist",
     success: function(file, response) {

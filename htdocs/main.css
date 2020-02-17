@@ -38,6 +38,16 @@ ul li {
     margin-right: auto;
 }
 
+.clickhere {
+    text-decoration: none;
+    background-color: rgb(0, 135, 247);
+    color: white;
+    padding: 10px;
+    border: 1px solid #003eff;
+    border-radius: 3px;
+    font-size: 1.5em;
+    display:inline-block;
+}
 .recent {
     background: white;
     border-radius: 5px;
