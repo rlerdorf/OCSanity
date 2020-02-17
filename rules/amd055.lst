@@ -155,6 +155,7 @@ PlatformInfo
 
 UEFI
  ConnectDrivers=yes
+ Drivers==HfsPlus.efi "-**{$value}** Check the filename in your Drivers/ directory. Normally this is called **HFSPlus.efi**":""
  Drivers==VBoxHfs.efi|HFSPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
