@@ -12,7 +12,7 @@
 ACPI
 :Add
  count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
- [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. It is in your firmware already."
+ [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]."
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
