@@ -48,6 +48,8 @@ ACPI
  FadtEnableReset=no
 ```
 
+Note that the attributes for that array element are available as variables that can be used in the output.
+
 The leading space in front of `[Enabled]` is important.  Here are what the different leading characters do:
 
 |  Char   | Action                           |
