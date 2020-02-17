@@ -2,7 +2,7 @@
 
 # OpenCore Sanity Checker
 
-This provides a way to apply rulesets to OpenCore config.plist files.
+OCSanity provides a way to apply rulesets to OpenCore config.plist files.
 
 The rulesets are written in a simplified schema language loosely based on PHP
 and using markdown for output. For the structure of the plist file parsed by OpenCore, the
@@ -103,12 +103,12 @@ just illustrating variable support in the messages. The \*\* is not part of it. 
 If a setting has multiple values in an array, but the array has no properties, like this:
 
 ```xml
-        <key>Drivers</key>
-        <array>
-            <string>HFSPlus.efi</string>
-            <string>ApfsDriverLoader.efi</string>
-            <string>FwRuntimeServices.efi</string>
-        </array>
+    <key>Drivers</key>
+    <array>
+        <string>HFSPlus.efi</string>
+        <string>ApfsDriverLoader.efi</string>
+        <string>FwRuntimeServices.efi</string>
+    </array>
 ```
 
 You can check it using syntax like this:
