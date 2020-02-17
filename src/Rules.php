@@ -226,38 +226,41 @@ class AttrValueRule extends Rule {
         }
 
         $found = false;
-        $found_count = $fkey = 0;
-        $fv = [];
+        $found_count = 0;
+        $fvs = [];
 
         foreach($arg as $key=>$v) {
             foreach($lookfor as $look) {
                 if(is_string($look)) $look = Rule::repVars($look, $vars);
                 if($this->op == '~=') {
-                    if(array_key_exists($this->left, $v) && preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
+                    if(array_key_exists($this->left, $v) && preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fvs[$key] = $v; }
                 } else {
                     if(!$lop || $lop=='|') {
-                        if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
+                        if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fvs[$key] = $v; }
                     } else if($lop=='&') {
-                        if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fkey = $key; $fv = $v; }
+                        if(array_key_exists($this->left, $v) && $v[$this->left] === $look) { $found_count++; $fvs[$key] = $v; }
                     }
                 }
             }
         }
+
         if($lop=='&' && $found_count >= count($lookfor)) $found = true;
-        else if((!$lop || $lop=='|') && $found_count) $found = true;
+        else if($found_count) $found = true;
 
-        foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
-        $msgtrue = Rule::repVars((string)$this->msgtrue, $vars);
-        $msgfalse = Rule::repVars((string)$this->msgfalse, $vars);
-
-        if($this->op == '!=') {
-            if(!$found) $ret = [Rule::setVars($msgtrue)];
-            else $ret[$fkey+1] = Rule::setVars($msgfalse);  // return with index to remove match from list
+        if(!$found) {
+            $ret = [Rule::setVars($this->msgfalse)];
         } else {
-            if($found) $ret[$fkey+1] = Rule::setVars($msgtrue);   // return with index to remove match from list
-            else $ret = [Rule::setVars($msgfalse)];
+            foreach($fvs as $fkey=>$fv) {
+                foreach($fv as $kk=>$vv) $vars = array_merge($vars, [ '{$'.$kk.'}' => Rule::valStr($vv) ]);
+                if($this->op == '!=') {
+                    $msgfalse = Rule::repVars((string)$this->msgfalse, $vars);
+                    $ret[$fkey+1] = Rule::setVars($msgfalse);  // return with index to remove match from list
+                } else {
+                    $msgtrue = Rule::repVars((string)$this->msgtrue, $vars);
+                    $ret[$fkey+1] = Rule::setVars($msgtrue);   // return with index to remove match from list
+                }
+            }
         }
-
         return $ret;
     }
 }

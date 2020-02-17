@@ -95,17 +95,15 @@ final class OCAttributeTest extends TestCase {
         $rules = <<< 'RULES'
         ACPI
         :Add
-         [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml " {$Path} Ok":"!{$Path} Bad"
-         [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml " {$Path} Ok":"!{$Path} Bad"
+         [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml " {$Path} Both":"!{$Path} Bad"
          [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml " {$Path} Ok":"!Bad1"
          [Path]==SSDT-EC-USBX-BAR.aml&SSDT-EC-FOO.aml&SSDT-EC-NOTHERE.aml " {$Path} Ok":"!Bad2"
 
         RULES;
 
         $buf = $this->applyRules($rules);
-        $this->assertStringContainsString('SSDT-EC-USBX.aml Ok', $buf);
-        $this->assertStringContainsString('SSDT-EC.aml Bad', $buf);
-        $this->assertStringContainsString('Bad1', $buf);
+        $this->assertStringContainsString('SSDT-EC-USBX.aml Both', $buf);
+        $this->assertStringContainsString('SSDT-EC.aml Both', $buf);
         $this->assertStringContainsString('Bad2', $buf);
     }
 
