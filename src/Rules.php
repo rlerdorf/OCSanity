@@ -231,7 +231,7 @@ class AttrValueRule extends Rule {
 
         foreach($arg as $key=>$v) {
             foreach($lookfor as $look) {
-                $look = Rule::repVars($look, $vars);
+                if(is_string($look)) $look = Rule::repVars($look, $vars);
                 if($this->op == '~=') {
                     if(array_key_exists($this->left, $v) && preg_match('@'.$look.'@', $v[$this->left])) { $found_count++; $fkey = $key; $fv = $v; }
                 } else {
@@ -299,14 +299,16 @@ class SettingRule extends Rule {
                         $msgfalse = Rule::repVars($this->msgfalse, $vars);
                     }
 
-                    $right = Rule::repVars($this->right, $vars);
+                    if(is_string($this->right)) $right = Rule::repVars($this->right, $vars);
+                    else $right = $this->right;
+
                     $cmp = Rule::valCast($val, $node->{$key});
                     // Apply condition
                     if(($this->op == '=' && $right == $cmp) || ($this->op == '~=' && preg_match('@'.$right.'@', $cmp))) {
                         $ret[$key] = empty($msgtrue) ? " **$key** = **".Rule::valStr($val, $node->{$key})."**" : Rule::setVars($msgtrue);
                     } else {
                         if(empty($msgfalse)) {
-                            $ret[$key] = "-**$key** = **".Rule::valStr($val, $node->{$key})."** but should normally be **".Rule::valStr($right)."**";
+                            $ret[$key] = "-**$key** = **".Rule::valStr($val, $node->{$key})."** but should normally be **".Rule::valStr($right, $node->{$key})."**";
                         } else {
                             $ret[$key] = Rule::setVars($msgfalse);
                         }
@@ -352,7 +354,7 @@ class SettingRule extends Rule {
                 foreach($val as $k=>$v) {
                     $cmp = Rule::valCast($v, $node->{$k});
                     foreach($lookfor as $look) {
-                        $look = Rule::repVars($look, $vars);
+                        if(is_string($look)) $look = Rule::repVars($look, $vars);
                         if(!$lop || $lop=='|') {
                             if($cmp === $look) { $found_count++; $fkey = $k; $fv = $cmp; }
                         } else if($lop=='&') {
