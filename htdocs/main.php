@@ -25,7 +25,7 @@
   <?php if($show_upload):?>
     <div class="col-md-8">
       <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="file-upload">
-      <h2>Sanity Checker</h2>
+      <h2>OpenCore Sanity Checker</h2>
         <div>
           <fieldset>
             <legend>Choose platform and OpenCore version: </legend>
