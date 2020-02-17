@@ -244,7 +244,6 @@ class AttrValueRule extends Rule {
             }
         }
 
-        echo $found_count;
         if($lop=='&' && $found_count >= count($lookfor)) $found = true;
         else if($lop!='&' && $found_count) $found = true;
 
