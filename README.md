@@ -113,7 +113,7 @@ If a setting has multiple values in an array, but the array has no properties, l
     </array>
 ```
 
-You can check it using syntax like this:
+You can check it using this syntax:
 
 ```
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
@@ -137,7 +137,7 @@ ACPI
  count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
 ```
 
-Here we can also see how we can take advantage of the markdown format. We use a **=** line to define a markdown link which we can then use in the warning message.
+Here you can also see how we can take advantage of the markdown format. A **=** line is used to define a markdown link which can then be used in the warning message.
 
 You can of course also use **<** and **>**:
 
@@ -192,7 +192,7 @@ NVRAM
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
 ```
 
-Now we need to put on our regex thinking cap. That `^(?:(?!alcid).)*$"` regex checks to see if the word `alcid` appears anywhere in the **boot-args** setting.
+Now we need to put on our regex thinking caps. That `^(?:(?!alcid).)*$"` regex checks to see if the word `alcid` appears anywhere in the **boot-args** setting.
 If it does, the true message is printed which is just the contents of the **$alcbootarg** variable that we set earlier. So, what this does is it will print a warning
 if **AppleALC.kext** is included, but **boot-args** does not include an **alcid** layout. Note that the false message is forced to empty with **:""**. If we didn't
 do that, then the next **boot-args** rule below it might not trigger. Remember only one message per entry and we only want to warn about **alcid** if the situation
