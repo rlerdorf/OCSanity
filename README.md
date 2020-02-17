@@ -69,7 +69,7 @@ A rule has this basic format:
 ```
 
 That is, if the **Setting** is set to **value** then the **" True message"** is printed. Otherwise
-the **"False message"** is shown. Again here the leading character has a meaning:
+the **"!False message"** is shown. Again here the leading character has a meaning:
 
 |  Char   | Action                           |
 | ------- | -------------------------------- |
