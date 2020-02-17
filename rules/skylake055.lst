@@ -8,6 +8,7 @@
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
 =[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#deviceproperties
 
 ACPI
 :Add
@@ -49,7 +50,7 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="((\x00\x00\x12\x19)|(\x01\x00\x12\x19))" " **{$setting}** iGPU set":"-**{$setting}** iGPU not set correctly"
+ AAPL,ig-platform-id~="00001219|x01001219" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU not set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 Kernel
 

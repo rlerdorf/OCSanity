@@ -8,6 +8,7 @@
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
 =[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#deviceproperties
 
 ACPI
 :Add
@@ -49,7 +50,7 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="((\x03\x00\x22\x0D)|(\x04\x00\x12\x04))" " **{$setting}** iGPU set":"-**{$setting}** iGPU not set correctly"
+ AAPL,ig-platform-id~="0300220d|04001204" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU not set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 Kernel
 
