@@ -89,23 +89,6 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
         }
     }
 
-    function get_obj(...$args) {
-        switch(count($args)) {
-            case 0:
-                return $this->value[0];
-            case 1:
-                return $this->value[0]->{$args[0]};
-            case 2:
-                return $this->value[0]->{$args[0]}->{$args[1]};
-            case 3:
-                return $this->value[0]->{$args[0]}->{$args[1]}->{$args[2]};
-            case 4:
-                return $this->value[0]->{$args[0]}->{$args[1]}->{$args[2]}->{$args[3]};
-            case 5:
-                return $this->value[0]->{$args[0]}->{$args[1]}->{$args[2]}->{$args[3]}->{$args[4]};
-        }
-    }
-
     function print_msg($msg) {
         $msg = trim($msg,'"');
         switch($msg[0]) {
@@ -115,6 +98,10 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
             case '%': $sev = 'info'; $msg = substr($msg,1); break;
             default: $sev = 'good'; break;
         }
-        echo "* <span class=\"{$sev}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css
+        if(preg_match('/{\$([^}]+)}/', $msg, $match)) {
+            echo "* <span class=\"err\">Unexpected missing **{$match[1]}** here</span>\n";
+        } else {
+            echo "* <span class=\"{$sev}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css
+        }
     }
 }
