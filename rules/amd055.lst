@@ -58,7 +58,7 @@ Kernel
  [BundlePath]==FakeSMC.kext&VirtualSMC.kext "-**{$BundlePath}** don't use both **FakeSMC.kext** and **VirtualSMC.kext**"
  [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
- [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=N** here since you are using AppleALC.kext';":"$alcbootarg=;"
+ [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=**<_layout_\> here since you are using AppleALC.kext';":"$alcbootarg=;"
  [BundlePath]==SMCProcessor.kext       "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==SMCSuperIO.kext         "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
