@@ -15,7 +15,7 @@ ACPI
  [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]."
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
- [Path]~=-EC.+aml :"%You might need something like SSDT-EC-USBX-AMD.aml. See the [ACPI Docs][acpi]"
+ [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-AMD.aml. See the [ACPI Docs][acpi]"
  [Path]==SSDT-EC-USBX-AMD.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-AMD** and **SSDT-EC**"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
