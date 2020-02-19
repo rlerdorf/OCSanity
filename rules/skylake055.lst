@@ -1,6 +1,7 @@
 # SkyLake OC 0.5.5
 # Generic config suitable for initial installation
 =# OpenCore 0.5.5 Intel SkyLake Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#kernel
 =[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#acpi

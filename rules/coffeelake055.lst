@@ -1,6 +1,7 @@
 # Coffee Lake OC 0.5.5
 # Generic config suitable for initial installation
 =# OpenCore 0.5.5 Intel Coffee Lake Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#kernel
 =[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#acpi

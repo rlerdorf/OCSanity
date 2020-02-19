@@ -1,6 +1,7 @@
 # Haswell OC 0.5.5
 # Generic config suitable for initial installation
 =# OpenCore 0.5.5 Intel Haswell Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#kernel
 =[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/haswell#acpi

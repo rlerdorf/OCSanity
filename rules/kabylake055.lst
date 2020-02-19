@@ -1,6 +1,7 @@
 # Kaby Lake OC 0.5.5
 # Generic config suitable for initial installation
 =# OpenCore 0.5.5 Intel Kaby Lake Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#kernel
 =[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#acpi
