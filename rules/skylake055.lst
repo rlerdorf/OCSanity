@@ -83,7 +83,7 @@ Kernel
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives=no
- XhciPortLimit=yes " **{$setting}** turn off after USB port mapping":" **{$setting}** enable if you have USB issues"
+ XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
 :Boot
