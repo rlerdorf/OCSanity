@@ -80,7 +80,7 @@ Kernel
  CustomSMBIOSGuid=no
  DisableIoMapper=yes
  DummyPowerManagement=no
- ExternalDiskIcons=yes
+ ExternalDiskIcons=no
  IncreasePciBarSize=no
  LapicKernelPanic=no
  PanicNoKextDump=yes
