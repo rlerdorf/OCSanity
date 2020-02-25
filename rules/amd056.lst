@@ -101,7 +101,9 @@ Misc
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
+ HideAuxiliary=no
  PickerAttributes=0
+ PickerAudioAssist=no
  Timeout=5
 
 :Debug
@@ -130,6 +132,7 @@ NVRAM
 :Add
 ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
  UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
+ DefaultBackgroundColor=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
@@ -167,6 +170,13 @@ UEFI
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
+:Audio
+ AudioSupport=no
+ AudioDevice=""
+ AudioCodec=0
+ AudioOut=0
+ PlayChime=no
+
 :Input
  KeyForgetThreshold=5
  KeyMergeThreshold=2
@@ -178,6 +188,7 @@ UEFI
  TimerResolution=50000
 
 :Protocols
+ AppleAudio=no
  AppleBootPolicy=no
  AppleEvent=no
  AppleImageConversion=no
