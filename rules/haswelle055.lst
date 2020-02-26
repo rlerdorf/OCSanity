@@ -1,15 +1,15 @@
-# Coffee Lake OC 0.5.5
+# Haswell-E OC 0.5.5
 # Generic config suitable for initial installation
-=# OpenCore 0.5.5 Intel Coffee Lake Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake
+=# OpenCore 0.5.5 Intel Haswell-E Sanity Check
+=https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#acpi
+=[kernel]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#kernel
+=[acpi]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#platforminfo
-=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#deviceproperties
+=[platforminfo]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#platforminfo
+=[deviceproperties]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#deviceproperties
 
 ACPI
 :Add
@@ -18,10 +18,7 @@ ACPI
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]!=SSDT-EC-USBX.aml|SSDT-EC.aml "-**SSDT-EC-USBX.aml** or **SSDT-EC** is missing. See the [ACPI Docs][acpi]"
- [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX** and **SSDT-EC**"
- [Path]!=SSDT-AWAC.aml "-**SSDT-AWAC.aml** is missing. See the [ACPI Docs][acpi] if you need it"
- [Path]!=SSDT-PMC.aml "-**SSDT-PMC.aml** is missing. See the [ACPI Docs][acpi] if you need it"
+ [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
 
 :Quirks
@@ -51,10 +48,6 @@ Booter
 
 DeviceProperties
 
-:Add
-::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="07009b3e|0300923e" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU not set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
-
 Kernel
 
 :Add
@@ -71,10 +64,14 @@ Kernel
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
 
+:Emulate
+ Cpuid1Data=c3060300000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** you need CPU spoofing here"
+ Cpuid1Mask=ffffffff000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}**"
+
 :Quirks
  AppleCpuPmCfgLock=yes
  AppleXcpmCfgLock=yes
- AppleXcpmExtraMsrs=no
+ AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=yes
@@ -127,7 +124,7 @@ NVRAM
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- nvda_drv~="(^$)|(00)" " **{$setting}** = **{$value}**. Set to **1** if you have a supported nvidia card":" **{$setting}** = **{$value}**. Normally **_&lt;blank&gt;_** unless you have a supported nvidia card"
+ nvda_drv="" " **{$setting}** set to **1** if you have a supported nvidia card":" **{$setting}** normally **_&lt;blank&gt;_** unless you have a supported nvidia card"
  prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
 
 PlatformInfo
@@ -176,7 +173,8 @@ UEFI
  AppleImageConversion=no
  AppleKeyMap=no
  AppleSmcIo=no
- ConsoleControl=yes
+ AppleUserInterfaceTheme=no
+ ConsoleControl=no
  DataHub=no
  DeviceProperties=no
  FirmwareVolume=no
@@ -187,14 +185,14 @@ UEFI
 :Quirks
  AvoidHighAlloc=no
  ExitBootServicesDelay=0
- IgnoreInvalidFlexRatio=no
+ IgnoreInvalidFlexRatio=yes
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
  ReplaceTabWithSpace=no
- SanitiseClearScreen=yes
+ SanitiseClearScreen=no
  ClearScreenOnModeSwitch=no
  UnblockFsConnect=no
 
