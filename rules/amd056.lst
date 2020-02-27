@@ -94,7 +94,11 @@ Kernel
 
 Misc
 :Boot
- BuiltinTextRenderer=no "-This shouldn't be here"
+ BuiltinTextRenderer=no "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs="" "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleBehaviourUi="" "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleMode="" "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6":"!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
+ Resolution="" "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6":"!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
@@ -110,6 +114,7 @@ Misc
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
+ DisplayDelay=0
 
 :Security
  AllowNvramReset=yes
@@ -118,6 +123,7 @@ Misc
  RequireSignature=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
  RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
  Vault=Optional
+ HaltLevel=2147483648
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
  ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
 
@@ -198,7 +204,7 @@ UEFI
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl=yes "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleControl=yes "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
