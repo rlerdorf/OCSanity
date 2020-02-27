@@ -221,7 +221,6 @@ UEFI
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen=no
- Scale=100
 
 :Quirks
  AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
