@@ -146,6 +146,7 @@ NVRAM
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  nvda_drv~="(^$)|(00)" " **{$setting}** = **{$value}**. Set to **01** if you have a supported nvidia card":" **{$setting}** = **{$value}**. Normally **00** or remove entirely unless you have a supported nvidia card"
  prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
+ SystemAudioVolume=46 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**";
 
 PlatformInfo
  Automatic=yes
@@ -178,11 +179,13 @@ UEFI
  Drivers==* " **{$value}**"
 
 :Audio
- AudioSupport=no
- AudioDevice=""
- AudioCodec=0
- AudioOut=0
- PlayChime=no
+ AudioSupport=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ AudioDevice=PciRoot(0x0)/Pci(0x1b,0x0) " **{$setting}** = **{$value}**"
+ AudioCodec=0 " **{$setting}** = **{$value}**"
+ AudioOut=0 " **{$setting}** = **{$value}**"
+ MinimumVolume=20 " **{$setting}** = **{$value}**"
+ PlayChime=no " **{$setting}** = **{$value}**"
+ VolumeAmplifier=0 " **{$setting}** = **{$value}**"
 
 :Input
  KeyForgetThreshold=5
