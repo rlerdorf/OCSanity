@@ -10,8 +10,19 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
 
     function applyRules(Rules $rules) {
         $last_title = '';
+        // Check for missing groups
         foreach(array_keys(array_diff_key($rules->rule, $this->toArray())) as $missing_group) {
             $this->print_msg("-*$missing_group* group is missing");
+        }
+        // Check for missing sections
+        $confArray = $this->toArray();
+        foreach($rules->rule as $group=>$block) {
+            foreach($block as $k=>$v) {
+                if($k == 'top' || $k[1]==':') continue;
+                if(!array_key_exists(trim($k,':'), $confArray[$group])) {
+                    $this->print_msg("!**$group** - **".trim($k,':')."** section is missing");
+                }
+            }
         }
         foreach($this->toArray() as $group=>$d) {
             if (!array_key_exists($group, $rules->rule)) {
