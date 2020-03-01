@@ -17,13 +17,26 @@ $md = $args->getOpt('markdown');
 $pd = new ParsedownExtra();
 
 $results = function() use($plist,$rules,$md) {
+               $old = set_error_handler("grabErrors");
                ob_start(function($buf) use($md) {
                    if($md) return $buf;
                    $pd = new ParsedownExtra();
                    return $pd->text($buf);
                });
-               $oc = new OpenCorePlist($plist);
-               $oc->applyRules(new Rules($rules));
+               $oc = null;
+               try {
+                   $oc = new OpenCorePlist($plist);
+               } catch (DOMException $e) {
+                   echo "This config.plist contains XML syntax errors and will not parse";
+               }
+               if($oc) $oc->applyRules(new Rules($rules));
                ob_end_flush();
+               set_error_handler($old);
 };
 $results();
+
+function grabErrors($errno, $errstr, $errfile, $errline) {
+    if(preg_match("@DOMDocument::load\(\): (.*?) in.*line: (\d+)@", $errstr, $match)) {
+        echo $match[1]." line ".$match[2]."\n";
+    }
+}

@@ -31,13 +31,20 @@ foreach($rules as $fn=>$rule) {
 // And the callable for the main template to get the results
 if($fpath) {
     $results = function() use($rs, $fpath) {
+        $old = set_error_handler("grabErrors");
         ob_start(function($buf) {
             $pd = new ParsedownExtra();
             return $pd->text($buf);
         });
-        $oc = new OpenCorePlist($fpath);
-        $oc->applyRules(new Rules("../rules/{$rs}.lst"));
+        $oc = null;
+        try {
+            $oc = new OpenCorePlist($fpath);
+        } catch(DOMException $e) {
+            echo "* <span class=\"err\">Your config.plist contains invalid XML and will not parse</span>\n";
+        }
+        if($oc) $oc->applyRules(new Rules("../rules/{$rs}.lst"));
         ob_end_flush();
+        set_error_handler($old);
     };
     $xml = file_get_contents($fpath);
     // Filter out all potentially sensitive data
@@ -76,6 +83,12 @@ if($fpath) {
         }
     }
     $links .= "<br>\n";
+}
+
+function grabErrors($errno, $errstr, $errfile, $errline) {
+    if(preg_match("@DOMDocument::load\(\): (.*?) in.*line: (\d+)@", $errstr, $match)) {
+        echo "* <span class=\"err\">".$match[1]." line ".$match[2]."</span>\n";
+    }
 }
 
 require './main.php';
