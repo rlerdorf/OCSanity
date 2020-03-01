@@ -40,13 +40,17 @@ if($fpath) {
         ob_end_flush();
     };
     $xml = file_get_contents($fpath);
-    $filters = [
-        '@(.*<key>MLB</key>\s*<.*?>)(.*?)(</.*?>.*)@s',
-        '@(.*<key>ROM</key>\s*<.*?>)(.*?)(</.*?>.*)@s',
-        '@(.*<key>SystemSerialNumber</key>\s*<.*?>)(.*?)(</.*?>.*)@s',
-        '@(.*<key>SystemUUID</key>\s*<.*?>)(.*?)(</.*?>.*)@s'];
-
-    $xml = preg_replace($filters, '$1...hidden...$3', $xml);
+    // Filter out all potentially sensitive data
+    $xml = preg_replace('@(<key>MLB</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>BoardSerialNumber</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>SystemSerialNumber</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>ROM</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>SystemUUID</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>SystemSKUNumber</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>ChassisSerialNumber</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>BoardProduct</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>BID</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
+    $xml = preg_replace('@(<key>ChassisVersion</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
     $filtered_xml = htmlspecialchars($xml);
     $links = false;
 } else {
