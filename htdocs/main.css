@@ -81,6 +81,16 @@ ul li {
     margin-right: auto;
 }
 
+.xml {
+    background: white;
+    border-radius: 5px;
+    border: 2px solid rgb(0, 135, 247);
+    border-image: none;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .container {
     background-color: #ccc;
 }
@@ -88,4 +98,8 @@ ul li {
 .col-centered {
     float: none;
     margin: 0 auto;
+}
+
+.btn {
+    margin-top: 0.8em;
 }

@@ -8,12 +8,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/magula.min.css" />
   <link rel="stylesheet" href="main.css?version=1.3" type="text/css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -40,8 +42,14 @@
       <?=$links;?>
     </div>
     <?php else:?>
-    <div class="col-md-12 col-centered results">
+    <div class="col-md-12 col-centered results" id="resultview">
+      <button type="button" class="btn btn-primary pull-right" id="viewA">Show Raw XML</button>
       <?= $results(); ?>
+    </div>
+    <div id="xmlview" class="col-md-12 col-centered xml" style="display:none">
+      <button type="button" class="btn btn-primary pull-right" id="viewB">Sanity Check</button>
+      <h1>config.plist</h1>
+      <pre><code class="lang-xml"><?=$filtered_xml;?></code></pre>
     </div>
     <?php endif; ?>
   </div>
@@ -58,6 +66,18 @@
                  window.location.replace("/?file="+response.file+"&rs="+$("#file-upload input[type='radio']:checked").attr('value'));
              }
   };
+
+  hljs.initHighlightingOnLoad();
+
+  $('#viewA').on('click', function(event) {
+      $('#resultview').toggle();
+      $('#xmlview').toggle();
+  });
+
+  $('#viewB').on('click', function(event) {
+      $('#resultview').toggle();
+      $('#xmlview').toggle();
+  });
 </script>
 
 </body>

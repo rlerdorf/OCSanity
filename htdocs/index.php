@@ -39,6 +39,15 @@ if($fpath) {
         $oc->applyRules(new Rules("../rules/{$rs}.lst"));
         ob_end_flush();
     };
+    $xml = file_get_contents($fpath);
+    $filters = [
+        '@(.*<key>MLB</key>\s*<.*?>)(.*?)(</.*?>.*)@s',
+        '@(.*<key>ROM</key>\s*<.*?>)(.*?)(</.*?>.*)@s',
+        '@(.*<key>SystemSerialNumber</key>\s*<.*?>)(.*?)(</.*?>.*)@s',
+        '@(.*<key>SystemUUID</key>\s*<.*?>)(.*?)(</.*?>.*)@s'];
+
+    $xml = preg_replace($filters, '$1...hidden...$3', $xml);
+    $filtered_xml = htmlspecialchars($xml);
     $links = false;
 } else {
     $results = function() { };
