@@ -1,14 +1,15 @@
-# AMD OC 0.5.6
+# Kaby Lake OC 0.5.6
 # Generic config suitable for initial installation
-=# OpenCore 0.5.6 AMD Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config
+=# OpenCore 0.5.6 Intel Kaby Lake Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#acpi
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#platforminfo
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#deviceproperties
 
 ACPI
 :Add
@@ -16,9 +17,10 @@ ACPI
  [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]."
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
- [Path]==SSDT-EC-USBX-AMD.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-AMD** and **SSDT-EC**"
- [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-AMD.aml. See the [ACPI Docs][acpi]"
- [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
+ [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-EC-USBX.aml|SSDT-EC.aml "-**SSDT-EC-USBX.aml** or **SSDT-EC** is missing. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX** and **SSDT-EC**"
+ [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
 
 :Quirks
  count==5
@@ -27,9 +29,6 @@ ACPI
  RebaseRegions=no
  ResetHwSig=no
  ResetLogoStatus=no
-
-:Patch
- count>15 "!You may have added the kernel patches in the wrong section. They should be in the Kernel section. Please review the [Kernel Docs][kernel]"
 
 Booter
 
@@ -42,14 +41,18 @@ Booter
  EnableSafeModeSlide=yes
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
- ProtectCsmRegion=no
  ProtectSecureBoot=no
+ ProtectCsmRegion=no
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
 
 DeviceProperties
+
+:Add
+::PciRoot(0x0)/Pci(0x2,0x0)
+ AAPL,ig-platform-id~="00001259|03001259" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU not set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 Kernel
 
@@ -60,32 +63,21 @@ Kernel
  [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
  [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=**<_layout_\> here since you are using AppleALC.kext';":"$alcbootarg=;"
- [BundlePath]==SMCProcessor.kext       "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==SMCSuperIO.kext         "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==IntelMausiEthernet.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
- [BundlePath]==IntelMausi.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
- [BundlePath]==AppleIGB.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
- [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
- [BundlePath]==NullCPUPowerManagement.kext "!**{$BundlePath}** set the **DummyPowerManagement** quirk instead of using this kext"
- [BundlePath]==USBInjectAll.kext "!**{$BundlePath}** Does not work on AMD"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
- [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
-
-:Patch
- count<20 "!**{$count}** patches found - Did you apply the kernel patches correctly? Please review the [Kernel Docs][kernel]"
- count>19 " AMD kernel patches"
- [MatchOS]~=.+ "!You have used Clover patches, not OpenCore"
+ [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
+ [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
 
 :Quirks
- AppleCpuPmCfgLock=no
- AppleXcpmCfgLock=no
+ AppleCpuPmCfgLock=yes
+ AppleXcpmCfgLock=yes
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
- DisableIoMapper=no
- DummyPowerManagement=yes
+ DisableIoMapper=yes
+ DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
  LapicKernelPanic=no
@@ -95,12 +87,12 @@ Kernel
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
-:Boot
  BuiltinTextRenderer=no "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
  ConsoleBehaviourOs="" "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  ConsoleBehaviourUi="" "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  ConsoleMode="" "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6":"!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
  Resolution="" "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6":"!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
+:Boot
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
@@ -122,10 +114,8 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- RequireSignature=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
- RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
- Vault=Optional
- HaltLevel=2147483648
+ RequireSignature=no 
+ RequireVault=no
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
  ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
 
@@ -148,7 +138,7 @@ NVRAM
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  nvda_drv~=(^$) "-**{$setting}** = **{$value}**. Set to **00** if you do not have an nvidia card or **01** if you do":" **{$setting}** = **{$value}**. Normally **00** or remove entirely unless you have a supported nvidia card"
  prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
- SystemAudioVolume=46 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**";
+ SystemAudioVolume=46 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 PlatformInfo
  Automatic=yes
@@ -174,7 +164,7 @@ UEFI
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
- Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
@@ -211,7 +201,7 @@ UEFI
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl=yes "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleControl=no "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
@@ -228,7 +218,7 @@ UEFI
  DirectGopRendering=no
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
- SanitiseClearScreen=no
+ SanitiseClearScreen=yes
  Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
 
 :Quirks
@@ -240,8 +230,8 @@ UEFI
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
+ ReplaceTabWithSpace=no
  ReplaceTabWithSpace=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  SanitiseClearScreen=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ClearScreenOnModeSwitch=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  UnblockFsConnect=no
-
