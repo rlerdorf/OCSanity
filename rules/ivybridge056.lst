@@ -25,6 +25,7 @@ ACPI
 
 :Block
  [Enabled]==no "!**{$Comment}** Patch is **disabled**! Enable this to make sure SSDT-CPU-PM works."
+ [Enabled]==yes " **{$Comment}** Patch is **enabled**"
 
 :Quirks
  count==5
