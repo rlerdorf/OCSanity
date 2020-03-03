@@ -67,7 +67,7 @@ Kernel
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
 
 :Emulate
- Cpuid1Data=c3060300000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** you need CPU spoofing here"
+ Cpuid1Data=c3060300000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** you need correct CPU spoofing here"
  Cpuid1Mask=ffffffff000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}**"
 
 :Quirks
