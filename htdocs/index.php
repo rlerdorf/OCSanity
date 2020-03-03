@@ -19,14 +19,18 @@ if(!$fn || !file_exists($fpath)) {
 // Build the radio button fieldset of rules
 $rules = Rules::getList('../rules');
 $id = 1;
-$select_rules = '';
+$select_rules0 = '<div style="float:left;">';
+$select_rules1 = '<div style="float:left;">';
 foreach($rules as $fn=>$rule) {
     if($rs==$fn) $checked = 'checked';
     else $checked = '';
-    $select_rules .= "<label for=\"radio{$id}\">{$rule['short']}</label>\n";
-    $select_rules .= "<input type=\"radio\" name=\"ruleset\" value=\"{$fn}\" id=\"radio{$id}\" $checked>\n";
+    ${"select_rules".(($id-1)%2)} .= "<label for=\"radio{$id}\">{$rule['short']}</label>\n";
+    ${"select_rules".(($id-1)%2)} .= "<input type=\"radio\" name=\"ruleset\" value=\"{$fn}\" id=\"radio{$id}\" $checked><br>\n";
     $id++;
 }
+$select_rules0 .= '</div>';
+$select_rules1 .= '</div>';
+$select_rules = $select_rules0 . $select_rules1;
 
 // And the callable for the main template to get the results
 if($fpath) {
