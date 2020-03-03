@@ -114,8 +114,10 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- RequireSignature=no 
- RequireVault=no
+ RequireSignature=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
+ RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
+ Vault=Optional
+ HaltLevel=2147483648
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
  ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
 
