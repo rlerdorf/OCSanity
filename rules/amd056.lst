@@ -228,7 +228,7 @@ UEFI
  DirectGopRendering=no
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
- SanitiseClearScreen=no
+ SanitiseClearScreen=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
 
 :Quirks

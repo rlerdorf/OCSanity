@@ -223,19 +223,18 @@ UEFI
  DirectGopRendering=no
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
- SanitiseClearScreen=yes
+ SanitiseClearScreen=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
 
 :Quirks
  AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  ExitBootServicesDelay=0
- IgnoreInvalidFlexRatio=no
+ IgnoreInvalidFlexRatio=yes
  IgnoreTextInGraphics=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ProvideConsoleGop=yes "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace=no
  ReplaceTabWithSpace=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  SanitiseClearScreen=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ClearScreenOnModeSwitch=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
