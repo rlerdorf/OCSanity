@@ -181,12 +181,12 @@ UEFI
 
 :Audio
  AudioSupport=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- AudioDevice=PciRoot(0x0)/Pci(0x1b,0x0) " **{$setting}** = **{$value}**"
- AudioCodec=0 " **{$setting}** = **{$value}**"
- AudioOut=0 " **{$setting}** = **{$value}**"
- MinimumVolume=20 " **{$setting}** = **{$value}**"
- PlayChime=no " **{$setting}** = **{$value}**"
- VolumeAmplifier=0 " **{$setting}** = **{$value}**"
+ AudioDevice=PciRoot(0x0)/Pci(0x1b,0x0) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ AudioCodec=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ AudioOut=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ MinimumVolume=20 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ PlayChime=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ VolumeAmplifier=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 :Input
  KeyForgetThreshold=5
