@@ -14,14 +14,15 @@
 ACPI
 :Add
  count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
- [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]."
+ [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]"
  [Path]==SSDT-1.aml "-**{$Path}** This is just an example SSDT. If you really made this yourself, call it something more descriptive"
- [Path]==SSDT-PLUG.aml "-**{$Path}** does not work on Sandy and Ivy Bridge systems."
+ [Path]==SSDT-PLUG.aml "-**{$Path}** does not work on Sandy and Ivy Bridge systems"
+ [Path]==SSDT-GPIO.aml "-**{$Path}** this doesn't belong on an Ivy Bridge system"
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-CPU-PM.aml "-**SSDT-CPU-PM.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
+ [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Block
  [Enabled]==no "!**{$Comment}** Patch is **disabled**! Enable this to make sure SSDT-CPU-PM works."
@@ -68,16 +69,20 @@ Kernel
  [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
  [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=**<_layout_\> here since you are using AppleALC.kext';":"$alcbootarg=;"
+ [BundlePath]==VoodooHDA.kext " **{$BundlePath}** Note that **AppleALC.kext** tends to have better audio quality"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
  [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
- [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
+ [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
+ [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Quirks
- AppleCpuPmCfgLock=yes
- AppleXcpmCfgLock=yes
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
@@ -85,7 +90,7 @@ Kernel
  DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
- LapicKernelPanic=no
+ LapicKernelPanic=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives=no
@@ -144,7 +149,7 @@ NVRAM
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  nvda_drv~=(^$) "-**{$setting}** = **{$value}**. Set to **00** if you do not have an nvidia card or **01** if you do":" **{$setting}** = **{$value}**. Normally **00** or remove entirely unless you have a supported nvidia card"
- prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
+ prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
  SystemAudioVolume=46 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 PlatformInfo

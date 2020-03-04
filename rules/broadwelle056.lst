@@ -64,6 +64,9 @@ Kernel
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
+ [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Emulate
@@ -71,8 +74,8 @@ Kernel
  Cpuid1Mask=ffffffff000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}**"
 
 :Quirks
- AppleCpuPmCfgLock=yes
- AppleXcpmCfgLock=yes
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
@@ -80,7 +83,7 @@ Kernel
  DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
- LapicKernelPanic=no
+ LapicKernelPanic=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives=no
@@ -139,7 +142,7 @@ NVRAM
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  nvda_drv~=(^$) "-**{$setting}** = **{$value}**. Set to **00** if you do not have an nvidia card or **01** if you do":" **{$setting}** = **{$value}**. Normally **00** or remove entirely unless you have a supported nvidia card"
- prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
+ prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
  SystemAudioVolume=46 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 PlatformInfo
