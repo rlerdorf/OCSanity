@@ -171,6 +171,7 @@ UEFI
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
  Drivers==#AppleUsbKbDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
