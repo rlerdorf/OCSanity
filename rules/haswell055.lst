@@ -51,7 +51,7 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="0300220d|04001204" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU not set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+ AAPL,ig-platform-id~="0000060c|0000160c|0000260c|00000604|00001604|00002604|0000260d|0000160a|0000260a|0500260a|0600260a|08002e0a|0c00160a|0700260d|0300220d|0a002e0a|0a00260a|0d002e0a|0d00260a|04001204|0b001204|0900260d|0e00260d|0f00260d" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 Kernel
 
