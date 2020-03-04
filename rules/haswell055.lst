@@ -20,7 +20,7 @@ ACPI
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EHCx_OFF.aml "-**SSDT-EHCx_OFF.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
+ [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Quirks
  count==5
@@ -67,7 +67,7 @@ Kernel
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
- [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Quirks
  AppleCpuPmCfgLock=yes

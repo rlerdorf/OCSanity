@@ -107,7 +107,7 @@ Misc
  PickerAttributes=0 "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
  HibernateMode=None
  Timeout=5
- Resolution=""
+ Resolution="" " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 :Debug
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"

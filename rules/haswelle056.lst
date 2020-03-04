@@ -1,15 +1,15 @@
 # Haswell-E OC 0.5.6
 # Generic config suitable for initial installation
 =# OpenCore 0.5.6 Intel Haswell-E Sanity Check
-=https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e
 =<hr>
-=[kernel]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#kernel
-=[acpi]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#acpi
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#platforminfo
-=[deviceproperties]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#deviceproperties
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e#deviceproperties
 
 ACPI
 :Add
@@ -20,7 +20,7 @@ ACPI
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
+ [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Quirks
  count==5
@@ -64,7 +64,7 @@ Kernel
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
- [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Emulate
  Cpuid1Data=c3060300000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** you need correct CPU spoofing here"
@@ -100,7 +100,7 @@ Misc
  HibernateMode=None
  PickerMode=Builtin
  HideAuxiliary=no
- PickerAttributes=0
+ PickerAttributes=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  PickerAudioAssist=no
  Timeout=5
 
@@ -218,7 +218,7 @@ UEFI
  count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
- Resolution=Max
+ Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
@@ -231,7 +231,7 @@ UEFI
 :Quirks
  AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  ExitBootServicesDelay=0
- IgnoreInvalidFlexRatio=no
+ IgnoreInvalidFlexRatio=yes
  IgnoreTextInGraphics=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ProvideConsoleGop=yes "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ReleaseUsbOwnership=no

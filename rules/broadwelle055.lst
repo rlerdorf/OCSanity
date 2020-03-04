@@ -1,30 +1,25 @@
-# Ivy Bridge OC 0.5.5
+# Broadwell-E OC 0.5.5
 # Generic config suitable for initial installation
-=# OpenCore 0.5.5 Intel Ivy Bridge Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge
+=# OpenCore 0.5.5 Intel Broadwell-E Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#acpi
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#platforminfo
-=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#deviceproperties
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#deviceproperties
 
 ACPI
 :Add
  count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
  [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]."
- [Path]==SSDT-PLUG.aml "-**{$Path}** does not work on Sandy and Ivy Bridge systems."
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
+ [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]!=SSDT-CPU-PM.aml "-**SSDT-CPU-PM.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
-
-:Block
- [Enabled]==no "!**{$Comment}** Patch is **disabled**! Enable this to make sure SSDT-CPU-PM works."
- [Enabled]==yes " **{$Comment}** Patch is **enabled**"
 
 :Quirks
  count==5
@@ -38,7 +33,7 @@ Booter
 
 :Quirks
  AvoidRuntimeDefrag=yes
- DevirtualiseMmio=no
+ DevirtualiseMmio=yes
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
@@ -52,10 +47,6 @@ Booter
  SignalAppleOS=no
 
 DeviceProperties
-
-:Add
-::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="0a006601" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 Kernel
 
@@ -73,10 +64,14 @@ Kernel
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
+:Emulate
+ Cpuid1Data=d4060300000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** you need correct CPU spoofing here"
+ Cpuid1Mask=ffffffff000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}**"
+
 :Quirks
  AppleCpuPmCfgLock=yes
  AppleXcpmCfgLock=yes
- AppleXcpmExtraMsrs=no
+ AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=yes
@@ -129,7 +124,7 @@ NVRAM
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- nvda_drv~="(^$)|(00)" " **{$setting}** = **{$value}**. Set to **1** if you have a supported nvidia card":" **{$setting}** = **{$value}**. Normally **_-blank-_** unless you have a supported nvidia card"
+ nvda_drv="" " **{$setting}** set to **1** if you have a supported nvidia card":" **{$setting}** normally **_-blank-_** unless you have a supported nvidia card"
  prev-lang:kbd=72752d52553a323532 "!**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
 
 PlatformInfo
@@ -156,7 +151,7 @@ UEFI
  Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
- Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
@@ -180,7 +175,7 @@ UEFI
  AppleKeyMap=no
  AppleSmcIo=no
  AppleUserInterfaceTheme=no
- ConsoleControl=yes
+ ConsoleControl=no
  DataHub=no
  DeviceProperties=no
  FirmwareVolume=no
@@ -198,7 +193,7 @@ UEFI
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
  ReplaceTabWithSpace=no
- SanitiseClearScreen=yes
+ SanitiseClearScreen=no
  ClearScreenOnModeSwitch=no
  UnblockFsConnect=no
 

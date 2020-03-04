@@ -105,7 +105,7 @@ Misc
  HibernateMode=None
  PickerMode=Builtin
  HideAuxiliary=no
- PickerAttributes=0
+ PickerAttributes=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  PickerAudioAssist=no
  Timeout=5
 
@@ -223,7 +223,7 @@ UEFI
  count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
- Resolution=Max
+ Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes

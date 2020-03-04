@@ -20,7 +20,7 @@ ACPI
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-EC-USBX.aml|SSDT-EC.aml "-**SSDT-EC-USBX.aml** or **SSDT-EC** is missing. See the [ACPI Docs][acpi]"
  [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX** and **SSDT-EC**"
- [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory" 
+ [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Quirks
  count==5
@@ -64,7 +64,7 @@ Kernel
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
- [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory" 
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Quirks
  AppleCpuPmCfgLock=yes
@@ -96,7 +96,7 @@ Misc
  HibernateMode=None
  PickerMode=Builtin
  HideAuxiliary=no
- PickerAttributes=0
+ PickerAttributes=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  PickerAudioAssist=no
  Timeout=5
 
@@ -214,7 +214,7 @@ UEFI
  count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
- Resolution=Max
+ Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
