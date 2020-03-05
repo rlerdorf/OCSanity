@@ -64,6 +64,7 @@ if($fpath) {
     $xml = preg_replace('@(<key>ChassisVersion</key>\s*<.*?>)(.*?)(</.*?>)@s', '$1...hidden...$3', $xml);
     $filtered_xml = htmlspecialchars($xml);
     $links = false;
+    $show_upload = false;
 } else {
     $results = function() { };
     $show_upload = true;
