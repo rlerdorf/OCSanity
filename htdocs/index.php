@@ -10,10 +10,13 @@ if(empty($_GET['rs']) && !empty($_GET['oc'])) {
 // Sanitize user input
     $rs = preg_replace('/[^a-zA-Z0-9_]+/', '-', $_GET['rs'] ?? $default_ruleset);
 }
-$fn = basename($_GET['file']);
-$fpath = __DIR__."/../uploads/$fn";
-if(!$fn || !file_exists($fpath)) {
-    $fpath = null;
+$fpath = null;
+if(!empty($_GET['file'])) {
+    $fn = basename($_GET['file']);
+    $fpath = __DIR__."/../uploads/$fn";
+    if(!$fn || !file_exists($fpath)) {
+        $fpath = null;
+    }
 }
 
 // Build the radio button fieldset of rules
