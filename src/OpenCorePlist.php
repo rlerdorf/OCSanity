@@ -9,7 +9,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
     }
 
     function applyRules(Rules $rules) {
-        $last_title = '';
+        $seens_title = [];
         // Check for missing groups
         foreach(array_keys(array_diff_key($rules->rule, $this->toArray())) as $missing_group) {
             $this->print_msg("-*$missing_group* group is missing");
@@ -34,9 +34,9 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
                 foreach($rules->rule[$group]["top"] as $rule) {
                     if(!empty($rule)) {
                         $msgs = $rule->exec($d, $this->value[0]->{$group});
-                        if($rule->title && $last_title!=$rule->title) {
+                        if($rule->title && !$seen_title[$rule->title]) {
                             echo "\n###".$rule->title."\n";
-                            $last_title = $rule->title;
+                            $seen_title[$rule->title] = true;
                         }
                         foreach($msgs as $k=>$msg) {
                             if(!empty($msg) && $msg!='""') {
@@ -59,9 +59,9 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
             }
 
             foreach($d as $section=>$dd) {
-                if($last_title!=$section) {
+                if(!$seen_title[$section]) {
                     echo "\n###$section\n";
-                    $last_title = $section;
+                    $seen_title[$section] = true;
                 }
                 if(!empty($rules->rule[$group][":$section"])) {
                     foreach($rules->rule[$group][":$section"] as $rule) {
@@ -97,6 +97,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
                     }
                 }
             }
+            $seen_title = [];
         }
     }
 
