@@ -99,6 +99,7 @@ Misc
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
+ UsePicker=yes "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
@@ -235,6 +236,7 @@ UEFI
  AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=yes
+ ReconnectOnResChange=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  IgnoreTextInGraphics=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ProvideConsoleGop=yes "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
  ReleaseUsbOwnership=no

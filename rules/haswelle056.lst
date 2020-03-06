@@ -96,6 +96,7 @@ Misc
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
+ UsePicker=yes "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
