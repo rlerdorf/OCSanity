@@ -194,6 +194,8 @@ UEFI
  Drivers==#NvmExpressDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#XhciDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==BootLiquor.efi "!**{$value}** You need OC 0.5.7+ for this"
  Drivers==* " **{$value}**"
 
 :Audio
@@ -241,6 +243,7 @@ UEFI
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
  DirectGopRendering=no
+ DirectGopCacheMode=-1 "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
