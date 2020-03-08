@@ -34,7 +34,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
                 foreach($rules->rule[$group]["top"] as $rule) {
                     if(!empty($rule)) {
                         $msgs = $rule->exec($d, $this->value[0]->{$group});
-                        if($rule->title && !isset($seen_title[$rule->title])) {
+                        if($rule->title && empty($seen_title[$rule->title])) {
                             echo "\n###".$rule->title."\n";
                             $seen_title[$rule->title] = true;
                         }
@@ -59,7 +59,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
             }
 
             foreach($d as $section=>$dd) {
-                if(!$seen_title[$section]) {
+                if(empty($seen_title[$section])) {
                     echo "\n###$section\n";
                     $seen_title[$section] = true;
                 }
