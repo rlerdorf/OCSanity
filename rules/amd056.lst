@@ -208,6 +208,7 @@ UEFI
  VolumeAmplifier=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
 
 :Input
+ KeyFiltering=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
  KeyForgetThreshold=5
  KeyMergeThreshold=2
  KeySupport=yes
