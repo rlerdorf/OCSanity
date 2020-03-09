@@ -210,6 +210,7 @@ UEFI
  count==13 :"!You should have exactly 13 settings in the UEFI-Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
+ AppleDebugLog=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
