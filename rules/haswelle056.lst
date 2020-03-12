@@ -43,6 +43,7 @@ Booter
  ForceExitBootServices=no
  ProtectCsmRegion=no
  ProtectSecureBoot=no
+ ProtectUefiServices=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
@@ -111,6 +112,9 @@ Misc
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
  DisplayDelay=0
+
+:Entries
+ [Arguments]~=debug "!**Arguments** = **{$Arguments}** boot-args go in the nvram section, not here"
 
 :Security
  AllowNvramReset=yes
