@@ -175,9 +175,9 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
- SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
- MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
- ROM=112233000000 "!**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
+ SystemProductName~="(iMacPro1,1|MacPro7,1|MacPro6,1|iMac14,2)" " **{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":"-**{$setting}** = **{$value} this is not a suggested SMBIOS for AMD systems**"
+ MLB~="(M000000000001|M0000000000000001)" "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
+ ROM~="(112233000000|112233445566)" "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemUUID=00000000-0000-0000-0000-000000000000 "!**{$setting}** should be set to your generated SmUUID. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
 
@@ -200,6 +200,7 @@ UEFI
  Drivers==#XhciDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#OpenCanopy.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==BootLiquor.efi "!**{$value}** You need OC 0.5.7+ for this"
  Drivers==* " **{$value}**"
 
