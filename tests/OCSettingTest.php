@@ -97,11 +97,11 @@ final class OCSettingTest extends TestCase {
         RULES;
 
         $buf = $this->applyRules($rules);
-        $this->assertStringContainsString('"good">**XhciPortLimit** = **No**', $buf);
-        $this->assertStringContainsString('"good">**KeyForgetThreshold** = **5**', $buf);
-        $this->assertStringContainsString('"good">**KeySwap** = **No**', $buf);
-        $this->assertStringContainsString('"warn">**PointerSupportMode** = **ASUS** but should normally be **_-blank-_**', $buf);
-        $this->assertStringContainsString('"warn">**SanitiseClearScreen** is missing. Normally set to **Yes**', $buf);
+        $this->assertStringContainsString('"good fas fa-check-circle">**XhciPortLimit** = **No**', $buf);
+        $this->assertStringContainsString('"good fas fa-check-circle">**KeyForgetThreshold** = **5**', $buf);
+        $this->assertStringContainsString('"good fas fa-check-circle">**KeySwap** = **No**', $buf);
+        $this->assertStringContainsString('"warn fas fa-question-circle">**PointerSupportMode** = **ASUS** but should normally be **_-blank-_**', $buf);
+        $this->assertStringContainsString('"warn fas fa-question-circle">**SanitiseClearScreen** is missing. Normally set to **Yes**', $buf);
     }
 
     public function testSettingNested(): void {
