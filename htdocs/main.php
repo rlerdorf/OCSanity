@@ -43,11 +43,11 @@
     </div>
     <?php else:?>
     <div class="col-md-12 col-centered results" id="resultview">
-      <button type="button" class="btn btn-primary pull-right" id="viewA">Show Raw XML</button>
+      <button type="button" class="btn btn-primary float-right" id="viewA">Show Raw XML</button>
       <?= $results(); ?>
     </div>
     <div id="xmlview" class="col-md-12 col-centered xml" style="display:none">
-      <button type="button" class="btn btn-primary pull-right" id="viewB">Sanity Check</button>
+      <button type="button" class="btn btn-primary float-right" id="viewB">Sanity Check</button>
       <h1>config.plist</h1>
       <pre><code class="lang-xml"><?=$filtered_xml;?></code></pre>
     </div>
