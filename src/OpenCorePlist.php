@@ -104,16 +104,16 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
     function print_msg($msg) {
         $msg = trim($msg,'"');
         switch($msg[0]) {
-            case ' ': $sev = 'good'; $msg = substr($msg,1); break;
-            case '-': $sev = 'warn'; $msg = substr($msg,1); break;
-            case '!': $sev = 'err'; $msg = substr($msg,1); break;
-            case '%': $sev = 'info'; $msg = substr($msg,1); break;
+            case ' ': $sev = 'good'; $icon = 'fa-check-circle'; $msg = substr($msg,1); break;
+            case '-': $sev = 'warn'; $icon = 'fa-question-circle'; $msg = substr($msg,1); break;
+            case '!': $sev = 'err'; $icon = 'fa-times-circle'; $msg = substr($msg,1); break;
+            case '%': $sev = 'info'; $icon = 'fa-info-circle'; $msg = substr($msg,1); break;
             default: $sev = 'good'; break;
         }
         if(preg_match('/{\$([^}]+)}/', $msg, $match)) {
-            echo "* <span class=\"err\">Unexpected missing **{$match[1]}** here</span>\n";
+            echo "* <span class=\"err fas fa-times-circle\">Unexpected missing **{$match[1]}** here</span>\n";
         } else {
-            echo "* <span class=\"{$sev}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css
+            echo "* <span class=\"{$sev} fas {$icon}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css
         }
     }
 }

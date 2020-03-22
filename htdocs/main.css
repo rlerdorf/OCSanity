@@ -3,36 +3,26 @@ body {
 }
 
 .good:before {
-  content:'\2611';
   display:inline-block;
   color:green;
   padding:0 6px 0 0;
 }
 
 .info:before {
-  content:'\2139';
   display:inline-block;
   color:#4242d2;
-  padding:0 4px 0 4px;
-  border-radius:50%;
-  border:2px solid;
-  line-height: 1em;
-  font-size: 0.9em;
-  margin-left: -2px;
-  margin-right: 4px;
+  padding:0 6px 0 0;
 }
 
 .err:before {
-  content:'\2612';
   display:inline-block;
   color:red;
   padding:0 6px 0 0;
 }
 
 .warn:before {
-  content:'\2610';
   display:inline-block;
-  color:#cccc00;
+  color:#dcdc00;
   padding:0 6px 0 0;
 }
 
