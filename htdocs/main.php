@@ -27,12 +27,27 @@
   <?php if($show_upload):?>
     <div class="col-md-7">
       <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="file-upload">
-      <h2>OpenCore Sanity Checker</h2>
-        <div>
-          <fieldset>
-            <legend>Choose platform and OpenCore version: </legend>
-            <?=$select_rules?>
-          </fieldset>
+        <h2>OpenCore Sanity Checker</h2>
+        <h5>Choose CPU Architecture and OC Version</h3>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend"><label class="input-group-text" for="selectarch">CPU</label></div>
+              <select class="form-control" name="selectarch" id="selectarch">
+                <?=$archopts?>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend"><label class="input-group-text" for="selectver">Version</label></div>
+              <select class="form-control" name="selectver" id="selectver">
+                <?=$veropts?>
+              </select>
+            </div>
+          </div>
+          <input type="hidden" name="ruleset" id="ruleset" value="">
         </div>
       </form>
     </div>
@@ -56,14 +71,25 @@
 </div>
 
 <script type="text/javascript">
-  $( function() { $("#file-upload input[type='radio']").checkboxradio(); } );
   jQuery("time.timeago").timeago();
+  var $select1 = $('#selectarch'), $select2 = $('#selectver'), $options = $select2.find('option');
+  var $defaultval = '<?=$default_version?>';
+  $select1.on('change', function() {
+	 $select2.html($options.filter('[value="' + this.value + '"]'));
+     $('#selectver option:contains(' + $defaultval + ')').prop({selected: true});
+     $('#ruleset').val($('#selectver').val()+$('#selectver option:selected').text().replace(/\./g, ''));
+  } ).trigger('change');
+  $select2.on('change', function() {
+     $('#ruleset').val($('#selectver').val()+$('#selectver option:selected').text().replace(/\./g, ''));
+  } ).trigger('change');
+
   Dropzone.options.fileUpload = {
   dictDefaultMessage: "<hr><div class=\"clickhere\">Then click here to choose<br>your config.plist or drag it here</div>",
     maxFilesize:1,
     acceptedFiles: ".plist",
     success: function(file, response) {
-                 window.location.replace("/?file="+response.file+"&rs="+$("#file-upload input[type='radio']:checked").attr('value'));
+                 var $short = $('#selectver').val()+$('#selectver option:selected').text().replace(/\./g, '');
+                 window.location.replace("/?file="+response.file+"&rs="+$short);
              }
   };
 

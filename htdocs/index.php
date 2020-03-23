@@ -1,11 +1,12 @@
 <?php
 require '../vendor/autoload.php';
-$default_ruleset = 'amd056';  // Update when this gets too old
+$default_ruleset = 'amd056';
+$default_version = '0.5.6';
 
 // Support old-style URL oc param
 
 if(empty($_GET['rs']) && !empty($_GET['oc'])) {
-    $rs = ($_GET['oc'] == '0.5.6') ? 'amd056' : 'amd055';
+    $rs = ($_GET['oc'] == $default_version) ? $default_ruleset : 'amd055';
 } else {
 // Sanitize user input
     $rs = preg_replace('/[^a-zA-Z0-9_]+/', '-', $_GET['rs'] ?? $default_ruleset);
@@ -19,21 +20,25 @@ if(!empty($_GET['file'])) {
     }
 }
 
-// Build the radio button fieldset of rules
+// Build the CPU Arch/OC Version Select dropdown data
 $rules = Rules::getList('../rules');
-$id = 1;
-$select_rules0 = '<div style="float:left;">';
-$select_rules1 = '<div style="float:left;">';
+$archopts = '';
+$veropts = '';
+$seen = [];
 foreach($rules as $fn=>$rule) {
-    if($rs==$fn) $checked = 'checked';
-    else $checked = '';
-    ${"select_rules".(($id-1)%2)} .= "<label for=\"radio{$id}\">{$rule['short']}</label>\n";
-    ${"select_rules".(($id-1)%2)} .= "<input type=\"radio\" name=\"ruleset\" value=\"{$fn}\" id=\"radio{$id}\" $checked><br>\n";
-    $id++;
+    if(preg_match('@^(.*?)(\d.*)$@', $fn, $match)) {
+        $key = $match[1];
+        if(preg_match('@^(.*?) OC (.*)$@', $rule['short'], $match)) {
+            if(empty($seen[$key])) {
+                $archopts .= "<option value=\"{$key}\">{$match[1]}</option>\n";
+                $seen[$key] = true;
+            }
+            if($match[2] == $default_version) $selected = ' selected';
+            else $selected = '';
+            $veropts .= "<option value=\"{$key}\"{$selected}>{$match[2]}</option>\n";
+        }
+    }
 }
-$select_rules0 .= '</div>';
-$select_rules1 .= '</div>';
-$select_rules = $select_rules0 . $select_rules1;
 
 // And the callable for the main template to get the results
 if($fpath) {
