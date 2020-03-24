@@ -108,7 +108,7 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
             case '-': $sev = 'warn'; $icon = 'fa-question-circle'; $msg = substr($msg,1); break;
             case '!': $sev = 'err'; $icon = 'fa-times-circle'; $msg = substr($msg,1); break;
             case '%': $sev = 'info'; $icon = 'fa-info-circle'; $msg = substr($msg,1); break;
-            default: $sev = 'good'; break;
+            default: $sev = 'good'; $icon = 'fa-check-circle'; break;
         }
         if(preg_match('/{\$([^}]+)}/', $msg, $match)) {
             echo "* <span class=\"err fas fa-times-circle\">Unexpected missing **{$match[1]}** here</span>\n";
