@@ -243,7 +243,7 @@ UEFI
  UnicodeCollation=no
 
 :Output
- count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
+ count==11 :"!You should have exactly 10 settings in the UEFI-Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
@@ -255,7 +255,7 @@ UEFI
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
+ Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
  AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
