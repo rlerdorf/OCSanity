@@ -54,6 +54,7 @@ Booter
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
+ SyncRuntimePermissions~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
 
 DeviceProperties
 

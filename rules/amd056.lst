@@ -51,11 +51,12 @@ Booter
  ForceExitBootServices=no
  ProtectCsmRegion=no
  ProtectSecureBoot=no
- ProtectUefiServices=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ ProtectUefiServices~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
+ SyncRuntimePermissions~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
 
 DeviceProperties
 
@@ -123,7 +124,7 @@ Misc
  Timeout=5
 
 :Debug
- AppleDebug=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebug~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"

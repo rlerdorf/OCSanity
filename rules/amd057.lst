@@ -56,6 +56,7 @@ Booter
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
+ SyncRuntimePermissions=no
 
 DeviceProperties
 
