@@ -44,7 +44,7 @@ Booter
  ForceExitBootServices=no
  ProtectSecureBoot=no
  ProtectCsmRegion=no
- ProtectUefiServices=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ ProtectUefiServices~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  ProvideCustomSlide=yes
  RebuildAppleMemoryMap~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  SetupVirtualMap=yes
@@ -87,33 +87,33 @@ Kernel
  DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
- LapicKernelPanic=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives=no
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
- BuiltinTextRenderer=no "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
- ConsoleBehaviourOs="" "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
- ConsoleBehaviourUi="" "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
- ConsoleMode="" "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6":"!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
- Resolution="" "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6":"!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
+ BuiltinTextRenderer~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleBehaviourUi~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
+ Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
 :Boot
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
- UsePicker=yes "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
  HideAuxiliary=no
- PickerAttributes=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ PickerAttributes~=.* " **{$setting}** = **{$value}**"
  PickerAudioAssist=no
  Timeout=5
 
 :Debug
- AppleDebug=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebug~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
@@ -126,8 +126,8 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- RequireSignature=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
- RequireVault=no "!**{$setting}** has been replaced by **Vault**":"!**{$setting}** has been replaced by **Vault**"
+ RequireSignature~=.* "!**{$setting}** has been replaced by **Vault**"
+ RequireVault~=.* "!**{$setting}** has been replaced by **Vault**"
  Vault=Optional
  HaltLevel=2147483648
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
@@ -144,15 +144,15 @@ NVRAM
 :Add
 ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
  UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
- DefaultBackgroundColor=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ DefaultBackgroundColor~=.* " **{$setting}** = **{$value}**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
- csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ csr-active-config~=.* " **{$setting}** = **{$value}**"
  nvda_drv~=(^$) "-**{$setting}** = **{$value}**. Set to **00** if you do not have an nvidia card or **01** if you do":" **{$setting}** = **{$value}**. Normally **00** or remove entirely unless you have a supported nvidia card"
  prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
- SystemAudioVolume=46 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ SystemAudioVolume~=.* " **{$setting}** = **{$value}**"
 
 PlatformInfo
  Automatic=yes
@@ -164,7 +164,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -194,16 +194,16 @@ UEFI
  Drivers==* " **{$value}**"
 
 :Audio
- AudioSupport=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- AudioDevice=PciRoot(0x0)/Pci(0x1b,0x0) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- AudioCodec=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- AudioOut=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- MinimumVolume=20 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- PlayChime=no " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- VolumeAmplifier=0 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ AudioSupport~=.* " **{$setting}** = **{$value}**"
+ AudioDevice~=.* " **{$setting}** = **{$value}**"
+ AudioCodec~=.* " **{$setting}** = **{$value}**"
+ AudioOut~=.* " **{$setting}** = **{$value}**"
+ MinimumVolume~=.* " **{$setting}** = **{$value}**"
+ PlayChime~=.* " **{$setting}** = **{$value}**"
+ VolumeAmplifier~=.* " **{$setting}** = **{$value}**"
 
 :Input
- KeyFiltering=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ KeyFiltering~=no "!**{$setting}** this is for OpenCore 0.5.7+"
  KeyForgetThreshold=5
  KeyMergeThreshold=2
  KeySupport=yes
@@ -217,7 +217,7 @@ UEFI
  count==13 :"!You should have exactly 13 settings in the UEFI-Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
- AppleDebugLog=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebugLog~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
@@ -225,7 +225,7 @@ UEFI
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl=no "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer":"!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleControl~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
@@ -235,28 +235,28 @@ UEFI
  count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
- Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ Resolution~=.* " **{$setting}** = **{$value}**"
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
  DirectGopRendering=no
- DirectGopCacheMode=-1 "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
+ DirectGopCacheMode~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
- SanitiseClearScreen=yes " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
- Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
+ SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
+ Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
- AvoidHighAlloc=no "!**{$setting}** no longer exists in OpenCore 0.5.6":"!**{$setting}** no longer exists in OpenCore 0.5.6"
+ AvoidHighAlloc~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=no
- ReconnectOnResChange=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
- IgnoreTextInGraphics=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
- ProvideConsoleGop=yes "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
- SanitiseClearScreen=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
- ClearScreenOnModeSwitch=no "!**{$setting}** has been moved to Output section in OC 0.5.6":"!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
  UnblockFsConnect=no

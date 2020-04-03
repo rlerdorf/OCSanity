@@ -53,8 +53,9 @@ Booter
  ProtectSecureBoot=no
  ProtectUefiServices=no
  ProvideCustomSlide=yes
+ RebuildAppleMemoryMap=no
  SetupVirtualMap=yes
- ShrinkMemoryMap=no
+ ShrinkMemoryMap~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7"
  SignalAppleOS=no
  SyncRuntimePermissions=no
 
