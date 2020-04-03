@@ -45,6 +45,7 @@ Booter
  ProtectSecureBoot=no
  ProtectUefiServices=no "!**{$setting}** this is for OpenCore 0.5.7+":"!**{$setting}** this is for OpenCore 0.5.7+"
  ProvideCustomSlide=yes
+ RebuildAppleMemoryMap~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
