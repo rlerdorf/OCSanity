@@ -1,14 +1,15 @@
-# AMD OC 0.5.7
+# Broadwell-E OC 0.5.7
 # Generic config suitable for initial installation
-=# OpenCore 0.5.7 AMD Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config
+=# OpenCore 0.5.7 Intel Broaswell-E Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#acpi
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#platforminfo
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#deviceproperties
 
 ACPI
 :Add
@@ -17,14 +18,8 @@ ACPI
  [Path]==SSDT-1.aml "-**{$Path}** This is just an example SSDT. If you really made this yourself, call it something more descriptive"
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
- [Path]==SSDT-EC-USBX-AMD.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-AMD** and **SSDT-EC**"
- [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-AMD.aml. See the [ACPI Docs][acpi]"
- [Path]~=AWAC.+aml "-**{$Path}** is not needed on AMD"
- [Path]~=RTC0.+aml "-**{$Path}** is not needed on AMD"
- [Path]~=ALS0.+aml "-**{$Path}** is not needed on AMD"
- [Path]==SSDT-PMC.aml "-**{$Path}** is not needed on AMD"
- [Path]==SSDT-PNLF.aml "-**{$Path}** is not needed on AMD"
- [Path]==SSDT-SBUS-MCHC.aml "-**{$Path}** is not needed on AMD"
+ [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Quirks
@@ -35,14 +30,11 @@ ACPI
  ResetHwSig=no
  ResetLogoStatus=no
 
-:Patch
- count>15 "!You may have added the kernel patches in the wrong section. They should be in the Kernel section. Please review the [Kernel Docs][kernel]"
-
 Booter
 
 :Quirks
  AvoidRuntimeDefrag=yes
- DevirtualiseMmio=no
+ DevirtualiseMmio=yes
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
@@ -55,7 +47,7 @@ Booter
  ProvideCustomSlide=yes
  RebuildAppleMemoryMap=no
  SetupVirtualMap=yes
- ShrinkMemoryMap~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7"
+ ShrinkMemoryMap=no
  SignalAppleOS=no
  SyncRuntimePermissions=no
 
@@ -70,33 +62,28 @@ Kernel
  [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
  [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
  [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=**<_layout_\> here since you are using AppleALC.kext';":"$alcbootarg=;"
- [BundlePath]==SMCProcessor.kext       "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==SMCSuperIO.kext         "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC plugins don't work on AMD"
- [BundlePath]==IntelMausiEthernet.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
- [BundlePath]==IntelMausi.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
- [BundlePath]==AppleIGB.kext "-**{$BundlePath}** this is probably not the right ethernet kext for an AMD system"
- [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
- [BundlePath]==NullCPUPowerManagement.kext "!**{$BundlePath}** set the **DummyPowerManagement** quirk instead of using this kext"
- [BundlePath]==USBInjectAll.kext "!**{$BundlePath}** Does not work on AMD"
- [BundlePath]==Legacy_USB3.kext "!**{$BundlePath}** shouldn't be here"
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
+ [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
+ [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
+ [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
-:Patch
- count<20 "!**{$count}** patches found - Did you apply the kernel patches correctly? Please review the [Kernel Docs][kernel]"
- count>19 " AMD kernel patches"
- [MatchOS]~=.+ "!You have used Clover patches, not OpenCore"
+:Emulate
+ Cpuid1Data=d4060300000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** you need correct CPU spoofing here"
+ Cpuid1Mask=ffffffff000000000000000000000000 " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}**"
 
 :Quirks
- AppleCpuPmCfgLock=no
- AppleXcpmCfgLock=no
- AppleXcpmExtraMsrs=no
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
- DisableIoMapper=no
- DummyPowerManagement=yes
+ DisableIoMapper=yes
+ DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -109,13 +96,13 @@ Misc
 :Boot
  BuiltinTextRenderer~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
  ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
- ConsoleBehaviourUi~="" "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleBehaviourUi~="" "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
  Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
- UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ UsePicker~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
@@ -177,9 +164,9 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
- SystemProductName~="(iMacPro1,1|MacPro7,1|MacPro6,1|iMac14,2)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for AMD systems. See [PlatformInfo Docs][platforminfo]"
- MLB~="(M000000000001|M0000000000000001)" "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
- ROM~="(112233000000|112233445566)" "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
+ SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
+ ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemUUID=00000000-0000-0000-0000-000000000000 "!**{$setting}** should be set to your generated SmUUID. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
 
@@ -191,19 +178,18 @@ UEFI
  Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OC 0.5.7"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
- Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
- Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==#AppleUsbKbDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#HiiDatabase.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#NvmExpressDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#XhciDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#OpenCanopy.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==* " **{$value}**"
 
 :Audio
@@ -257,12 +243,12 @@ UEFI
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
- Scale~=.* "!**{$setting}** shouldn't be here"
+ Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
 
 :Quirks
  AvoidHighAlloc~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  ExitBootServicesDelay=0
- IgnoreInvalidFlexRatio=no
+ IgnoreInvalidFlexRatio=yes
  ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
@@ -272,5 +258,4 @@ UEFI
  ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
- UnblockFsConnect=no
-
+ UnblockFsConnect~=.*

@@ -99,13 +99,13 @@ Misc
 :Boot
  BuiltinTextRenderer~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
  ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
- ConsoleBehaviourUi~="" "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleBehaviourUi~="" "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
  Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
- UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ UsePicker~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
@@ -225,7 +225,7 @@ UEFI
  AppleSmcIo=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleControl~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
@@ -247,17 +247,17 @@ UEFI
  Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
- AvoidHighAlloc~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ AvoidHighAlloc~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=no
- ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- ProvideConsoleGop=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ ProvideConsoleGop=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  UnblockFsConnect=no
 
