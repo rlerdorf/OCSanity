@@ -4,6 +4,7 @@ body {
 
 .good:before {
   display:inline-block;
+  font-weight: 500;
   color:green;
   padding:0 6px 0 0;
 }
@@ -24,6 +25,10 @@ body {
   display:inline-block;
   color:#dcdc00;
   padding:0 6px 0 0;
+}
+
+.fa, .fas {
+  font-weight: 500;
 }
 
 ul li {

@@ -111,9 +111,9 @@ class OpenCorePlist extends CFPropertyList\CFPropertyList {
             default: $sev = 'good'; $icon = 'fa-check-circle'; break;
         }
         if(preg_match('/{\$([^}]+)}/', $msg, $match)) {
-            echo "* <span class=\"err fas fa-times-circle\">Unexpected missing **{$match[1]}** here</span>\n";
+            echo "* <span class=\"fas err fa-times-circle\">Unexpected missing **{$match[1]}** here</span>\n";
         } else {
-            echo "* <span class=\"{$sev} fas {$icon}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css
+            echo "* <span class=\"fas {$sev} {$icon}\">$msg</span>\n";  // Markdown-extra to add the severity class - see main.css
         }
     }
 }
