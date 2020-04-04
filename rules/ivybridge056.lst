@@ -197,6 +197,7 @@ UEFI
  Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==BootLiquor.efi "!**{$value}** You need OC 0.5.7+ for this"
+ Drivers==OpenRuntime.efi "!**{$value}** You need OC 0.5.7+ for this"
  Drivers==* " **{$value}**"
 
 :Audio
