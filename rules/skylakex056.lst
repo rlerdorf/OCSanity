@@ -42,6 +42,7 @@ Booter
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
  ProtectCsmRegion=no
+ ProtectMemoryRegions~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  ProtectSecureBoot=no
  ProtectUefiServices~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  ProvideCustomSlide=yes

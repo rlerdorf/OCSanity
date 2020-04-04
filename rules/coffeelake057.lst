@@ -45,6 +45,7 @@ Booter
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
  ProtectCsmRegion=no
+ ProtectMemoryRegions=no
  ProtectSecureBoot=no
  ProtectUefiServices=no
  ProvideCustomSlide=yes
