@@ -1,6 +1,6 @@
-# Kaby Lake OC 0.5.6
+# Kaby Lake OC 0.5.7
 # Generic config suitable for initial installation
-=# OpenCore 0.5.6 Intel Kaby Lake Sanity Check
+=# OpenCore 0.5.7 Intel Kaby Lake Sanity Check
 =https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/kaby-lake#kernel
@@ -44,13 +44,13 @@ Booter
  ForceExitBootServices=no
  ProtectSecureBoot=no
  ProtectCsmRegion=no
- ProtectUefiServices~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ ProtectUefiServices=no
  ProvideCustomSlide=yes
- RebuildAppleMemoryMap~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ RebuildAppleMemoryMap=no
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
- SyncRuntimePermissions~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ SyncRuntimePermissions=no
 
 DeviceProperties
 
@@ -94,16 +94,16 @@ Kernel
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
- BuiltinTextRenderer~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
- ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
- ConsoleBehaviourUi~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
- ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
- Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
+ BuiltinTextRenderer~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
+ ConsoleBehaviourUi~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
+ ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
+ Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
 :Boot
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
- UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ UsePicker~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
@@ -113,7 +113,7 @@ Misc
  Timeout=5
 
 :Debug
- AppleDebug~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebug=no
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
@@ -150,9 +150,9 @@ NVRAM
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config~=.* " **{$setting}** = **{$value}**"
- nvda_drv~=(^$) "-**{$setting}** = **{$value}**. Set to **00** if you do not have an nvidia card or **01** if you do":" **{$setting}** = **{$value}**. Normally **00** or remove entirely unless you have a supported nvidia card"
+ nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OC 0.5.7"
  prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
- SystemAudioVolume~=.* " **{$setting}** = **{$value}**"
+ SystemAudioVolume~="^\d+$" " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this should be a positive number"
 
 PlatformInfo
  Automatic=yes
@@ -175,7 +175,8 @@ UEFI
  ConnectDrivers=yes
  Drivers==HfsPlus.efi "-**{$value}** Check the filename in your Drivers/ directory. Normally this is called **HFSPlus.efi**":""
  Drivers==VBoxHfs.efi|HFSPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
- Drivers==FwRuntimeServices.efi " **{$value}**":"!**FwRuntimeServices.efi** is missing"
+ Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
+ Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OC 0.5.7"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
@@ -190,8 +191,6 @@ UEFI
  Drivers==#XhciDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==BootLiquor.efi "!**{$value}** You need OC 0.5.7+ for this"
- Drivers==OpenRuntime.efi "!**{$value}** You need OC 0.5.7+ for this"
  Drivers==* " **{$value}**"
 
 :Audio
@@ -204,7 +203,7 @@ UEFI
  VolumeAmplifier~=.* " **{$setting}** = **{$value}**"
 
 :Input
- KeyFiltering~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ KeyFiltering=no
  KeyForgetThreshold=5
  KeyMergeThreshold=2
  KeySupport=yes
@@ -215,10 +214,10 @@ UEFI
  TimerResolution=50000
 
 :Protocols
- count==13 :"!You should have exactly 13 settings in the UEFI-Protocols section"
+ count==14 :"!You should have exactly 14 settings in the UEFI-Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
- AppleDebugLog~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebugLog=no
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
@@ -226,14 +225,14 @@ UEFI
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleControl~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
  UnicodeCollation=no
 
 :Output
- count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
+ count==11 :"!You should have exactly 11 settings in the UEFI-Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution~=.* " **{$setting}** = **{$value}**"
@@ -241,23 +240,23 @@ UEFI
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
  DirectGopRendering=no
- DirectGopCacheMode~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ DirectGopCacheMode=""
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
  Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
- AvoidHighAlloc~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ AvoidHighAlloc~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=no
- ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
  UnblockFsConnect=no
