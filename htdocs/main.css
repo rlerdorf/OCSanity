@@ -4,13 +4,13 @@ body {
 
 .good:before {
   display:inline-block;
-  font-weight: 500;
   color:green;
   padding:0 6px 0 0;
 }
 
 .info:before {
   display:inline-block;
+  font-weight: 600;
   color:#4242d2;
   padding:0 6px 0 0;
 }
