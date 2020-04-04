@@ -1,0 +1,263 @@
+# SkyLake OC 0.5.7
+# Generic config suitable for initial installation
+=# OpenCore 0.5.7 Intel SkyLake Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake
+=<hr>
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#acpi
+=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
+=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
+=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#platforminfo
+=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#deviceproperties
+
+ACPI
+:Add
+ count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
+ [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]."
+ [Path]==SSDT-1.aml "-**{$Path}** This is just an example SSDT. If you really made this yourself, call it something more descriptive"
+ [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
+ [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
+ [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-EC-USBX.aml|SSDT-EC.aml "-**SSDT-EC-USBX.aml** or **SSDT-EC** is missing. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-USBX.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX** and **SSDT-EC**"
+ [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
+
+:Quirks
+ count==5
+ FadtEnableReset=no
+ NormalizeHeaders=no
+ RebaseRegions=no
+ ResetHwSig=no
+ ResetLogoStatus=no
+
+Booter
+
+:Quirks
+ AvoidRuntimeDefrag=yes
+ DevirtualiseMmio=no
+ DisableSingleUser=no
+ DisableVariableWrite=no
+ DiscardHibernateMap=no
+ EnableSafeModeSlide=yes
+ EnableWriteUnprotector=yes
+ ForceExitBootServices=no
+ ProtectSecureBoot=no
+ ProtectCsmRegion=no
+ ProtectUefiServices=no
+ ProvideCustomSlide=yes
+ RebuildAppleMemoryMap=no
+ SetupVirtualMap=yes
+ ShrinkMemoryMap=no
+ SignalAppleOS=no
+ SyncRuntimePermissions=no
+
+DeviceProperties
+
+:Add
+::PciRoot(0x0)/Pci(0x2,0x0)
+ AAPL,ig-platform-id~="00001e19|00001619|00002619|00002719|00001b19|00003b19|00001219|01000219|01001719|01001219|01003219|02001619|02002619|03001e19|04002619|04002719|05003b19|06001b19|07002619" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+
+Kernel
+
+:Add
+ count==0 "!You have no Kexts. You definitely need at least Lilu.kext and VirtualSMC.kext. Please review the [Kexts Docs][kexts]"
+ [BundlePath]==Lilu.kext " **Lilu.kext** make sure this Kext is in your **OC/Kexts** directory and the first kext listed here":"!**Lilu.kext** is missing. Add it to the top of this list"
+ [BundlePath]==FakeSMC.kext&VirtualSMC.kext "-**{$BundlePath}** don't use both **FakeSMC.kext** and **VirtualSMC.kext**"
+ [BundlePath]!=FakeSMC.kext|VirtualSMC.kext "-you should have either **FakeSMC.kext** or **VirtualSMC.kext** here"
+ [BundlePath]==VoodooHDA.kext&AppleALC.kext "-**{$BundlePath}** don't use both **VoodooHDA.kext** and **AppleALC.kext**"
+ [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=**<_layout_\> here since you are using AppleALC.kext';":"$alcbootarg=;"
+ [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
+ [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
+ [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
+ [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
+
+:Quirks
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmExtraMsrs=no
+ AppleXcpmForceBoost=no
+ CustomSMBIOSGuid=no
+ DisableIoMapper=yes
+ DummyPowerManagement=no
+ ExternalDiskIcons=no
+ IncreasePciBarSize=no
+ LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
+ PanicNoKextDump=yes
+ PowerTimeoutKernelPanic=yes
+ ThirdPartyDrives=no
+ XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
+
+Misc
+ BuiltinTextRenderer~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
+ ConsoleBehaviourUi~="" "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
+ Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
+
+:Boot
+ HideSelf=yes
+ PollAppleHotKeys=no
+ ShowPicker=yes
+ UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ TakeoffDelay=0
+ HibernateMode=None
+ PickerMode=Builtin
+ HideAuxiliary=no
+ PickerAttributes~=.* " **{$setting}** = **{$value}**"
+ PickerAudioAssist=no
+ Timeout=5
+
+:Debug
+ AppleDebug=no
+ DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
+ Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
+ DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
+ DisplayDelay=0
+
+:Entries
+ [Arguments]~=debug "!**Arguments** = **{$Arguments}** boot-args go in the nvram section, not here"
+
+:Security
+ AllowNvramReset=yes
+ AllowSetDefault=yes
+ AuthRestart=no
+ RequireSignature~=.* "!**{$setting}** has been replaced by **Vault**"
+ RequireVault~=.* "!**{$setting}** has been replaced by **Vault**"
+ Vault=Optional
+ HaltLevel=2147483648
+ ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
+ ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
+
+:Tools
+ count==0 " You removed the tool EFIs":"%You can remove the tool EFIs here"
+
+NVRAM
+ LegacyEnable=no
+ LegacyOverwrite=no
+ WriteFlash=yes
+
+:Add
+::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+ UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
+ DefaultBackgroundColor~=.* " **{$setting}** = **{$value}**"
+
+::7C436110-AB2A-4BBB-A880-FE41995C9F82
+ boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
+ boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
+ csr-active-config~=.* " **{$setting}** = **{$value}**"
+ nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OC 0.5.7"
+ prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
+ SystemAudioVolume~="^\d+$" " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this should be a positive number"
+
+PlatformInfo
+ Automatic=yes
+ UpdateDataHub=yes
+ UpdateNVRAM=yes
+ UpdateSMBIOS=yes
+ UpdateSMBIOSMode=Create
+
+:Generic
+ SpoofVendor=yes
+ AdviseWindows=no
+ SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
+ ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
+ SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
+ SystemUUID=00000000-0000-0000-0000-000000000000 "!**{$setting}** should be set to your generated SmUUID. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
+
+UEFI
+ ConnectDrivers=yes
+ Drivers==HfsPlus.efi "-**{$value}** Check the filename in your Drivers/ directory. Normally this is called **HFSPlus.efi**":""
+ Drivers==VBoxHfs.efi|HFSPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
+ Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
+ Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OC 0.5.7"
+ Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
+ Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
+ Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
+ Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
+ Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
+ Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
+ Drivers==#AppleUsbKbDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#HiiDatabase.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#NvmExpressDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#XhciDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==* " **{$value}**"
+
+:Audio
+ AudioSupport~=.* " **{$setting}** = **{$value}**"
+ AudioDevice~=.* " **{$setting}** = **{$value}**"
+ AudioCodec~=.* " **{$setting}** = **{$value}**"
+ AudioOut~=.* " **{$setting}** = **{$value}**"
+ MinimumVolume~=.* " **{$setting}** = **{$value}**"
+ PlayChime~=.* " **{$setting}** = **{$value}**"
+ VolumeAmplifier~=.* " **{$setting}** = **{$value}**"
+
+:Input
+ KeyFiltering=no
+ KeyForgetThreshold=5
+ KeyMergeThreshold=2
+ KeySupport=yes
+ KeySupportMode=Auto
+ KeySwap=no
+ PointerSupport=no
+ PointerSupportMode=""
+ TimerResolution=50000
+
+:Protocols
+ count==14 :"!You should have exactly 14 settings in the UEFI-Protocols section"
+ AppleAudio=no
+ AppleBootPolicy=no
+ AppleDebugLog=no
+ AppleEvent=no
+ AppleImageConversion=no
+ AppleKeyMap=no
+ AppleSmcIo=no
+ AppleUserInterfaceTheme=no
+ DataHub=no
+ DeviceProperties=no
+ ConsoleControl~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ FirmwareVolume=no
+ HashServices=no
+ OSInfo=no
+ UnicodeCollation=no
+
+:Output
+ count==11 :"!You should have exactly 11 settings in the UEFI-Output section"
+ TextRenderer=BuiltinGraphics
+ ConsoleMode=""
+ Resolution~=.* " **{$setting}** = **{$value}**"
+ ClearScreenOnModeSwitch=no
+ IgnoreTextInGraphics=no
+ ProvideConsoleGop=yes
+ DirectGopRendering=no
+ DirectGopCacheMode=""
+ ReconnectOnResChange=no
+ ReplaceTabWithSpace=no
+ SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
+ Scale~=.* "!**{$setting}** shouldn't be here"
+
+:Quirks
+ AvoidHighAlloc~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ ExitBootServicesDelay=0
+ IgnoreInvalidFlexRatio=no
+ ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReleaseUsbOwnership=no
+ RequestBootVarFallback=yes
+ RequestBootVarRouting=yes
+ ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ UnblockFsConnect=no
