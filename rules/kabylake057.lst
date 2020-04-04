@@ -44,7 +44,7 @@ Booter
  ForceExitBootServices=no
  ProtectSecureBoot=no
  ProtectMemoryRegions=no
- ProtectCsmRegion=no
+ ProtectCsmRegion~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectUefiServices=no
  ProvideCustomSlide=yes
  RebuildAppleMemoryMap=no

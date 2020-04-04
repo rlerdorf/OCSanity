@@ -42,7 +42,7 @@ Booter
  EnableSafeModeSlide=yes
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
- ProtectCsmRegion=no
+ ProtectCsmRegion~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no
  ProtectSecureBoot=no
  ProtectUefiServices=no
