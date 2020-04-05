@@ -92,6 +92,7 @@ Kernel
 Misc
 :Boot
  HideSelf=yes
+ ConsoleAttributes~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  PollAppleHotKeys=no
  ShowPicker=yes
  UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"

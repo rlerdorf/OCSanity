@@ -102,6 +102,7 @@ Misc
  ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
  Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
  HideSelf=yes
+ ConsoleAttributes~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
  PollAppleHotKeys=no
  ShowPicker=yes
  UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
