@@ -199,13 +199,7 @@ UEFI
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
- Drivers==#AppleUsbKbDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#HiiDatabase.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#NvmExpressDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#XhciDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#AudioDxe.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#BootLiquor.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
- Drivers==#OpenCanopy.efi "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
+ Drivers==~^#.* "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==* " **{$value}**"
 
 :Audio

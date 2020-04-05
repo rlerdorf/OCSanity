@@ -324,6 +324,18 @@ class SettingRule extends Rule {
                     return ["!**$key** is missing"];
                 }
                 //
+                // Special case, regex across all remaining attributes
+                if($this->op == '==' && $this->right[0] === '~') {
+                    foreach($val as $k=>$v) {
+                        $vars = $this->vars + [ '{$setting}' => $key, '{$value}' => Rule::valStr($v, $node->{$k}), '{@value}' => Rule::valStr($v, $node->{$k}, true) ];
+                        $msgtrue = Rule::repVars($this->msgtrue, $vars);
+                        if(preg_match('@'.substr($this->right,1).'@', $v)) {
+                            $ret[":$key:$k"] = Rule::setvars($msgtrue);
+                        }
+                    }
+                    continue;
+                }
+
                 // Special case, * matches all remaining attributes that haven't matched a previous rule
                 if($this->op == '==' && $this->right === '*') {
                     foreach($val as $k=>$v) {
