@@ -89,6 +89,7 @@ Kernel
  count<20 "!**{$count}** patches found - Did you apply the kernel patches correctly? Please review the [Kernel Docs][kernel]"
  count>19 " AMD kernel patches"
  [MatchOS]~=.+ "!You have used Clover patches, not OpenCore"
+ [Replace]~=\xbb\xbc\x4f\xea\x78\xe9\x5d\x00\x00\x00\x90 " Catalina 10.15.4 CPUFAMILY_INTEL_PENRYN patch found":"-Catalina 10.15.4 CPUFAMILY_INTEL_PENRYN patch is missing or incorrect"
 
 :Quirks
  AppleCpuPmCfgLock=no
