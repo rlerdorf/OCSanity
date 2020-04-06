@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
-$default_ruleset = 'amd056';
-$default_version = '0.5.6';
+$default_ruleset = 'amd057';
+$default_version = '0.5.7';
 
 // Support old-style URL oc param
 
@@ -30,7 +30,9 @@ foreach($rules as $fn=>$rule) {
         $key = $match[1];
         if(preg_match('@^(.*?) OC (.*)$@', $rule['short'], $match)) {
             if(empty($seen[$key])) {
-                $archopts .= "<option value=\"{$key}\">{$match[1]}</option>\n";
+                if($key == 'amd') $selected = ' selected';
+                else $selected = '';
+                $archopts .= "<option value=\"{$key}\"{$selected}>{$match[1]}</option>\n";
                 $seen[$key] = true;
             }
             if($match[2] == $default_version) $selected = ' selected';
