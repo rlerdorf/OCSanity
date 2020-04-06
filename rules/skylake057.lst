@@ -47,11 +47,11 @@ Booter
  ProtectCsmRegion~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectUefiServices=no
  ProvideCustomSlide=yes
- RebuildAppleMemoryMap=no
+ RebuildAppleMemoryMap=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
- SyncRuntimePermissions=no
+ SyncRuntimePermissions=yes
 
 DeviceProperties
 
@@ -115,7 +115,7 @@ Misc
  Timeout=5
 
 :Debug
- AppleDebug=no
+ AppleDebug=yes
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"

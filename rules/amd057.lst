@@ -1,14 +1,14 @@
-# AMD OC 0.5.7
+# AMD Zen OC 0.5.7
 # Generic config suitable for initial installation
-=# OpenCore 0.5.7 AMD Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config
+=# OpenCore 0.5.7 AMD Zen Sanity Check
+=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/zen
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#acpi
+=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/zen#kernel
+=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/zen#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/amd-config#platforminfo
+=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/zen#platforminfo
 
 ACPI
 :Add
@@ -54,11 +54,11 @@ Booter
  ProtectSecureBoot=no
  ProtectUefiServices=no
  ProvideCustomSlide=yes
- RebuildAppleMemoryMap=no
- SetupVirtualMap=yes
+ RebuildAppleMemoryMap=yes
+ SetupVirtualMap=no
  ShrinkMemoryMap~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7"
  SignalAppleOS=no
- SyncRuntimePermissions=no
+ SyncRuntimePermissions=yes
 
 DeviceProperties
 

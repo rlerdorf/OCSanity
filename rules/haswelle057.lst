@@ -44,13 +44,13 @@ Booter
  ProtectCsmRegion~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no
  ProtectSecureBoot=no
- ProtectUefiServices=no "!**{$setting}** this is for OpenCore 0.5.7+"
+ ProtectUefiServices=no
  ProvideCustomSlide=yes
- RebuildAppleMemoryMap=no "!**{$setting}** this is for OpenCore 0.5.7+"
+ RebuildAppleMemoryMap=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
- SyncRuntimePermissions=no "!**{$setting}** this is for OpenCore 0.5.7+"
+ SyncRuntimePermissions=no
 
 DeviceProperties
 
@@ -111,7 +111,7 @@ Misc
  Timeout=5
 
 :Debug
- AppleDebug=no
+ AppleDebug=yes
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
@@ -209,7 +209,7 @@ UEFI
  count==14 :"!You should have exactly 14 settings in the UEFI-Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
- AppleDebugLog=no "!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebugLog=no
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
