@@ -1,15 +1,15 @@
 # Ivy Bridge OC 0.5.7
 # Generic config suitable for initial installation
-=# OpenCore 0.5.7 Intel Ivy Bridge Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge
+=# OpenCore 0.5.7 Intel Ivy Bridge Desktop Sanity Check
+=https://desktop.dortania.ml/config.plist/ivy-bridge.html
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#acpi
-=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
-=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
-=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#platforminfo
-=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/ivy-bridge#deviceproperties
+=[kernel]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#kernel
+=[acpi]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#acpi
+=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
+=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
+=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
+=[platforminfo]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#platforminfo
+=[deviceproperties]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#deviceproperties
 
 ACPI
 :Add
