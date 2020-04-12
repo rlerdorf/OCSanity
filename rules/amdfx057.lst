@@ -1,14 +1,14 @@
 # AMD FX OC 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore 0.5.7 AMD FX Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/fx
+=https://desktop.dortania.ml/AMD/fx.html
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/fx#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/fx#acpi
-=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
-=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
-=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/fx#platforminfo
+=[kernel]:https://desktop.dortania.ml/AMD/fx.html#kernel
+=[acpi]:https://desktop.dortania.ml/AMD/fx.html#acpi
+=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
+=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
+=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
+=[platforminfo]:https://desktop.dortania.ml/AMD/fx.html#platforminfo
 
 ACPI
 :Add
