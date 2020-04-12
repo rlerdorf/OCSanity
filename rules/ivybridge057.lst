@@ -181,8 +181,8 @@ PlatformInfo
 
 UEFI
  ConnectDrivers=yes
- Drivers==HfsPlus.efi "-**{$value}** Check the filename in your Drivers/ directory. Normally this is called **HFSPlus.efi**":""
- Drivers==VBoxHfs.efi|HFSPlus.efi " **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
+ Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "$hfs={$value}; **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
+ Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "!**{$value}** you already have **{$hfs}**"
  Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
  Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OC 0.5.7"
  Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
