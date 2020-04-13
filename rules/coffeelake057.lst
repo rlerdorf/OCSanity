@@ -1,4 +1,4 @@
-# Coffee Lake OC 0.5.7
+# Coffee Lake Desktop OC 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore 0.5.7 Intel Coffee Lake Sanity Check
 =https://desktop.dortania.ml/config.plist/coffee-lake.html
@@ -169,7 +169,7 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
- SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ SystemProductName~="(iMac19,1|iMac18,3)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Coffee Lake Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"

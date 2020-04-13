@@ -166,7 +166,7 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
- SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ SystemProductName~="(iMacPro1,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Broadwell-E Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"

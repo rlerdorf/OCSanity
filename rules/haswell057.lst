@@ -1,4 +1,4 @@
-# Haswell OC 0.5.7
+# Haswell Desktop OC 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore 0.5.7 Intel Haswell Sanity Check
 =https://desktop.dortania.ml/config.plist/haswell.html
@@ -166,7 +166,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
+ SystemProductName~="(iMac14,1|iMac14,2|iMac15,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Haswell Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
