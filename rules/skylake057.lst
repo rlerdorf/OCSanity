@@ -1,15 +1,15 @@
 # SkyLake OC 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore 0.5.7 Intel SkyLake Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake
+=https://desktop.dortania.ml/config.plist/skylake.html
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#acpi
-=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
-=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
-=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#platforminfo
-=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/skylake#deviceproperties
+=[kernel]:https://desktop.dortania.ml/config.plist/skylake#kernel
+=[acpi]:https://desktop.dortania.ml/config.plist/skylake#acpi
+=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
+=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
+=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
+=[platforminfo]:https://desktop.dortania.ml/config.plist/skylake#platforminfo
+=[deviceproperties]:https://desktop.dortania.ml/config.plist/skylake#deviceproperties
 
 ACPI
 :Add

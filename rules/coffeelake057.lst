@@ -1,15 +1,15 @@
 # Coffee Lake OC 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore 0.5.7 Intel Coffee Lake Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake
+=https://desktop.dortania.ml/config.plist/coffee-lake.html
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#acpi
-=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
-=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
-=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#platforminfo
-=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-config.plist/coffee-lake#deviceproperties
+=[kernel]:https://desktop.dortania.ml/config.plist/coffee-lake#kernel
+=[acpi]:https://desktop.dortania.ml/config.plist/coffee-lake#acpi
+=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
+=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
+=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
+=[platforminfo]:https://desktop.dortania.ml/config.plist/coffee-lake#platforminfo
+=[deviceproperties]:https://desktop.dortania.ml/config.plist/coffee-lake##deviceproperties
 
 ACPI
 :Add

@@ -1,15 +1,15 @@
 # Broadwell-E OC 0.5.7
 # Generic config suitable for initial installation
-=# OpenCore 0.5.7 Intel Broaswell-E Sanity Check
-=https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e
+=# OpenCore 0.5.7 Intel Broadwell-E Sanity Check
+=https://desktop.dortania.ml/config-HEDT/broadwell-e.html
 =<hr>
-=[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#kernel
-=[acpi]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#acpi
-=[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
-=[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
-=[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#platforminfo
-=[deviceproperties]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#deviceproperties
+=[kernel]:https://desktop.dortania.ml/config-HEDT/broadwell-e#kernel
+=[acpi]:https://desktop.dortania.ml/config-HEDT/broadwell-e#acpi
+=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
+=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
+=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
+=[platforminfo]:https://desktop.dortania.ml/config-HEDT/broadwell-e#platforminfo
+=[deviceproperties]:https://desktop.dortania.ml/config-HEDT/broadwell-e#deviceproperties
 
 ACPI
 :Add
