@@ -127,6 +127,7 @@ NVRAM
  UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
+ boot-args~="ncpi=" "!**{$setting}** = **{$value}** I think you mean **npci=** there not **ncpi=**":""
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config=00000000 " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"

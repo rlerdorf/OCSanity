@@ -148,6 +148,7 @@ NVRAM
  DefaultBackgroundColor~=.* " **{$setting}** = **{$value}**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
+ boot-args~="ncpi=" "!**{$setting}** = **{$value}** I think you mean **npci=** there not **ncpi=**":""
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config~=.* " **{$setting}** = **{$value}**"
