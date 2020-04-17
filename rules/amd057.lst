@@ -98,7 +98,7 @@ Kernel
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=no
- DummyPowerManagement=yes
+ DummyPowerManagement=yes " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this needs to be enabled"
  ExternalDiskIcons=no
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -120,7 +120,7 @@ Misc
  UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
  TakeoffDelay=0
  HibernateMode=None
- PickerMode=Builtin
+ PickerMode~=(Builtin|External) " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this should be set to either **Builtin** or **External**"
  HideAuxiliary=no
  PickerAttributes~=.* " **{$setting}** = **{$value}**"
  PickerAudioAssist=no
