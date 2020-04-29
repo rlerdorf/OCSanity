@@ -98,6 +98,7 @@ Kernel
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=no
+ DisableRtcChecksum~=.* "!**{$setting}** is for OpenCore-0.5.8"
  DummyPowerManagement=yes " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this needs to be enabled"
  ExternalDiskIcons=no
  IncreasePciBarSize=no
@@ -114,6 +115,7 @@ Misc
  ConsoleBehaviourUi~="" "!**{$setting}** no longer exists in OpenCore 0.5.6"
  ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
  Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
+ ConsoleAttributes~=.* " **{$setting}** = **{$value}**"
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
