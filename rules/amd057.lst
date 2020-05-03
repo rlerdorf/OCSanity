@@ -56,7 +56,7 @@ Booter
  ProvideCustomSlide=yes
  RebuildAppleMemoryMap=yes
  SetupVirtualMap=no
- ShrinkMemoryMap~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7"
+ ShrinkMemoryMap~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **RebuildAppleMemoryMap** instead"
  SignalAppleOS=no
  SyncRuntimePermissions=yes
 
