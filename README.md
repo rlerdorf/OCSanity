@@ -34,7 +34,7 @@ For a snippet of the Sample.plist file which looks like this:
 ```
 
 Here **ACPI** is the top-level group, **Add** is the section. And then each array element in the section has attributes **Comment**,
-**Enabled** and **Path**.  In the Quirks section there is no array, so no array attributes. Instead we just have individual settings.
+**Enabled** and **Path**. In the Quirks section there is no array, so no array attributes. Instead we just have individual settings.
 In the schema language a rule applied to an array attribute is denoted by square brackets, **[Enabled]**, around the attribute name.
 For a setting, leave off the brackets.
 
@@ -50,17 +50,17 @@ ACPI
 
 Note that the attributes for that array element are available as variables that can be used in the output.
 
-The leading space in front of `[Enabled]` is important.  Here are what the different leading characters do:
+The leading space in front of `[Enabled]` is important. Here are what the different leading characters do:
 
-|  Char   | Action                           |
-| ------- | -------------------------------- |
-| **#**   | Comment - ignored                |
-| **=**   | Output the rest of this line     |
-| **:**   | Enter section                    |
-| **::**  | Enter sub-section                |
-| **$**   | Assign a variable: `$var=data`   |
+| Char          | Action                                           |
+| ------------- | ------------------------------------------------ |
+| **#**         | Comment - ignored                                |
+| **=**         | Output the rest of this line                     |
+| **:**         | Enter section                                    |
+| **::**        | Enter sub-section                                |
+| **\$**        | Assign a variable: `$var=data`                   |
 | **\<space\>** | Define a rule to be run in current group/section |
-|         | Anything else defines a group    |
+|               | Anything else defines a group                    |
 
 ## Rules
 
@@ -73,13 +73,13 @@ A rule has this basic format:
 That is, if the **Setting** is set to **value** then the **" True message"** is printed. Otherwise
 the **"!False message"** is shown. Again here the leading character has a meaning:
 
-|  Char   | Action                           |
-| ------- | -------------------------------- |
-| **\<space\>**   | Good (green)             |
-| **-**   | Warning (yellow)                 |
-| **!**   | Error (red)                      |
-| **%**   | Info (blue)                      |
-| **$**   | Assign a variable: `$var=data;`  |
+| Char          | Action                          |
+| ------------- | ------------------------------- |
+| **\<space\>** | Good (green)                    |
+| **-**         | Warning (yellow)                |
+| **!**         | Error (red)                     |
+| **%**         | Info (blue)                     |
+| **\$**        | Assign a variable: `$var=data;` |
 
 For settings, if you leave the true/false messages out, the built-in ones will be shown.
 For any rule you can override the built-in messages. For example:
@@ -99,7 +99,7 @@ UEFI
  ConnectDrivers=yes :"!**{$setting}** = **{$value}** are you sure you don't want this enabled?"
 ```
 
-Since we know the name of the setting in this case, we don't really need to use **{$setting}** there, but it is
+Since we know the name of the setting in this case, we don't really need to use **{\$setting}** there, but it is
 just illustrating variable support in the messages. The \*\* is not part of it. That's just markdown for bold.
 
 If a setting has multiple values in an array, but the array has no properties, like this:
@@ -116,7 +116,7 @@ If a setting has multiple values in an array, but the array has no properties, l
 You can check it using this syntax:
 
 ```
- Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
 ```
 
 That scans the array and if it finds **VirualSmc.efi** it will print that error message. There is a special wildcard case that looks like this:
@@ -181,7 +181,7 @@ So we can do things like this:
  [BundlePath]==AppleALC.kext "$alcbootarg='-**{$setting}** = **{$value}** You need to add **alcid=N** here since you are using AppleALC.kext';":"$alcbootarg=;"
 ```
 
-Read that one very carefully. It isn't actually outputting anything. If **AppleALC.kext** is present it will set the **$alcbootarg** variable to a string containing
+Read that one very carefully. It isn't actually outputting anything. If **AppleALC.kext** is present it will set the **\$alcbootarg** variable to a string containing
 a warning message. If it isn't there, the variable is set to an empty string. Now later on we might have something like this:
 
 ```
@@ -193,7 +193,7 @@ NVRAM
 ```
 
 Now we need to put on our regex thinking caps. That `^(?:(?!alcid).)*$"` regex checks to see if the word `alcid` appears anywhere in the **boot-args** setting.
-If it does, the true message is printed which is just the contents of the **$alcbootarg** variable that we set earlier. Tis will print a warning if **AppleALC.kext** is
+If it does, the true message is printed which is just the contents of the **\$alcbootarg** variable that we set earlier. Tis will print a warning if **AppleALC.kext** is
 included, but **boot-args** does not include an **alcid** layout. Note that the false message is forced to empty with **:""**. If we didn't do that, then the next
 **boot-args** rule below it might not trigger. Remember only one message per entry and we only want to warn about **alcid** if the situation calls for that, otherwise
 if **boot-args** was left at the default setting we provide a helpful reminder to perhaps add a GPU flag.

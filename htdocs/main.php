@@ -28,7 +28,7 @@
     <div class="col-md-7">
       <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="file-upload">
         <h2>OpenCore Sanity Checker</h2>
-        <h5>Choose CPU Architecture and OC Version</h3>
+        <h5>Choose CPU Architecture and OpenCore Version</h3>
         <br>
         <div class="row">
           <div class="col-md-6">

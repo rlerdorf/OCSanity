@@ -1,6 +1,6 @@
-# Broadwell-E OC 0.5.5
+# Broadwell-E OpenCore v0.5.5
 # Generic config suitable for initial installation
-=# OpenCore 0.5.5 Intel Broadwell-E Sanity Check
+=# OpenCore v0.5.5 Intel Broadwell-E Sanity Check
 =https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/broadwell-e#kernel
@@ -141,7 +141,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -160,7 +160,7 @@ UEFI
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
- Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
 :Input
@@ -202,3 +202,5 @@ UEFI
  ClearScreenOnModeSwitch=no
  UnblockFsConnect=no
 
+:ReservedMemory
+ "-Section added in OpenCore v0.5.8"

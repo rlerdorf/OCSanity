@@ -1,15 +1,15 @@
-# Haswell-E OC 0.5.5
+# Haswell-E OpenCore v0.5.5
 # Generic config suitable for initial installation
-=# OpenCore 0.5.5 Intel Haswell-E Sanity Check
-=https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md
+=# OpenCore v0.5.5 Intel Haswell-E Sanity Check
+=https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md
 =<hr>
-=[kernel]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#kernel
-=[acpi]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#acpi
+=[kernel]:https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#kernel
+=[acpi]:https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#acpi
 =[kexts]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/ktext#kexts
 =[debug]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug
 =[scanpolicy]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security#scan-policy
-=[platforminfo]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#platforminfo
-=[deviceproperties]:https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#deviceproperties
+=[platforminfo]:https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#platforminfo
+=[deviceproperties]:https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/blob/master/config-HEDT/haswell-e.md#deviceproperties
 
 ACPI
 :Add
@@ -141,7 +141,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -159,7 +159,7 @@ UEFI
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
- Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
 :Input
@@ -201,3 +201,5 @@ UEFI
  ClearScreenOnModeSwitch=no
  UnblockFsConnect=no
 
+:ReservedMemory
+ "-Section added in OpenCore v0.5.8"

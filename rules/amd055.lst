@@ -1,6 +1,6 @@
-# AMD Zen OC 0.5.5
+# AMD Zen OpenCore v0.5.5
 # Generic config suitable for initial installation
-=# OpenCore 0.5.5 AMD Zen Sanity Check
+=# OpenCore v0.5.5 AMD Zen Sanity Check
 =https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/zen
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/amd-config.plist/zen#kernel
@@ -45,7 +45,7 @@ Booter
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
  ProtectCsmRegion=no
- ProtectSecureBoot=no "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
+ ProtectSecureBoot=no "!**{$setting}** is for OpenCore v0.5.6":"!**{$setting}** is for OpenCore v0.5.6"
  ProvideCustomSlide=yes
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
@@ -104,8 +104,8 @@ Misc
  ShowPicker=yes
  TakeoffDelay=0
  UsePicker=yes
- PickerMode=Builtin "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
- PickerAttributes=0 "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
+ PickerMode=Builtin "!**{$setting}** is for OpenCore v0.5.6":"!**{$setting}** is for OpenCore v0.5.6"
+ PickerAttributes=0 "!**{$setting}** is for OpenCore v0.5.6":"!**{$setting}** is for OpenCore v0.5.6"
  HibernateMode=None
  Timeout=5
  Resolution="" " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
@@ -121,7 +121,7 @@ Misc
  AuthRestart=no
  RequireSignature=no
  RequireVault=no
- Vault=Optional "!**{$setting}** is for OC 0.5.6":"!**{$setting}** is for OC 0.5.6"
+ Vault=Optional "!**{$setting}** is for OpenCore v0.5.6":"!**{$setting}** is for OpenCore v0.5.6"
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
  ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
 
@@ -155,7 +155,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -174,7 +174,7 @@ UEFI
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
- Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==* " **{$value}**"
 
 :Input
@@ -217,3 +217,5 @@ UEFI
  SanitiseClearScreen=no
  UnblockFsConnect=no
 
+:ReservedMemory
+ "-Section added in OpenCore v0.5.8"

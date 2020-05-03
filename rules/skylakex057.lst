@@ -1,6 +1,6 @@
-# SkyLake-X OC 0.5.7
+# SkyLake-X OpenCore v0.5.7
 # Generic config suitable for initial installation
-=# OpenCore 0.5.7 Intel SkyLake-X Sanity Check
+=# OpenCore v0.5.7 Intel SkyLake-X Sanity Check
 =https://desktop.dortania.ml/config-HEDT/skylake-x.html
 =<hr>
 =[kernel]:https://desktop.dortania.ml/config-HEDT/skylake-x#kernel
@@ -42,14 +42,14 @@ Booter
  EnableSafeModeSlide=yes
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
- ProtectCsmRegion~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **ProtectMemoryRegions** instead"
+ ProtectCsmRegion~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no
  ProtectSecureBoot=no
  ProtectUefiServices=no
  ProvideCustomSlide=yes
  RebuildAppleMemoryMap=yes
  SetupVirtualMap=yes
- ShrinkMemoryMap~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.7 - See **RebuildAppleMemoryMap** instead"
+ ShrinkMemoryMap~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **RebuildAppleMemoryMap** instead"
  SignalAppleOS=no
  SyncRuntimePermissions=yes
 
@@ -81,7 +81,7 @@ Kernel
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=yes
- DisableRtcChecksum~=.* "!**{$setting}** is for OpenCore-0.5.8"
+ DisableRtcChecksum~=.* "!**{$setting}** is for OpenCore v0.5.8"
  DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
@@ -96,13 +96,13 @@ Misc
  HideSelf=yes
  PollAppleHotKeys=no
  ShowPicker=yes
- UsePicker~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
+ UsePicker~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  TakeoffDelay=0
- BuiltinTextRenderer~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
- ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
- ConsoleBehaviourUi~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
- ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
- Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OC 0.5.6"
+ BuiltinTextRenderer~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
+ ConsoleBehaviourUi~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
+ ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OpenCore v0.5.6"
+ Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OpenCore v0.5.6"
  ConsoleAttributes~=.* " **{$setting}** = **{$value}**"
  HibernateMode=None
  PickerMode=Builtin
@@ -125,8 +125,8 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- RequireSignature~=.* "!**{$setting}** has been replaced by **Vault**"
- RequireVault~=.* "!**{$setting}** has been replaced by **Vault**"
+ RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
+ RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional
  HaltLevel=2147483648
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
@@ -150,7 +150,7 @@ NVRAM
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
  csr-active-config~=.* " **{$setting}** = **{$value}**"
- nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OC 0.5.7"
+ nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OpenCore v0.5.7"
  prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} (ru-RU:252)**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value}**"
  SystemAudioVolume~="^\d+$" " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this should be a positive number"
 
@@ -164,7 +164,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~="(iMacPro1,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake-X systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -176,15 +176,15 @@ UEFI
  Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "$hfs={$value}; **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
  Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "!**{$value}** you already have **{$hfs}**"
  Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
- Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OC 0.5.7"
- Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
+ Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OpenCore v0.5.7"
+ Drivers==ApfsDriverLoader.efi "!**ApfsDriverLoader.efi** was merged into OpenCore under the UEFI/APFS section as of OpenCore v0.5.8"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
- Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==~^#.* "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==* " **{$value}**"
 
@@ -208,26 +208,26 @@ UEFI
  PointerSupportMode=""
  TimerResolution=50000
 
-:Protocols
- count==14 :"!You should have exactly 14 settings in the UEFI-Protocols section"
+:ProtocolOverrides
+ count==15 :"!You should have exactly 15 settings in the UEFI/ProtocolOverrides section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
+ AppleRtcRam=no
  AppleSmcIo=no
- AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
  UnicodeCollation=no
 
 :Output
- count==11 :"!You should have exactly 11 settings in the UEFI-Output section"
+ count==11 :"!You should have exactly 11 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution~=.* " **{$setting}** = **{$value}**"
@@ -242,16 +242,19 @@ UEFI
  Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
- AvoidHighAlloc~=.* "!**{$setting}** no longer exists as of OpenCore 0.5.6"
+ AvoidHighAlloc~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=no
- ReconnectOnResChange~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
- IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
- ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ ReconnectOnResChange~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
+ IgnoreTextInGraphics~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
+ ProvideConsoleGop~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
- SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
- ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section as of OC 0.5.6"
+ ReplaceTabWithSpace~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
+ SanitiseClearScreen~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
+ ClearScreenOnModeSwitch~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  UnblockFsConnect=no
+
+:ReservedMemory
+ "-Section added in OpenCore v0.5.8"

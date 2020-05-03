@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 $default_ruleset = 'amd057';
-$default_version = '0.5.7';
+$default_version = 'v0.5.7';
 
 // Support old-style URL oc param
 
@@ -28,7 +28,7 @@ $seen = [];
 foreach($rules as $fn=>$rule) {
     if(preg_match('@^(.*?)(\d.*)$@', $fn, $match)) {
         $key = $match[1];
-        if(preg_match('@^(.*?) OC (.*)$@', $rule['short'], $match)) {
+        if(preg_match('@^(.*?) OpenCore (.*)$@', $rule['short'], $match)) {
             if(empty($seen[$key])) {
                 if($key == 'amd') $selected = ' selected';
                 else $selected = '';

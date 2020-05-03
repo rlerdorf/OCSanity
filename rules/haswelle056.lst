@@ -1,6 +1,6 @@
-# Haswell-E OC 0.5.6
+# Haswell-E OpenCore v0.5.6
 # Generic config suitable for initial installation
-=# OpenCore 0.5.6 Intel Haswell-E Sanity Check
+=# OpenCore v0.5.6 Intel Haswell-E Sanity Check
 =https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e
 =<hr>
 =[kernel]:https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/intel-hedt-config.plist/haswell-e#kernel
@@ -42,15 +42,15 @@ Booter
  EnableWriteUnprotector=yes
  ForceExitBootServices=no
  ProtectCsmRegion=no
- ProtectMemoryRegions~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ ProtectMemoryRegions~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  ProtectSecureBoot=no
- ProtectUefiServices~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ ProtectUefiServices~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  ProvideCustomSlide=yes
- RebuildAppleMemoryMap~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ RebuildAppleMemoryMap~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  SetupVirtualMap=yes
  ShrinkMemoryMap=no
  SignalAppleOS=no
- SyncRuntimePermissions~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ SyncRuntimePermissions~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
 
 DeviceProperties
 
@@ -92,16 +92,16 @@ Kernel
 
 Misc
 :Boot
- BuiltinTextRenderer~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
- ConsoleBehaviourOs~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
- ConsoleBehaviourUi~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
- ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
- Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section in OC 0.5.6"
+ BuiltinTextRenderer~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
+ ConsoleBehaviourUi~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
+ ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section in OpenCore v0.5.6"
+ Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section in OpenCore v0.5.6"
  HideSelf=yes
- ConsoleAttributes~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ ConsoleAttributes~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  PollAppleHotKeys=no
  ShowPicker=yes
- UsePicker~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ UsePicker~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  TakeoffDelay=0
  HibernateMode=None
  PickerMode=Builtin
@@ -111,7 +111,7 @@ Misc
  Timeout=5
 
 :Debug
- AppleDebug~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebug~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
@@ -124,8 +124,8 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- RequireSignature~=.* "!**{$setting}** has been replaced by **Vault**"
- RequireVault~=.* "!**{$setting}** has been replaced by **Vault**"
+ RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
+ RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional
  HaltLevel=2147483648
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
@@ -163,7 +163,7 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OC 0.5.5"
+ SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -181,9 +181,9 @@ UEFI
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
  Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
  Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
- Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was absorbed into Opencore under the quirk **AppleSmcIo**!"
- Drivers==BootLiquor.efi "!**{$value}** You need OC 0.5.7+ for this"
- Drivers==OpenRuntime.efi "!**{$value}** You need OC 0.5.7+ for this"
+ Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
+ Drivers==BootLiquor.efi "!**{$value}** You need OpenCore v0.5.7+ for this"
+ Drivers==OpenRuntime.efi "!**{$value}** You need OpenCore v0.5.7+ for this"
  Drivers==~^#.* "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==* " **{$value}**"
 
@@ -197,7 +197,7 @@ UEFI
  VolumeAmplifier~=.* " **{$setting}** = **{$value}**"
 
 :Input
- KeyFiltering~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ KeyFiltering~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  KeyForgetThreshold=5
  KeyMergeThreshold=2
  KeySupport=yes
@@ -208,10 +208,10 @@ UEFI
  TimerResolution=50000
 
 :Protocols
- count==13 :"!You should have exactly 13 settings in the UEFI-Protocols section"
+ count==13 :"!You should have exactly 13 settings in the UEFI/Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
- AppleDebugLog~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ AppleDebugLog~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
@@ -219,14 +219,14 @@ UEFI
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- ConsoleControl~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6 - See UEFI/TextRenderer"
+ ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
  FirmwareVolume=no
  HashServices=no
  OSInfo=no
  UnicodeCollation=no
 
 :Output
- count==10 :"!You should have exactly 10 settings in the UEFI-Output section"
+ count==10 :"!You should have exactly 10 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution~=.* " **{$setting}** = **{$value}**"
@@ -234,22 +234,25 @@ UEFI
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
  DirectGopRendering=no
- DirectGopCacheMode~=.* "!**{$setting}** this is for OpenCore 0.5.7+"
+ DirectGopCacheMode~=.* "!**{$setting}** this is for OpenCore v0.5.7+"
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
  Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
- AvoidHighAlloc~=.* "!**{$setting}** no longer exists in OpenCore 0.5.6"
+ AvoidHighAlloc~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=yes
- IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ IgnoreTextInGraphics~=.* "!**{$setting}** has been moved to Output section in OpenCore v0.5.6"
+ ProvideConsoleGop~=.* "!**{$setting}** has been moved to Output section in OpenCore v0.5.6"
  ReleaseUsbOwnership=no
  RequestBootVarFallback=yes
  RequestBootVarRouting=yes
- ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
- ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section in OC 0.5.6"
+ ReplaceTabWithSpace~=.* "!**{$setting}** has been moved to Output section in OpenCore v0.5.6"
+ SanitiseClearScreen~=.* "!**{$setting}** has been moved to Output section in OpenCore v0.5.6"
+ ClearScreenOnModeSwitch~=.* "!**{$setting}** has been moved to Output section in OpenCore v0.5.6"
  UnblockFsConnect=no
+
+:ReservedMemory
+ "-Section added in OpenCore v0.5.8"
