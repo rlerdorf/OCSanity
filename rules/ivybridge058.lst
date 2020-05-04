@@ -200,7 +200,7 @@ UEFI
  Drivers==* " **{$value}**"
 
 :APFS
- EnableJumpStart=yes
+ EnableJumpstart=yes
  HideVerbose=yes
  JumpstartHotPlug=no
  MinDate=0
