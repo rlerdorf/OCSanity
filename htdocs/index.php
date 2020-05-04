@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
-$default_ruleset = 'amd057';
-$default_version = 'v0.5.7';
+$default_ruleset = 'amd058';
+$default_version = '0.5.8';
 
 // Support old-style URL oc param
 
@@ -22,6 +22,7 @@ if(!empty($_GET['file'])) {
 
 // Build the CPU Arch/OC Version Select dropdown data
 $rules = Rules::getList('../rules');
+ksort($rules);
 $archopts = '';
 $veropts = '';
 $seen = [];

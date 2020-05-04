@@ -1,4 +1,4 @@
-# Ivy Bridge Desktop OpenCore v0.5.7
+# Ivy Bridge Desktop OpenCore 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore v0.5.7 Intel Ivy Bridge Desktop Sanity Check
 =https://desktop.dortania.ml/config.plist/ivy-bridge.html
@@ -187,7 +187,7 @@ UEFI
  Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "!**{$value}** you already have **{$hfs}**"
  Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
  Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OpenCore v0.5.7"
- Drivers==ApfsDriverLoader.efi "!**ApfsDriverLoader.efi** was merged into OpenCore under the UEFI/APFS section as of OpenCore v0.5.8"
+ Drivers==ApfsDriverLoader.efi " **{$value}**":"!**ApfsDriverLoader.efi** is missing"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
  Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here unless running legacy!"
  Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
@@ -218,15 +218,14 @@ UEFI
  PointerSupportMode=""
  TimerResolution=50000
 
-:ProtocolOverrides
- count==15 :"!You should have exactly 15 settings in the UEFI/ProtocolOverrides section"
+:Protocols
+ count==14 :"!You should have exactly 15 settings in the UEFI/Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
  AppleEvent=no
  AppleImageConversion=no
  AppleKeyMap=no
- AppleRtcRam=no
  AppleSmcIo=no
  DataHub=no
  DeviceProperties=no

@@ -1,4 +1,4 @@
-# Coffee Lake Desktop OpenCore v0.5.7
+# Coffee Lake Desktop OpenCore 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore v0.5.7 Intel Coffee Lake Sanity Check
 =https://desktop.dortania.ml/config.plist/coffee-lake.html
@@ -214,7 +214,7 @@ UEFI
  TimerResolution=50000
 
 :Protocols
- count==14 :"!You should have exactly 14 settings in the UEFI/ProtocolOverrides section"
+ count==14 :"!You should have exactly 14 settings in the UEFI/Protocols section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
