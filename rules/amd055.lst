@@ -216,6 +216,3 @@ UEFI
  RequestBootVarRouting=yes
  SanitiseClearScreen=no
  UnblockFsConnect=no
-
-:ReservedMemory
- "-Section added in OpenCore v0.5.8"

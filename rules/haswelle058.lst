@@ -263,4 +263,3 @@ UEFI
  UnblockFsConnect=no
 
 :ReservedMemory
- "-Section added in OpenCore v0.5.8"

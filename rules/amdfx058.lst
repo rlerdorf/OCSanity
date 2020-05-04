@@ -98,7 +98,7 @@ Kernel
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=no
- DisableRtcChecksum~=.* "!**{$setting}** is for OpenCore v0.5.8"
+ DisableRtcChecksum=no
  DummyPowerManagement=yes
  ExternalDiskIcons=no
  IncreasePciBarSize=no
@@ -282,4 +282,3 @@ UEFI
  UnblockFsConnect=no
 
 :ReservedMemory
- "-Section added in OpenCore v0.5.8"

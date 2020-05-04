@@ -84,7 +84,7 @@ Kernel
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no
  DisableIoMapper=yes
- DisableRtcChecksum~=.* "!**{$setting}** is for OpenCore v0.5.8"
+ DisableRtcChecksum=no
  DummyPowerManagement=no
  ExternalDiskIcons=no
  IncreasePciBarSize=no
@@ -266,3 +266,5 @@ UEFI
  SanitiseClearScreen~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ClearScreenOnModeSwitch~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  UnblockFsConnect~=.*
+
+:ReservedMemory
