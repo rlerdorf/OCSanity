@@ -132,7 +132,6 @@ Misc
  AllowSetDefault=yes
  AuthRestart=no
  BootProtect=None
- BootProtect=None
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional
