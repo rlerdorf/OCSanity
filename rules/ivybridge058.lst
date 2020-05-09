@@ -20,7 +20,8 @@ ACPI
  [Path]==SSDT-GPIO.aml "-**{$Path}** this doesn't belong on an Ivy Bridge system"
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
- [Path]!=SSDT-EC.aml "-**SSDT-EC.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-USBX-DESKTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-DESKTOP** and **SSDT-EC**"
+ [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-DESKTOP.aml. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-CPU-PM.aml "-**SSDT-CPU-PM.aml** is missing. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
