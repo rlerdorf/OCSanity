@@ -241,7 +241,7 @@ UEFI
  UnicodeCollation=no
 
 :Output
- count==11 :"!You should have exactly 11 settings in the UEFI/Output section"
+ count==10 :"!You should have exactly 10 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
