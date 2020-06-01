@@ -114,7 +114,7 @@ Misc
 
 :Debug
  AppleDebug=yes
- ApplePanic=no
+ ApplePanic=yes
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
  DisplayLevel=2147483714 :" **{$setting}** see [Debugging Docs][debug] for more info debug display levels"
@@ -142,7 +142,7 @@ Misc
 NVRAM
  LegacyEnable=no
  LegacyOverwrite=no
- WriteFlash=yes
+ WriteFlash=no
 
 :Add
 ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
