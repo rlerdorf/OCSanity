@@ -1,6 +1,6 @@
-# Coffee Lake Desktop OpenCore 0.6.0
+# Coffee Lake Plus Laptop OpenCore 0.6.0
 # Generic config suitable for initial installation
-=# OpenCore v0.6.0 Intel Coffee Lake Sanity Check
+=# OpenCore v0.6.0 Intel Coffee Lake Plus Laptop Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus#kernel
@@ -74,8 +74,8 @@ Kernel
  [BundlePath]!=WhateverGreen.kext "-**WhateverGreen.kext** is missing. Please review the [Kexts Docs][kexts]"
  [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
- [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
- [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** Please ensure your laptop has a light sensor, otherwise this can cause issues"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** Please ensure your battery has been properly patched to 8bits, otherwise this can cause issues"
  [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
  [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
@@ -175,7 +175,7 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(iMac19,1|iMac18,3)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Coffee Lake Desktop systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(MacBookPro16,1|MacBookPro16,3|MacBookPro16,4)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Coffee Lake Plus Laptop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
