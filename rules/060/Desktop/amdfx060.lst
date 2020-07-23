@@ -7,7 +7,7 @@
 =[acpi]:https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
 =[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
-=[scanpolicy]:https://dortania.github.io/OpenCore-Install-Guide/post-install/security.html#scanpolicy
+=[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
 =[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#platforminfo
 
 ACPI
@@ -24,7 +24,6 @@ ACPI
  [Path]~=ALS0.+aml "-**{$Path}** is not needed on AMD"
  [Path]==SSDT-PMC.aml "-**{$Path}** is not needed on AMD"
  [Path]==SSDT-PNLF.aml "-**{$Path}** is not needed on AMD"
- [Path]==SSDT-SBUS-MCHC.aml "-**{$Path}** is not needed on AMD"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Quirks

@@ -7,7 +7,7 @@
 =[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
 =[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
-=[scanpolicy]:https://dortania.github.io/OpenCore-Install-Guide/post-install/security.html#scanpolicy
+=[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
 =[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#platforminfo
 =[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#deviceproperties
 
