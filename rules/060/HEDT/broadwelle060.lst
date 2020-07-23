@@ -35,7 +35,7 @@ Booter
 
 :Quirks
  AvoidRuntimeDefrag=yes
- DevirtualiseMmio=yes
+ DevirtualiseMmio=no " **{$setting}** = **{$value}** Note you may get allocation issues at boot with this disabled":" **{$setting}** = **{$value}** Note you may get an early kernel panic with this enabled"
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
@@ -48,7 +48,7 @@ Booter
  ProtectUefiServices=no
  ProvideCustomSlide=yes
  ProvideMaxSlide=0
- RebuildAppleMemoryMap=yes
+ RebuildAppleMemoryMap=no
  SetupVirtualMap=yes
  ShrinkMemoryMap~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **RebuildAppleMemoryMap** instead"
  SignalAppleOS=no
@@ -144,9 +144,9 @@ Misc
  count==0 " You removed the tool EFIs":"%You can remove the tool EFIs here"
 
 NVRAM
- LegacyEnable=no
- LegacyOverwrite=no
- WriteFlash=no
+ LegacyEnable=yes
+ LegacyOverwrite=yes
+ WriteFlash=yes
 
 :Add
 ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14

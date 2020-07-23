@@ -35,12 +35,12 @@ Booter
 
 :Quirks
  AvoidRuntimeDefrag=yes
- DevirtualiseMmio=no
+ DevirtualiseMmio=yes
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
  EnableSafeModeSlide=yes
- EnableWriteUnprotector=yes
+ EnableWriteUnprotector=no
  ForceExitBootServices=no
  ProtectCsmRegion~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no

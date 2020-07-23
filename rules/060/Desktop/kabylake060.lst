@@ -40,7 +40,7 @@ Booter
  DisableVariableWrite=no
  DiscardHibernateMap=no
  EnableSafeModeSlide=yes
- EnableWriteUnprotector=yes
+ EnableWriteUnprotector=no
  ForceExitBootServices=no
  ProtectSecureBoot=no
  ProtectMemoryRegions=no
