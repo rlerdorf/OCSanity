@@ -19,10 +19,10 @@ ACPI
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]==SSDT-EC-USBX-DESKTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-DESKTOP** and **SSDT-EC**"
- [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-DESKTOP.aml. See the [ACPI Docs][acpi]"
- [Path]!=SSDT-AWAC.aml "-**SSDT-AWAC.aml** is missing. See the [ACPI Docs][acpi] if you need it"
- [Path]!=SSDT-PMC.aml "-**SSDT-PMC.aml** is missing. See the [ACPI Docs][acpi] if you need it"
+ [Path]==SSDT-EC-USBX-LAPTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-LAPTOP** and **SSDT-EC**"
+ [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-LAPTOP.aml. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-AWAC.aml "-**SSDT-AWAC.aml** shouldn't be required. See the [ACPI Docs][acpi] if you actually need it"
+ [Path]==SSDT-PMC.aml "-**SSDT-PMC.aml** is not required for 8th gen laptops."
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Quirks
