@@ -1,14 +1,14 @@
 # AMD FX OpenCore 0.5.9
 # Generic config suitable for initial installation
 =# OpenCore v0.5.9 AMD FX Sanity Check
-=https://desktop.dortania.ml/AMD/fx.html
+=https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html
 =<hr>
-=[kernel]:https://desktop.dortania.ml/AMD/fx.html#kernel
-=[acpi]:https://desktop.dortania.ml/AMD/fx.html#acpi
-=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
-=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
-=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
-=[platforminfo]:https://desktop.dortania.ml/AMD/fx.html#platforminfo
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#acpi
+=[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
+=[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
+=[scanpolicy]:https://dortania.github.io/OpenCore-Install-Guide/post-install/security.html#scanpolicy
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#platforminfo
 
 ACPI
 :Add
