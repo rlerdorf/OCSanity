@@ -75,6 +75,7 @@ Kernel
  [BundlePath]==XLNCUSBFIX.kext "!**XLNCUSBFIX.kext** this is an AMD-specific kext, don't use on Intel"
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** Please ensure your laptop has a light sensor, otherwise this can cause issues"
+ [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** Please ensure your battery has been properly patched to 8bits, otherwise this can cause issues"
  [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
  [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
