@@ -127,7 +127,7 @@ Misc
  AllowNvramReset=yes
  AllowSetDefault=yes
  AuthRestart=no
- BlacklistAppleUpdate=yes
+ BlacklistAppleUpdate~=.* "!**{$setting}** was deprecated in OpenCore v0.6.0 - See **run-efi-updater** under NVRAM instead"
  BootProtect=Bootstrap
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
@@ -194,6 +194,7 @@ UEFI
 
 :APFS
  EnableJumpstart=yes
+ GlobalConnect=no :" **{$setting}** = **{$value}** Recommended to enable on HP systems if APFS drives do not show up"
  HideVerbose=yes
  JumpstartHotPlug=no
  MinDate=0
@@ -220,11 +221,12 @@ UEFI
  TimerResolution=50000
 
 :ProtocolOverrides
- count==15 :"!You should have exactly 15 settings in the UEFI/ProtocolOverrides section"
+ count==16 :"!You should have exactly 16 settings in the UEFI/ProtocolOverrides section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
  AppleEvent=no
+ AppleFramebufferInfo=no
  AppleImageConversion=no
  AppleKeyMap=no
  AppleRtcRam=no
@@ -238,7 +240,7 @@ UEFI
  UnicodeCollation=no
 
 :Output
- count==10 :"!You should have exactly 10 settings in the UEFI/Output section"
+ count==11 :"!You should have exactly 11 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution~=.* " **{$setting}** = **{$value}**"
@@ -250,6 +252,7 @@ UEFI
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
+ UgaPassThrough=no
  Scale~=.* "!**{$setting}** shouldn't be here"
 
 :Quirks
