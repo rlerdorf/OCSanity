@@ -25,21 +25,21 @@
 <div class="container">
   <div class="row">
   <?php if($show_upload):?>
-    <div class="col-md-7">
+    <div class="col-md-8">
       <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="file-upload">
         <h2>OpenCore Sanity Checker</h2>
         <h5>Choose CPU Architecture and OpenCore Version</h3>
         <br>
         <div class="row">
-          <div class="col-md-6">
-            <div class="input-group mb-3">
+          <div class="col-md-8">
+            <div class="input-group mb-7">
               <div class="input-group-prepend"><label class="input-group-text" for="selectarch">CPU</label></div>
               <select class="form-control" name="selectarch" id="selectarch">
                 <?=$archopts?>
               </select>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="input-group mb-3">
               <div class="input-group-prepend"><label class="input-group-text" for="selectver">Version</label></div>
               <select class="form-control" name="selectver" id="selectver">
