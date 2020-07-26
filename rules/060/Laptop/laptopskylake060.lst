@@ -151,7 +151,7 @@ NVRAM
 
 :Add
 ::4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
- UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usally set to **01** or **02**"
+ UIScale~=(01|02) " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}** but it is usually set to **01** or **02**"
  DefaultBackgroundColor~=.* " **{$setting}** = **{$value}**"
 
 ::7C436110-AB2A-4BBB-A880-FE41995C9F82
@@ -188,11 +188,15 @@ UEFI
  Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OpenCore v0.5.7"
  Drivers==ApfsDriverLoader.efi "!**ApfsDriverLoader.efi** was merged into OpenCore under the UEFI/APFS section as of OpenCore v0.5.8"
  Drivers==OpenCore.efi "!**OpenCore.efi** should not be here!"
- Drivers==AppleUsbKbdxe.efi "!**AppleUsbKbdxe.efi** should not be here!"
- Drivers==NvmExpressDxe.efi "!**NvmExpressDxe.efi** should not be here!"
- Drivers==XhciDxe.efi "!**XhciDxe.efi** should not be here!"
+ Drivers==AppleUsbKbdxe.efi "!**{$value}** has been replaced by OpenUsbKbDxe.efi as of OpenCore v0.5.7"
+ Drivers==CrScreenshotDxe.efi "!**{$value}** should not be here!"
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
- Drivers==AppleUsbKbDxe.efi "-**AppleUsbKbDxe.efi** Unless you are doing a legacy install, you don't need this"
+ Drivers==NvmExpressDxe.efi "!**{$value}** should not be here!"
+ Drivers==OpenUsbKbDxe.efi "-**{$value}** Unless you are doing a legacy install, you don't need this"
+ Drivers==Ps2KeyboardDxe.efi "!**{$value}** should not be here!"
+ Drivers==Ps2MouseDxe.efi "!**{$value}** should not be here!"
+ Drivers==UsbMouseDxe.efi "!**{$value}** should not be here!"
+ Drivers==XhciDxe.efi "!**{$value}** should not be here!"
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==~^#.* "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
  Drivers==* " **{$value}**"
