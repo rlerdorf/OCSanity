@@ -61,7 +61,7 @@ class Rules {
                 $ret[substr($fn,0,-4)] = ['short'=>$short, 'long'=>$long];
             }
         }
-        uasort($ret, function($a,$b) { return $a['short']<=>$b['short']; });
+        uasort($ret, function($a,$b) { return strnatcmp($a['short'],$b['short']); });
         return $ret;
     }
 }

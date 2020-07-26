@@ -22,7 +22,7 @@ if(!empty($_GET['file'])) {
 
 // Build the CPU Arch/OC Version Select dropdown data
 $rules = Rules::getList('../rules');
-ksort($rules);
+//ksort($rules);
 $archopts = '';
 $veropts = '';
 $seen = [];
