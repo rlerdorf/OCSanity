@@ -20,9 +20,8 @@ ACPI
  [Path]==SSDT-GPIO.aml "-**{$Path}** this doesn't belong on an Ivy Bridge system"
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
- [Path]==SSDT-EC-USBX-LAPTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-LAPTOP** and **SSDT-EC**"
- [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-LAPTOP.aml. See the [ACPI Docs][acpi]"
- [Path]!=SSDT-CPU-PM.aml "-**SSDT-CPU-PM.aml** is missing. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-LAPTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-LAPTOP** and **SSDT-EC**"
+ [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-LAPTOP.aml. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
 
 :Block
@@ -228,7 +227,7 @@ UEFI
  KeySupportMode=Auto
  KeySwap=no
  PointerSupport=no
- PointerSupportMode=""
+ PointerSupportMode~=.* " **{$setting}** = **{$value}**"
  TimerResolution=50000
 
 :ProtocolOverrides
@@ -241,12 +240,12 @@ UEFI
  AppleImageConversion=no
  AppleKeyMap=no
  AppleRtcRam=no
- AppleSmcIo=no
+ AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
  DataHub=no
  DeviceProperties=no
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
- FirmwareVolume=no
- HashServices=no
+ FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
  OSInfo=no
  UnicodeCollation=no
 
@@ -274,13 +273,13 @@ UEFI
  ReconnectOnResChange~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  IgnoreTextInGraphics~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ProvideConsoleGop~=yes "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
- ReleaseUsbOwnership=no
+ ReleaseUsbOwnership=yes
  RequestBootVarFallback~=.* "!**{$setting}** was deprecated in OpenCore v0.5.9"
  RequestBootVarRouting=yes
  TscSyncTimeout=0
  ReplaceTabWithSpace~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  SanitiseClearScreen~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ClearScreenOnModeSwitch~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
- UnblockFsConnect=no
+ UnblockFsConnect=no " **{$setting}** = **{$value}** If you have an HP system, please enable this"
 
 :ReservedMemory

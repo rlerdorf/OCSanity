@@ -221,7 +221,7 @@ UEFI
  KeySupportMode=Auto
  KeySwap=no
  PointerSupport=no
- PointerSupportMode=""
+ PointerSupportMode~=.* " **{$setting}** = **{$value}**"
  TimerResolution=50000
 
 :ProtocolOverrides

@@ -221,7 +221,7 @@ UEFI
  KeySupportMode=Auto
  KeySwap=no
  PointerSupport=no
- PointerSupportMode=""
+ PointerSupportMode~=.* " **{$setting}** = **{$value}**"
  TimerResolution=50000
 
 :ProtocolOverrides
@@ -234,12 +234,12 @@ UEFI
  AppleImageConversion=no
  AppleKeyMap=no
  AppleRtcRam=no
- AppleSmcIo=no
+ AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
  DataHub=no
  DeviceProperties=no
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
- FirmwareVolume=no
- HashServices=no
+ FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
  OSInfo=no
  UnicodeCollation=no
 
@@ -274,6 +274,6 @@ UEFI
  ReplaceTabWithSpace~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  SanitiseClearScreen~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ClearScreenOnModeSwitch~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
- UnblockFsConnect=no
+ UnblockFsConnect=no " **{$setting}** = **{$value}** If you have an HP system, please enable this"
 
 :ReservedMemory
