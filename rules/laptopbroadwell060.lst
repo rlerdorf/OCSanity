@@ -138,7 +138,7 @@ Misc
  AllowSetDefault=yes
  AuthRestart=no
  BlacklistAppleUpdate~=.* "!**{$setting}** was deprecated in OpenCore v0.6.0 - See **run-efi-updater** under NVRAM instead"
- BootProtect=Bootstrap
+ BootProtect~=.* " **{$setting}** = **{$value}**"
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional
