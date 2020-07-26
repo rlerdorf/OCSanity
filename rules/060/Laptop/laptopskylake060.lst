@@ -25,6 +25,7 @@ ACPI
  [Path]!=SSDT-PNLF.aml "-**{$Path}** is missing. See the [ACPI Docs][acpi]"
  [Path]==SSDT-PNLF-CFL.aml "-**{$Path}** This should not be included on Kaby Lake and older laptops, instead use SSDT-PNLF. Please review the [ACPI Docs][acpi]."
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
+ [Path]==SSDT-XOSI.aml&SSDT-GPI0.aml "-**{$Path}** don't use both **SSDT-XOSI** and **SSDT-GPI0**"
 
 :Quirks
  count==5
