@@ -154,6 +154,7 @@ NVRAM
  boot-args~="ncpi=" "!**{$setting}** = **{$value}** I think you mean **npci=** there not **ncpi=**":""
  boot-args~="^(?:(?!alcid).)*$" "{$alcbootarg}":""
  boot-args="-v keepsyms=1" " **{$setting}** = **{$value}** If you have a navi10 GPU add **agdpmod=pikera**":" **{$setting}** = **{$value}**"
+ run-efi-updater=no
  csr-active-config~=.* " **{$setting}** = **{$value}**"
  nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OpenCore v0.5.7"
  prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
