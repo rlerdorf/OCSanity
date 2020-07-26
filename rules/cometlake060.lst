@@ -1,6 +1,6 @@
-# Coffee Lake Desktop OpenCore 0.6.0
+# Desktop: (10th Gen) Comet Lake OpenCore 0.6.0
 # Generic config suitable for initial installation
-=# OpenCore v0.6.0 Intel Coffee Lake Sanity Check
+=# OpenCore v0.6.0 Intel Comet Lake Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake#kernel
