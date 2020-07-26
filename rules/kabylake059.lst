@@ -1,4 +1,4 @@
-# Kaby Lake Desktop OpenCore 0.5.9
+# Desktop: (7th Gen) Kaby Lake OpenCore 0.5.9
 # Generic config suitable for initial installation
 =# OpenCore v0.5.9 Intel Kaby Lake Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/kaby-lake.html
@@ -131,7 +131,7 @@ Misc
  AllowSetDefault=yes
  AuthRestart=no
  BlacklistAppleUpdate=yes
- BootProtect=Bootstrap
+ BootProtect~=.* " **{$setting}** = **{$value}**"
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional

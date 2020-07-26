@@ -1,4 +1,4 @@
-# SkyLake-X OpenCore 0.5.9
+# HEDT: (7th, 9th, 10th Gen) SkyLake-X OpenCore 0.5.9
 # Generic config suitable for initial installation
 =# OpenCore v0.5.9 Intel SkyLake-X Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html
@@ -127,7 +127,7 @@ Misc
  AllowSetDefault=yes
  AuthRestart=no
  BlacklistAppleUpdate=yes
- BootProtect=Bootstrap
+ BootProtect~=.* " **{$setting}** = **{$value}**"
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional

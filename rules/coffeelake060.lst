@@ -1,4 +1,4 @@
-# Coffee Lake Desktop OpenCore 0.6.0
+# Desktop: (8th, 9th Gen) Coffee Lake OpenCore 0.6.0
 # Generic config suitable for initial installation
 =# OpenCore v0.6.0 Intel Coffee Lake Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake.html
@@ -137,7 +137,7 @@ Misc
  AllowSetDefault=yes
  AuthRestart=no
  BlacklistAppleUpdate~=.* "!**{$setting}** was deprecated in OpenCore v0.6.0 - See **run-efi-updater** under NVRAM instead"
- BootProtect=Bootstrap
+ BootProtect~=.* " **{$setting}** = **{$value}**"
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional

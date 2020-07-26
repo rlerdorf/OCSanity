@@ -1,6 +1,6 @@
-# Coffee Lake Plus Laptop OpenCore 0.6.0
+# Laptop: (9th, 10th Gen) Coffee and Comet Lake Plus OpenCore 0.6.0
 # Generic config suitable for initial installation
-=# OpenCore v0.6.0 Intel Coffee Lake Plus Laptop Sanity Check
+=# OpenCore v0.6.0 Intel Coffee and Comet Lake Plus Laptop Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus#kernel
@@ -141,7 +141,7 @@ Misc
  AllowSetDefault=yes
  AuthRestart=no
  BlacklistAppleUpdate~=.* "!**{$setting}** was deprecated in OpenCore v0.6.0 - See **run-efi-updater** under NVRAM instead"
- BootProtect=Bootstrap
+ BootProtect~=.* " **{$setting}** = **{$value}**"
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional
