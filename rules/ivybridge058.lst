@@ -1,15 +1,15 @@
 # Ivy Bridge Desktop OpenCore 0.5.8
 # Generic config suitable for initial installation
 =# OpenCore v0.5.8 Intel Ivy Bridge Desktop Sanity Check
-=https://desktop.dortania.ml/config.plist/ivy-bridge.html
+=https://dortania.github.io/OpenCore-Install-Guide/config.plist/ivy-bridge.html
 =<hr>
-=[kernel]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#kernel
-=[acpi]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#acpi
-=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
-=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
-=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
-=[platforminfo]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#platforminfo
-=[deviceproperties]:https://desktop.dortania.ml/config.plist/ivy-bridge.html#deviceproperties
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/ivy-bridge.html#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/ivy-bridge.html#acpi
+=[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
+=[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
+=[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/ivy-bridge.html#platforminfo
+=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/ivy-bridge.html#deviceproperties
 
 ACPI
 :Add

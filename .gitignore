@@ -1,2 +1,6 @@
 vendor/*
 composer.lock
+.DS_Store
+rules/.DS_Store
+rules/060/.DS_Store
+*.phar

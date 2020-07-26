@@ -1,14 +1,14 @@
 # AMD Zen OpenCore 0.5.7
 # Generic config suitable for initial installation
 =# OpenCore v0.5.7 AMD Zen Sanity Check
-=https://desktop.dortania.ml/AMD/zen.html
+=https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html
 =<hr>
-=[kernel]:https://desktop.dortania.ml/AMD/zen.html#kernel
-=[acpi]:https://desktop.dortania.ml/AMD/zen.html#acpi
-=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
-=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
-=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
-=[platforminfo]:https://desktop.dortania.ml/AMD/zen.html#platforminfo
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#acpi
+=[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
+=[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
+=[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#platforminfo
 
 ACPI
 :Add

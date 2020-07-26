@@ -1,15 +1,15 @@
 # SkyLake-X OpenCore 0.5.8
 # Generic config suitable for initial installation
 =# OpenCore v0.5.8 Intel SkyLake-X Sanity Check
-=https://desktop.dortania.ml/config-HEDT/skylake-x.html
+=https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html
 =<hr>
-=[kernel]:https://desktop.dortania.ml/config-HEDT/skylake-x#kernel
-=[acpi]:https://desktop.dortania.ml/config-HEDT/skylake-x#acpi
-=[kexts]:https://desktop.dortania.ml/ktext.html#kexts
-=[debug]:https://desktop.dortania.ml/troubleshooting/debug.html
-=[scanpolicy]:https://desktop.dortania.ml/post-install/security.html#scanpolicy
-=[platforminfo]:https://desktop.dortania.ml/config-HEDT/skylake-x#platforminfo
-=[deviceproperties]:https://desktop.dortania.ml/config-HEDT/skylake-x#deviceproperties
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#acpi
+=[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
+=[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
+=[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#platforminfo
+=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#deviceproperties
 
 ACPI
 :Add
