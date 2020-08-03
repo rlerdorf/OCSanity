@@ -230,11 +230,12 @@ UEFI
  TimerResolution=50000
 
 :ProtocolOverrides
- count==15 :"!You should have exactly 15 settings in the UEFI/ProtocolOverrides section"
+ count==16 :"!You should have exactly 16 settings in the UEFI/ProtocolOverrides section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
  AppleEvent=no
+ AppleFramebufferInfo=no
  AppleImageConversion=no
  AppleKeyMap=no
  AppleRtcRam=no
@@ -248,7 +249,7 @@ UEFI
  UnicodeCollation=no
 
 :Output
- count==10 :"!You should have exactly 10 settings in the UEFI/Output section"
+ count==11 :"!You should have exactly 11 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution~=.* " **{$setting}** = **{$value}**"
@@ -260,6 +261,7 @@ UEFI
  ReconnectOnResChange=no
  ReplaceTabWithSpace=no
  SanitiseClearScreen~=.* " **{$setting}** = **{$value}**"
+ UgaPassThrough=no
  Scale=100 "!**{$setting}** shouldn't be here":"!**{$setting}** shouldn't be here"
 
 :Quirks
