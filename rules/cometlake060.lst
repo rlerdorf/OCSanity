@@ -25,6 +25,8 @@ ACPI
  [Path]==SSDT-PMC.aml "-**{$Path}** This should not be included on Comet Lake motherboards. Please review the [ACPI Docs][acpi]."
  [Path]!=SSDT-RHUB.aml "-**{$Path}** is missing. If this is an Asus motherboard you will require this SSDT. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
+ [Path]==SSDT-OLA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
+ [Path]==SSDT-SSDT-OLARILA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
 
 :Quirks
  count==5
@@ -90,16 +92,16 @@ Kernel
  AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
- CustomSMBIOSGuid=no
+ CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
  DisableIoMapper=yes
- DisableRtcChecksum=no
+ DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=no
- ExternalDiskIcons=no
+ ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
- ThirdPartyDrives=no
+ ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
@@ -174,7 +176,7 @@ PlatformInfo
  UpdateDataHub=yes
  UpdateNVRAM=yes
  UpdateSMBIOS=yes
- UpdateSMBIOSMode=Create
+ UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**"
 
 :Generic
  SpoofVendor=yes
