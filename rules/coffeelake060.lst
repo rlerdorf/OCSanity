@@ -23,7 +23,10 @@ ACPI
  [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-DESKTOP.aml. See the [ACPI Docs][acpi]"
  [Path]!=SSDT-AWAC.aml "-**SSDT-AWAC.aml** is missing. See the [ACPI Docs][acpi] if you need it"
  [Path]!=SSDT-PMC.aml "-**SSDT-PMC.aml** is missing. See the [ACPI Docs][acpi] if you need it"
+ [Path]==SSDT-RHUB.aml "-**{$Path}** is not required on Coffee Lake motherboards. See the [ACPI Docs][acpi]"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
+ [Path]==SSDT-OLA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
+ [Path]==SSDT-SSDT-OLARILA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
 
 :Quirks
  count==5
@@ -89,16 +92,16 @@ Kernel
  AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
- CustomSMBIOSGuid=no
+ CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
  DisableIoMapper=yes
- DisableRtcChecksum=no
+ DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=no
- ExternalDiskIcons=no
+ ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
- ThirdPartyDrives=no
+ ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
@@ -173,7 +176,7 @@ PlatformInfo
  UpdateDataHub=yes
  UpdateNVRAM=yes
  UpdateSMBIOS=yes
- UpdateSMBIOSMode=Create
+ UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**"
 
 :Generic
  SpoofVendor=yes
@@ -198,9 +201,9 @@ UEFI
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==NvmExpressDxe.efi "!**{$value}** should not be here!"
  Drivers==OpenUsbKbDxe.efi "-**{$value}** Unless you are doing a legacy install, you don't need this"
- Drivers==Ps2KeyboardDxe.efi "!**{$value}** should not be here!"
- Drivers==Ps2MouseDxe.efi "!**{$value}** should not be here!"
- Drivers==UsbMouseDxe.efi "!**{$value}** should not be here!"
+ Drivers==Ps2KeyboardDxe.efi "-**{$value}** Unless you are using a PS2 keyboard, this should not be here!"
+ Drivers==Ps2MouseDxe.efi "-**{$value}** Unless you are using a PS2 mouse/trackpad with OpenCanopy, this should not be here!"
+ Drivers==UsbMouseDxe.efi "-**{$value}** Unless you are using a USB mouse/trackpad with OpenCanopy, this should not be here!"
  Drivers==XhciDxe.efi "!**{$value}** should not be here!"
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==~^#.* "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"

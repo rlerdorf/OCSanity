@@ -25,6 +25,8 @@ ACPI
  [Path]==SSDT-PMC.aml "-**{$Path}** is not needed on AMD"
  [Path]==SSDT-PNLF.aml "-**{$Path}** is not needed on AMD"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
+ [Path]==SSDT-OLA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
+ [Path]==SSDT-SSDT-OLARILA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
 
 :Quirks
  count==5
@@ -96,16 +98,16 @@ Kernel
  AppleXcpmCfgLock=no
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
- CustomSMBIOSGuid=no
+ CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
  DisableIoMapper=no
- DisableRtcChecksum=no
+ DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=yes
- ExternalDiskIcons=no
+ ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
- ThirdPartyDrives=no
+ ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
 Misc
@@ -129,7 +131,7 @@ Misc
  Timeout=5
 
 :Debug
- AppleDebug=no
+ AppleDebug=yes
  ApplePanic=yes
  DisableWatchDog=yes :" **{$setting}** enabling this will help debugging"
  Target=67 :" **{$setting}** see the [Debugging Docs][debug] for more info on debug target numbers"
@@ -180,13 +182,13 @@ PlatformInfo
  UpdateDataHub=yes
  UpdateNVRAM=yes
  UpdateSMBIOS=yes
- UpdateSMBIOSMode=Create
+ UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**"
 
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(iMacPro1,1|MacPro7,1|MacPro6,1|iMac14,2)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for AMD systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(iMacPro1,1|MacPro7,1|MacPro6,1|iMac14,2|iMac15,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for AMD systems. See [PlatformInfo Docs][platforminfo]"
  MLB~="(M000000000001|M0000000000000001)" "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM~="(112233000000|112233445566)" "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -205,9 +207,9 @@ UEFI
  Drivers==HiiDatabase.efi "!**{$value}** should not be here!"
  Drivers==NvmExpressDxe.efi "!**{$value}** should not be here!"
  Drivers==OpenUsbKbDxe.efi "-**{$value}** Unless you are doing a legacy install, you don't need this"
- Drivers==Ps2KeyboardDxe.efi "!**{$value}** should not be here!"
- Drivers==Ps2MouseDxe.efi "!**{$value}** should not be here!"
- Drivers==UsbMouseDxe.efi "!**{$value}** should not be here!"
+ Drivers==Ps2KeyboardDxe.efi "-**{$value}** Unless you are using a PS2 keyboard, this should not be here!"
+ Drivers==Ps2MouseDxe.efi "-**{$value}** Unless you are using a PS2 mouse/trackpad with OpenCanopy, this should not be here!"
+ Drivers==UsbMouseDxe.efi "-**{$value}** Unless you are using a USB mouse/trackpad with OpenCanopy, this should not be here!"
  Drivers==XhciDxe.efi "!**{$value}** should not be here!"
  Drivers==VirtualSmc.efi "!**VirtualSmc.efi** was merged into OpenCore under the quirk **AppleSmcIo**!"
  Drivers==~^#.* "!**{$value}** remove the **#** if you want this to load otherwise remove entirely"
