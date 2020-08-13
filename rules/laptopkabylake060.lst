@@ -44,7 +44,7 @@ Booter
  DisableVariableWrite=no
  DiscardHibernateMap=no
  EnableSafeModeSlide=yes
- EnableWriteUnprotector=no
+ EnableWriteUnprotector=yes
  ForceExitBootServices=no
  ProtectSecureBoot=no
  ProtectMemoryRegions=no
@@ -52,11 +52,11 @@ Booter
  ProtectUefiServices=no
  ProvideCustomSlide=yes
  ProvideMaxSlide=0
- RebuildAppleMemoryMap=yes
+ RebuildAppleMemoryMap=no
  SetupVirtualMap=yes
  ShrinkMemoryMap~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **RebuildAppleMemoryMap** instead"
  SignalAppleOS=no
- SyncRuntimePermissions=yes
+ SyncRuntimePermissions=no
 
 DeviceProperties
 
