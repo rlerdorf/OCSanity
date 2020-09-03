@@ -236,21 +236,23 @@ UEFI
  TimerResolution=50000
 
 :ProtocolOverrides
- count==16 :"!You should have exactly 16 settings in the UEFI/ProtocolOverrides section"
+ count==18 :"!You should have exactly 18 settings in the UEFI/ProtocolOverrides section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
  AppleEvent=no
  AppleFramebufferInfo=no
  AppleImageConversion=no
+ AppleImg4Verification=no
  AppleKeyMap=no
  AppleRtcRam=no
- AppleSmcIo=no
+ AppleSecureBoot=no
+ AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
  DataHub=no
  DeviceProperties=no
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
- FirmwareVolume=no
- HashServices=no
+ FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
  OSInfo=no
  UnicodeCollation=no
 
