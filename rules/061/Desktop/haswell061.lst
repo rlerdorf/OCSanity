@@ -136,12 +136,16 @@ Misc
 :Security
  AllowNvramReset=yes
  AllowSetDefault=yes
+ ApECID=0
  AuthRestart=no
  BlacklistAppleUpdate~=.* "!**{$setting}** was deprecated in OpenCore v0.6.0 - See **run-efi-updater** under NVRAM instead"
  BootProtect~=.* " **{$setting}** = **{$value}**"
+ DmgLoading=Signed
+ EnablePassword=no
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  RequireVault~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
  Vault=Optional
+ SecureBootModel~=.* " **{$setting}** = **{$value}**"
  HaltLevel=2147483648
  ExposeSensitiveData=6 :" **{$setting}** = **{$value}**"
  ScanPolicy=0 :"-**{$setting}** = **{$value}**. Initially you want 0 here, but once you are up and running check [Scanpolicy Docs][scanpolicy] for why you should change this"
