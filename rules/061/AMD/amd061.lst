@@ -43,7 +43,7 @@ Booter
 
 :Quirks
  AvoidRuntimeDefrag=yes
- DevirtualiseMmio=no
+ DevirtualiseMmio=no " **{$setting}** = **{$value}** If you have TRx40(ie. 3rd Gen ThreadRipper), please enable this"
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
