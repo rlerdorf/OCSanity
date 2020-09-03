@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
-$default_ruleset = 'amd059';
-$default_version = '0.5.9';
+$default_ruleset = 'amd061';
+$default_version = '0.6.1';
 
 // Support old-style URL oc param
 
