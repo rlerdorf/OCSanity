@@ -248,7 +248,7 @@ UEFI
  TimerResolution=50000
 
 :ProtocolOverrides
- count==18 :"!You should have exactly 18 settings in the UEFI/ProtocolOverrides section"
+ count==17 :"!You should have exactly 17 settings in the UEFI/ProtocolOverrides section"
  AppleAudio=no
  AppleBootPolicy=no
  AppleDebugLog=no
