@@ -26,7 +26,7 @@ ACPI
  [Path]==SSDT-PNLF-CFL.aml "-**{$Path}** This should not be included on Kaby Lake and older laptops, instead use SSDT-PNLF. Please review the [ACPI Docs][acpi]."
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
  [Path]==SSDT-OLA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
- [Path]==SSDT-SSDT-OLARILA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
+ [Path]==SSDT-OLARILA.aml "-**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
 
 :Delete
  [Enabled]==no "!**{$Comment}** Patch is **disabled**! Enable this to make sure SSDT-CPU-PM works."
