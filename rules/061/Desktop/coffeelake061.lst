@@ -50,7 +50,7 @@ Booter
  ProtectCsmRegion~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no
  ProtectSecureBoot=no
- ProtectUefiServices=no
+ ProtectUefiServices=yes
  ProvideCustomSlide=yes
  ProvideMaxSlide=0
  RebuildAppleMemoryMap=yes
