@@ -65,10 +65,10 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="0a006601" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+ AAPL,snb-platform-id~="10000300|00000500" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 ::PciRoot(0x0)/Pci(0x1b,0x0)
- AAPL,ig-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
+ AAPL,snb-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
 
 Kernel
 
@@ -189,7 +189,7 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(iMac12,2|MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Sandy Bridge Desktop systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(iMac12,1|iMac12,2|MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Sandy Bridge Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
