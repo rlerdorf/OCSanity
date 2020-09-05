@@ -1,15 +1,15 @@
-# Desktop: (4th Gen) Haswell OpenCore 0.6.1
+# HEDT: (4th Gen) Ivy Bridge-E OpenCore 0.6.1
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Haswell Sanity Check
-=https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell.html
+=# OpenCore v0.6.1 Intel Ivy Bridge-E Sanity Check
+=https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e.html
 =<hr>
-=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#kernel
-=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#acpi
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
 =[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
 =[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
-=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#platforminfo
-=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#deviceproperties
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#platforminfo
+=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#deviceproperties
 
 ACPI
 :Add
@@ -58,13 +58,6 @@ Booter
 
 DeviceProperties
 
-:Add
-::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="0300220d|04001204|07002216" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
-
-::PciRoot(0x0)/Pci(0x1b,0x0)
- AAPL,ig-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
-
 Kernel
 
 :Add
@@ -79,15 +72,12 @@ Kernel
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
- [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
- [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
- [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
 :Quirks
- AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
- AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
- AppleXcpmExtraMsrs=no
+ AppleCpuPmCfgLock=yes
+ AppleXcpmCfgLock=yes
+ AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
  DisableIoMapper=yes
@@ -153,8 +143,8 @@ Misc
  count==0 " You removed the tool EFIs":"%You can remove the tool EFIs here"
 
 NVRAM
- LegacyEnable=no
- LegacyOverwrite=no
+ LegacyEnable=yes
+ LegacyOverwrite=yes
  WriteFlash=yes
 
 :Add
@@ -182,7 +172,8 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
- SystemProductName~="(iMac14,1|iMac14,2|iMac14,4|iMac15,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Haswell Desktop systems. See [PlatformInfo Docs][platforminfo]"
+ SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
+ SystemProductName~="(MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake-X systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -262,7 +253,7 @@ UEFI
  count==11 :"!You should have exactly 11 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
- Resolution=Max " **{$setting}** = **{$value}**":" **{$setting}** = **{$value}**"
+ Resolution~=.* " **{$setting}** = **{$value}**"
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
@@ -279,7 +270,6 @@ UEFI
  DeduplicateBootOrder=yes
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=yes
- ReconnectOnResChange~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  IgnoreTextInGraphics~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ProvideConsoleGop~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ReleaseUsbOwnership=no
