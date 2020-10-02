@@ -1,6 +1,6 @@
-# Desktop: (6th Gen) Skylake OpenCore 0.6.1
+# Desktop: (6th Gen) Skylake OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Skylake Sanity Check
+=# OpenCore v0.6.2 Intel Skylake Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake#kernel

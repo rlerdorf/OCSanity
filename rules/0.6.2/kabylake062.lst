@@ -1,6 +1,6 @@
-# Desktop: (7th Gen) Kaby Lake OpenCore 0.6.1
+# Desktop: (7th Gen) Kaby Lake OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Kaby Lake Sanity Check
+=# OpenCore v0.6.2 Intel Kaby Lake Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/kaby-lake.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/kaby-lake#kernel

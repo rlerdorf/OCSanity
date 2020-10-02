@@ -1,6 +1,6 @@
-# Laptop: (5th Gen) Broadwell OpenCore 0.6.1
+# Laptop: (5th Gen) Broadwell OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Broadwell Laptop Sanity Check
+=# OpenCore v0.6.2 Intel Broadwell Laptop Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/broadwell.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/broadwell#kernel

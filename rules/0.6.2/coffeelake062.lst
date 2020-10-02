@@ -1,6 +1,6 @@
-# Desktop: (8th, 9th Gen) Coffee Lake OpenCore 0.6.1
+# Desktop: (8th, 9th Gen) Coffee Lake OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Coffee Lake Sanity Check
+=# OpenCore v0.6.2 Intel Coffee Lake Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake#kernel

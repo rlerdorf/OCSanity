@@ -1,6 +1,6 @@
-# HEDT: (4th Gen) Ivy Bridge-E OpenCore 0.6.1
+# HEDT: (4th Gen) Ivy Bridge-E OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Ivy Bridge-E Sanity Check
+=# OpenCore v0.6.2 Intel Ivy Bridge-E Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#kernel

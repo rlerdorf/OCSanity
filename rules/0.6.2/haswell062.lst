@@ -1,6 +1,6 @@
-# Desktop: (4th Gen) Haswell OpenCore 0.6.1
+# Desktop: (4th Gen) Haswell OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Haswell Sanity Check
+=# OpenCore v0.6.2 Intel Haswell Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config.plist/haswell#kernel

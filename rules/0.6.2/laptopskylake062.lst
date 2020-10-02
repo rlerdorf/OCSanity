@@ -1,6 +1,6 @@
-# Laptop: (6th Gen) SkyLake OpenCore 0.6.1
+# Laptop: (6th Gen) SkyLake OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel SkyLake Laptop Sanity Check
+=# OpenCore v0.6.2 Intel SkyLake Laptop Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake#kernel
