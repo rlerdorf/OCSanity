@@ -63,13 +63,6 @@ Booter
 
 DeviceProperties
 
-:Add
-::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,snb-platform-id~="10000300|00000500" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
-
-::PciRoot(0x0)/Pci(0x1b,0x0)
- AAPL,snb-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
-
 Kernel
 
 :Add
