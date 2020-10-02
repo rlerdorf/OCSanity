@@ -101,7 +101,8 @@ Kernel
  CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
  DisableIoMapper=no
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
- DummyPowerManagement=yes
+ DummyPowerManagement=yes " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this needs to be enabled"
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -191,6 +192,8 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~="(iMacPro1,1|MacPro7,1|MacPro6,1|iMac14,2|iMac15,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for AMD systems. See [PlatformInfo Docs][platforminfo]"
  MLB~="(M000000000001|M0000000000000001)" "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"

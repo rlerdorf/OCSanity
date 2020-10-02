@@ -96,6 +96,7 @@ Kernel
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=no
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -185,6 +186,8 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SystemProductName~="(MacBookAir6,1|MacBookAir6,2|MacBookPro11,1|MacBookPro11,2|MacBookPro11,3|MacBookPro11,4|MacBookPro11,5)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Haswell Laptop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"

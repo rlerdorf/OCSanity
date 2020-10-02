@@ -87,6 +87,7 @@ Kernel
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=no
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -176,6 +177,8 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~=(^$)|(MacPro5,1) "!**{$setting}** You need to set this. See [PlatformInfo Docs][platforminfo]":" **{$setting}** = **{$value}**"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"

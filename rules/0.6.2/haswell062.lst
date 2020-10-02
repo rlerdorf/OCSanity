@@ -93,6 +93,7 @@ Kernel
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=no
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -182,6 +183,8 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SystemProductName~="(iMac14,1|iMac14,2|iMac14,4|iMac15,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Haswell Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"

@@ -97,6 +97,7 @@ Kernel
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement=no
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
@@ -186,6 +187,8 @@ PlatformInfo
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~="(MacBook9,1|MacBookPro13,1|MacBookPro13,2|MacBookPro13,3)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake Laptop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
