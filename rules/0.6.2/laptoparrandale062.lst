@@ -67,10 +67,12 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,snb-platform-id~="00000100" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+ framebuffer-patch-enable~="01000000" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+ framebuffer-singlelink~="01000000" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 ::PciRoot(0x0)/Pci(0x1b,0x0)
- AAPL,snb-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
+ framebuffer-patch-enable~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
+ framebuffer-singlelink~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
 
 Kernel
 
