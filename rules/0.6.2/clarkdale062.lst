@@ -16,7 +16,7 @@ ACPI
  count==0 "-You have no SSDT Patches. Please review the [ACPI Docs][acpi]"
  [Path]==DSDT.aml "-**{$Path}** You should not be including your dumped DSDT. Please review the [ACPI Docs][acpi]"
  [Path]==SSDT-1.aml "-**{$Path}** This is just an example SSDT. If you really made this yourself, call it something more descriptive"
- [Path]==SSDT-PLUG.aml "-**{$Path}** does not work on Sandy and Sandy Bridge systems"
+ [Path]==SSDT-PLUG.aml "-**{$Path}** does not work on Ivy Bridge and older systems"
  [Path]==SSDT-GPIO.aml "-**{$Path}** this doesn't belong on an Sandy Bridge system"
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
