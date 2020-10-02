@@ -1,15 +1,15 @@
 # HEDT: (4th Gen) Ivy Bridge-E OpenCore 0.6.1
 # Generic config suitable for initial installation
 =# OpenCore v0.6.1 Intel Ivy Bridge-E Sanity Check
-=https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e.html
+=https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e.html
 =<hr>
-=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#kernel
-=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#acpi
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
 =[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
 =[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
-=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#platforminfo
-=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-brdige-e#deviceproperties
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#platforminfo
+=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#deviceproperties
 
 ACPI
 :Add
