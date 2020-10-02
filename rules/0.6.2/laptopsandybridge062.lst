@@ -1,15 +1,15 @@
 # Laptop: (2rd Gen) Sandy Bridge OpenCore 0.6.2
 # Generic config suitable for initial installation
 =# OpenCore v0.6.2 Intel Sandy Bridge Laptop Sanity Check
-=https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html
+=https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html
 =<hr>
-=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#kernel
-=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#acpi
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
 =[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
 =[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
-=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#platforminfo
-=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#deviceproperties
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html#platforminfo
+=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html#deviceproperties
 
 ACPI
 :Add
