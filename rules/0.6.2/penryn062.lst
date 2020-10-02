@@ -192,7 +192,7 @@ PlatformInfo
  ProcessorType~=.* " **{$setting}** = **{$value}**"
  MemoryFormFactor=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(iMac12,1|iMac12,2|MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Sandy Bridge Desktop systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(iMac4,1|iMac7,1|iMac10,1|MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Sandy Bridge Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
