@@ -28,7 +28,7 @@ ACPI
 
 :Quirks
  count==5
- FadtEnableReset=no
+ FadtEnableReset~=.* " **{$setting}** = **{$value}**"
  NormalizeHeaders=no
  RebaseRegions=no
  ResetHwSig=no
@@ -37,22 +37,22 @@ ACPI
 Booter
 
 :Quirks
- AvoidRuntimeDefrag=yes
+ AvoidRuntimeDefrag=yes " **{$setting}** = **{$value}** If you board does not support UEFI, please disable this":" **{$setting}** = **{$value}** This is only required if your supports UEFI"
  DevirtualiseMmio=no
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
- EnableSafeModeSlide=yes
- EnableWriteUnprotector=yes
+ EnableSafeModeSlide=yes " **{$setting}** = **{$value}** If you board does not support UEFI, please disable this":" **{$setting}** = **{$value}** This is only required if your supports UEFI"
+ EnableWriteUnprotector=yes " **{$setting}** = **{$value}** If you board does not support UEFI, please disable this":" **{$setting}** = **{$value}** This is only required if your supports UEFI"
  ForceExitBootServices=no
  ProtectCsmRegion~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no
  ProtectSecureBoot=no
  ProtectUefiServices=no
- ProvideCustomSlide=yes
+ ProvideCustomSlide=yes " **{$setting}** = **{$value}** If you board does not support UEFI, please disable this":" **{$setting}** = **{$value}** This is only required if your supports UEFI"
  ProvideMaxSlide=0
- RebuildAppleMemoryMap=no
- SetupVirtualMap=yes
+ RebuildAppleMemoryMap=no " **{$setting}** = **{$value}** If you plan to boot OS X 10.6 or older, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to boot OS X 10.6 or older"
+ SetupVirtualMap=yes " **{$setting}** = **{$value}** If you board does not support UEFI, please disable this":" **{$setting}** = **{$value}** This is only required if your supports UEFI"
  ShrinkMemoryMap~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **RebuildAppleMemoryMap** instead"
  SignalAppleOS=no
  SyncRuntimePermissions=no
@@ -79,19 +79,22 @@ Kernel
  [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
+:Emulate
+ DummyPowerManagement=no
+
 :Quirks
  AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
- CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
+ CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
- DummyPowerManagement=no
+ DummyPowerManagement~=.* "!**{$setting}** was moved in OpenCore v0.6.2 - See **Kernel -> Emulate**"
  ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
- LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
+ LapicKernelPanic=no " **{$setting}** = **{$value}** If you have an HP laptop, please enable this":" **{$setting}** = **{$value}** This is only required if you have an HP laptop"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
@@ -173,7 +176,7 @@ PlatformInfo
  UpdateDataHub=yes
  UpdateNVRAM=yes
  UpdateSMBIOS=yes
- UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**"
+ UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
 
 :Generic
  SpoofVendor=yes
@@ -210,7 +213,7 @@ UEFI
 
 :APFS
  EnableJumpstart=yes
- GlobalConnect=no :" **{$setting}** = **{$value}** Recommended to enable on HP systems if APFS drives do not show up"
+ GlobalConnect=no " **{$setting}** = **{$value}** If you have an HP motherboard and can't see APFS drives in OpenCore, please enable this":" **{$setting}** = **{$value}** Only required for HP motherboard that cannot see APFS drives in OpenCore"
  HideVerbose=yes
  JumpstartHotPlug=no
  MinDate=0
@@ -248,12 +251,12 @@ UEFI
  AppleKeyMap=no
  AppleRtcRam=no
  AppleSecureBoot=no
- AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
- HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
+ HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
  OSInfo=no
  UnicodeCollation=no
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
