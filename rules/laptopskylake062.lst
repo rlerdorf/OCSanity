@@ -101,6 +101,7 @@ Kernel
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
  DummyPowerManagement~=.* "!**{$setting}** was moved in OpenCore v0.6.2 - See **Kernel -> Emulate**"
  ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
+ LegacyCommpage=no
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
  LapicKernelPanic=no " **{$setting}** = **{$value}** If you have an HP laptop, please enable this":" **{$setting}** = **{$value}** This is only required if you have an HP laptop"
