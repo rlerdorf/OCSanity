@@ -193,7 +193,7 @@ NVRAM
 ```
 
 Now we need to put on our regex thinking caps. That `^(?:(?!alcid).)*$"` regex checks to see if the word `alcid` appears anywhere in the **boot-args** setting.
-If it does, the true message is printed which is just the contents of the **\$alcbootarg** variable that we set earlier. Tis will print a warning if **AppleALC.kext** is
+If it does, the true message is printed which is just the contents of the **\$alcbootarg** variable that we set earlier. This will print a warning if **AppleALC.kext** is
 included, but **boot-args** does not include an **alcid** layout. Note that the false message is forced to empty with **:""**. If we didn't do that, then the next
 **boot-args** rule below it might not trigger. Remember only one message per entry and we only want to warn about **alcid** if the situation calls for that, otherwise
 if **boot-args** was left at the default setting we provide a helpful reminder to perhaps add a GPU flag.
