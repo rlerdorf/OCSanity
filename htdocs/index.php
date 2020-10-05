@@ -79,14 +79,14 @@ if($fpath) {
 } else {
     $results = function() { };
     $show_upload = true;
-    // Grab the last 10 uploaded files
+    // Grab the files uploaded in the last 30 minutes
     $dir = new DirectoryIterator('../uploads');
     $uploads = [];
     foreach ($dir as $fileinfo) {
         if(!$fileinfo->isDot()) {
             $fn = $fileinfo->getFilename();
             $mtime = $fileinfo->getMTime();
-            if(time()-$mtime < 3600) {
+            if(time()-$mtime < 1800) {
                 $uploads[$fn] = $mtime;
             }
         }
