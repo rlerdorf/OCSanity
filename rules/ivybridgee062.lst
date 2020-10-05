@@ -1,6 +1,6 @@
-# HEDT: (4th Gen) Ivy Bridge-E OpenCore 0.6.1
+# HEDT: (3rd, 4th Gen) Sandy and Ivy Bridge-E OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Ivy Bridge-E Sanity Check
+=# OpenCore v0.6.2 Intel Sandy and Ivy Bridge-E Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e.html
 =<hr>
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#kernel
@@ -27,7 +27,7 @@ ACPI
 
 :Quirks
  count==5
- FadtEnableReset=no
+ FadtEnableReset~=.* " **{$setting}** = **{$value}**"
  NormalizeHeaders=no
  RebaseRegions=no
  ResetHwSig=no
@@ -74,18 +74,23 @@ Kernel
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
+:Emulate
+ DummyPowerManagement=no
+
 :Quirks
  AppleCpuPmCfgLock=yes
  AppleXcpmCfgLock=yes
  AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
- CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
+ CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
- DummyPowerManagement=no
+ DummyPowerManagement~=.* "!**{$setting}** was moved in OpenCore v0.6.2 - See **Kernel -> Emulate**"
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
+ LegacyCommpage=no
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
- LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
+ LapicKernelPanic=no " **{$setting}** = **{$value}** If you have an HP laptop, please enable this":" **{$setting}** = **{$value}** This is only required if you have an HP laptop"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
@@ -167,11 +172,13 @@ PlatformInfo
  UpdateDataHub=yes
  UpdateNVRAM=yes
  UpdateSMBIOS=yes
- UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**"
+ UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
 
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~="(MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake-X systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -202,7 +209,7 @@ UEFI
 
 :APFS
  EnableJumpstart=yes
- GlobalConnect=no :" **{$setting}** = **{$value}** Recommended to enable on HP systems if APFS drives do not show up"
+ GlobalConnect=no " **{$setting}** = **{$value}** If you have an HP motherboard and can't see APFS drives in OpenCore, please enable this":" **{$setting}** = **{$value}** Only required for HP motherboard that cannot see APFS drives in OpenCore"
  HideVerbose=yes
  JumpstartHotPlug=no
  MinDate=0
@@ -240,12 +247,12 @@ UEFI
  AppleKeyMap=no
  AppleRtcRam=no
  AppleSecureBoot=no
- AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
- HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
+ HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
  OSInfo=no
  UnicodeCollation=no
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"

@@ -1,15 +1,15 @@
-# HEDT: (4th Gen) Ivy Bridge-E OpenCore 0.6.1
+# HEDT: (7th, 9th, 10th Gen) Skylake-X OpenCore 0.6.2
 # Generic config suitable for initial installation
-=# OpenCore v0.6.1 Intel Ivy Bridge-E Sanity Check
-=https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e.html
+=# OpenCore v0.6.2 Intel Skylake-X Sanity Check
+=https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html
 =<hr>
-=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#kernel
-=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#acpi
+=[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#kernel
+=[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
 =[debug]:https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
 =[scanpolicy]:https://dortania.github.io/OpenCore-Post-Install/universal/security.html#scanpolicy
-=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#platforminfo
-=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/ivy-bridge-e#deviceproperties
+=[platforminfo]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#platforminfo
+=[deviceproperties]:https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x#deviceproperties
 
 ACPI
 :Add
@@ -19,15 +19,16 @@ ACPI
  [Path]~=".dsl$" "!**{$Path}** Only include .aml files here. dsl files need to be compiled to .aml"
  [Enabled]==no "-**{$Path}** is **disabled**. Either enable it or remove it to get rid of this warning"
  [Path]!=SSDT-PLUG.aml "-**SSDT-PLUG.aml** is missing. See the [ACPI Docs][acpi]"
- [Path]==SSDT-EC-DESKTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-DESKTOP** and **SSDT-EC**"
- [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-DESKTOP.aml. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-EC-USBX-DESKTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-DESKTOP** and **SSDT-EC**"
+ [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-DESKTOP.aml. See the [ACPI Docs][acpi]"
+ [Path]==SSDT-PMC.aml "-**SSDT-PMC.aml** This should not be included on HEDT systems. See the [ACPI Docs][acpi] if you need it"
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
  [Path]==SSDT-OLA.aml "!**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
  [Path]==SSDT-OLARILA.aml "!**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
 
 :Quirks
  count==5
- FadtEnableReset=no
+ FadtEnableReset~=.* " **{$setting}** = **{$value}**"
  NormalizeHeaders=no
  RebaseRegions=no
  ResetHwSig=no
@@ -37,12 +38,12 @@ Booter
 
 :Quirks
  AvoidRuntimeDefrag=yes
- DevirtualiseMmio=no
+ DevirtualiseMmio=yes
  DisableSingleUser=no
  DisableVariableWrite=no
  DiscardHibernateMap=no
  EnableSafeModeSlide=yes
- EnableWriteUnprotector=yes
+ EnableWriteUnprotector=no
  ForceExitBootServices=no
  ProtectCsmRegion~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **ProtectMemoryRegions** instead"
  ProtectMemoryRegions=no
@@ -50,11 +51,11 @@ Booter
  ProtectUefiServices=no
  ProvideCustomSlide=yes
  ProvideMaxSlide=0
- RebuildAppleMemoryMap=no
- SetupVirtualMap=yes
+ RebuildAppleMemoryMap=yes
+ SetupVirtualMap=yes " **{$setting}** = **{$value}** If you have an Asus motherboard with BIOS v3006 or newer, please disable this"
  ShrinkMemoryMap~=.* "!**{$setting}** was deprecated in OpenCore v0.5.7 - See **RebuildAppleMemoryMap** instead"
  SignalAppleOS=no
- SyncRuntimePermissions=no
+ SyncRuntimePermissions=yes
 
 DeviceProperties
 
@@ -72,20 +73,28 @@ Kernel
  [BundlePath]==SmallTree-Intel-211-AT-PCIe-GBE.kext "-**{$BundlePath}** while this might work, **SmallTreeIntel82576.kext** is considered more reliable"
  [BundlePath]==SMCLightSensor.kext     "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
  [BundlePath]==SMCBatteryManager.kext  "!**{$BundlePath}** VirtualSMC laptop plugins don't work on Desktop"
+ [BundlePath]==XHCI-unsupported.kext  "-**{$BundlePath}** you probably don't need this"
+ [BundlePath]==FakePCIID.kext "-**{$BundlePath}** there are better ways to fake device ids"
+ [BundlePath]==FakePCIID_Intel_HDMI_Audio.kext "-**{$BundlePath}** there are better ways to fake device ids"
  [BundlePath]==* " **{$BundlePath}** make sure this Kext is in your **OC/Kexts** directory"
 
+:Emulate
+ DummyPowerManagement=no
+
 :Quirks
- AppleCpuPmCfgLock=yes
- AppleXcpmCfgLock=yes
- AppleXcpmExtraMsrs=yes
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
- CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this"
+ CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
- DummyPowerManagement=no
+ DummyPowerManagement~=.* "!**{$setting}** was moved in OpenCore v0.6.2 - See **Kernel -> Emulate**"
+ ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
+ LegacyCommpage=no
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
  IncreasePciBarSize=no
- LapicKernelPanic~=.* " **{$setting}** = **{$value}**"
+ LapicKernelPanic=no " **{$setting}** = **{$value}** If you have an HP laptop, please enable this":" **{$setting}** = **{$value}** This is only required if you have an HP laptop"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
  ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
@@ -93,17 +102,17 @@ Kernel
 
 Misc
 :Boot
- BuiltinTextRenderer~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
- ConsoleBehaviourOs~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
- ConsoleBehaviourUi~="" "!**{$setting}** was deprecated in OpenCore v0.5.6"
- ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OpenCore v0.5.6"
- Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OpenCore v0.5.6"
- ConsoleAttributes~=.* " **{$setting}** = **{$value}**"
  HideSelf~=.* "!**{$setting}** was deprecated in OpenCore v0.5.9"
  PollAppleHotKeys=no
  ShowPicker=yes
  UsePicker~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  TakeoffDelay=0
+ BuiltinTextRenderer~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
+ ConsoleBehaviourOs~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
+ ConsoleBehaviourUi~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
+ ConsoleMode~=.* "!**{$setting}** has been moved to UEFI/Output section as of OpenCore v0.5.6"
+ Resolution~=.* "!**{$setting}** has been moved to UEFI/Output section as of OpenCore v0.5.6"
+ ConsoleAttributes~=.* " **{$setting}** = **{$value}**"
  HibernateMode=None
  PickerMode=Builtin
  HideAuxiliary=no
@@ -143,8 +152,8 @@ Misc
  count==0 " You removed the tool EFIs":"%You can remove the tool EFIs here"
 
 NVRAM
- LegacyEnable=yes
- LegacyOverwrite=yes
+ LegacyEnable=no
+ LegacyOverwrite=no
  WriteFlash=yes
 
 :Add
@@ -159,7 +168,7 @@ NVRAM
  run-efi-updater="No"
  csr-active-config~=.* " **{$setting}** = **{$value}**"
  nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OpenCore v0.5.7"
- prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
+ prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} (ru-RU:252)**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value}**"
  SystemAudioVolume~="^\d+$" " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this should be a positive number"
 
 PlatformInfo
@@ -167,13 +176,15 @@ PlatformInfo
  UpdateDataHub=yes
  UpdateNVRAM=yes
  UpdateSMBIOS=yes
- UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**"
+ UpdateSMBIOSMode=Create " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please set this to **Custom**":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
 
 :Generic
  SpoofVendor=yes
  AdviseWindows=no
+ ProcessorType~=.* " **{$setting}** = **{$value}**"
+ MemoryFormFactor=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(MacPro6,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake-X systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(iMacPro1,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake-X systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -202,7 +213,7 @@ UEFI
 
 :APFS
  EnableJumpstart=yes
- GlobalConnect=no :" **{$setting}** = **{$value}** Recommended to enable on HP systems if APFS drives do not show up"
+ GlobalConnect=no " **{$setting}** = **{$value}** If you have an HP motherboard and can't see APFS drives in OpenCore, please enable this":" **{$setting}** = **{$value}** Only required for HP motherboard that cannot see APFS drives in OpenCore"
  HideVerbose=yes
  JumpstartHotPlug=no
  MinDate=0
@@ -240,12 +251,12 @@ UEFI
  AppleKeyMap=no
  AppleRtcRam=no
  AppleSecureBoot=no
- AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
- FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
- HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this"
+ FirmwareVolume=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
+ HashServices=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
  OSInfo=no
  UnicodeCollation=no
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
@@ -270,7 +281,8 @@ UEFI
  AvoidHighAlloc~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  DeduplicateBootOrder=yes
  ExitBootServicesDelay=0
- IgnoreInvalidFlexRatio=yes
+ IgnoreInvalidFlexRatio=no
+ ReconnectOnResChange~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  IgnoreTextInGraphics~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ProvideConsoleGop~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
  ReleaseUsbOwnership=no
