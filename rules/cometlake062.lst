@@ -191,7 +191,7 @@ PlatformInfo
  SpoofVendor=yes
  AdviseWindows=no
  ProcessorType~=.* " **{$setting}** = **{$value}**"
- MemoryFormFactor=Auto
+ SystemMemoryStatus=Auto
  SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~="(iMac20,1|iMac20,2)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Coffee Lake Desktop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
