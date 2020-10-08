@@ -22,7 +22,7 @@ ACPI
  [Path]==SSDT-EC-USBX-LAPTOP.aml&SSDT-EC.aml "-**{$Path}** don't use both **SSDT-EC-USBX-LAPTOP** and **SSDT-EC**"
  [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-LAPTOP.aml. See the [ACPI Docs][acpi]"
  [Path]==SSDT-EC-USBX-DESKTOP.aml "-**{$Path}** Please use **SSDT-EC-USBX-LAPTOP** instead"
- [Path]!=SSDT-PNLF.aml "-**{$Path}** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-PNLF.aml "-**{$Path}** is missing, please add this if you're using a laptop. See the [ACPI Docs][acpi]"
  [Path]==SSDT-PNLF-CFL.aml "-**{$Path}** This should not be included on Kaby Lake and older laptops, instead use SSDT-PNLF. Please review the [ACPI Docs][acpi]."
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
  [Path]==SSDT-OLA.aml "!**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
@@ -64,7 +64,7 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="00001619|00001b19|00002619|00001219|" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+ AAPL,ig-platform-id~="00001619|00001b19|00002619|00001219|00001b19|02001619|02002619|05003b19" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 ::PciRoot(0x0)/Pci(0x1b,0x0)
  AAPL,ig-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
@@ -194,7 +194,7 @@ PlatformInfo
  ProcessorType~=.* " **{$setting}** = **{$value}**"
  SystemMemoryStatus=Auto
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(MacBook9,1|MacBookPro13,1|MacBookPro13,2|MacBookPro13,3)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake Laptop systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(MacBook9,1|MacBookPro13,1|MacBookPro13,2|MacBookPro13,3|iMac17,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Skylake Laptop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"

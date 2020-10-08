@@ -24,7 +24,7 @@ ACPI
  [Path]~=-EC.+aml :"%You might need something like SSDT-EC.aml or SSDT-EC-USBX-LAPTOP.aml. See the [ACPI Docs][acpi]"
  [Path]==SSDT-AWAC.aml "-**SSDT-AWAC.aml** shouldn't be required. See the [ACPI Docs][acpi] if you actually need it"
  [Path]==SSDT-PMC.aml "-**SSDT-PMC.aml** is not required for 8th gen laptops."
- [Path]!=SSDT-PNLF-CFL.aml "-**{$Path}** is missing. See the [ACPI Docs][acpi]"
+ [Path]!=SSDT-PNLF-CFL.aml "-**{$Path}** is missing, please add this if you're using a laptop. See the [ACPI Docs][acpi]"
  [Path]==SSDT-PNLF.aml "-**{$Path}** This should not be included on Coffee Lake and newer laptops, instead use SSDT-PNLF-CFL. Please review the [ACPI Docs][acpi]."
  [Path]==* " **{$Path}** Make sure this file is in your OC/ACPI directory"
  [Path]==SSDT-OLA.aml "!**{$Path}** Don't use random files found on sketchy websites, these inject random data that can very likely prevent booting. Please review the [ACPI Docs][acpi]."
@@ -66,7 +66,7 @@ DeviceProperties
 
 :Add
 ::PciRoot(0x0)/Pci(0x2,0x0)
- AAPL,ig-platform-id~="00009b3e" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
+ AAPL,ig-platform-id~="00009b3e|0900a53e|07009B3e|0000a53e" " **{$setting}** = **{$value}** iGPU set correctly":"-**{$setting}** = **{$value}** - iGPU may not be set correctly. Please read the [DeviceProperties Docs][deviceproperties]"
 
 ::PciRoot(0x0)/Pci(0x1b,0x0)
  AAPL,ig-platform-id~=.* "!**{$setting}** is in the wrong location, iGPU location is PciRoot(0x0)/Pci(0x2,0x0)"
@@ -196,7 +196,7 @@ PlatformInfo
  ProcessorType~=.* " **{$setting}** = **{$value}**"
  SystemMemoryStatus=Auto
  SupportsCsm=no "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5":"!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
- SystemProductName~="(MacBookPro15,1|MacBookPro15,2|MacBookPro15,3|MacBookPro15,4)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Coffee Lake Laptop systems. See [PlatformInfo Docs][platforminfo]"
+ SystemProductName~="(MacBookPro15,1|MacBookPro15,2|MacBookPro15,3|MacBookPro15,4|Macmini8,1)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Coffee Lake Laptop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  ROM=112233000000 "-**{$setting}** = **{$value}** You should set this to your NIC MAC address. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
  SystemSerialNumber=W0000000001 "!**{$setting}** should be set to your generated system serial number. See the [PlaformInfo Docs][platforminfo]":" **{$setting}** is set"
