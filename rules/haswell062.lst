@@ -88,7 +88,7 @@ Kernel
  DummyPowerManagement=no
 
 :Quirks
- AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable if you don't plan to boot 10.10 or older":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios and you need to boot 10.10 or older"
  AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no

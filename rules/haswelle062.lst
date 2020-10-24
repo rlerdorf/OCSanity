@@ -80,8 +80,8 @@ Kernel
  DummyPowerManagement=no
 
 :Quirks
- AppleCpuPmCfgLock=yes
- AppleXcpmCfgLock=yes
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable if you don't plan to boot 10.10 or older":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios and you need to boot 10.10 or older"
+ AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
  AppleXcpmExtraMsrs=yes
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
