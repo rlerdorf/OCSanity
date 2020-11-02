@@ -103,7 +103,7 @@ Kernel
  CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
  DisableIoMapper=yes
  DisableRtcChecksum~=.* " **{$setting}** = **{$value}**"
- DummyPowerManagement~=.* "!**{$setting}** was moved in OpenCore v0.6.3 - See **Kernel -> Emulate**"
+ DummyPowerManagement~=.* "!**{$setting}** was moved in OpenCore v0.6.2 - See **Kernel -> Emulate**"
  ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  LegacyCommpage=no
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
@@ -276,10 +276,11 @@ UEFI
  ConsoleControl~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See UEFI/TextRenderer"
 
 :Output
- count==11 :"!You should have exactly 11 settings in the UEFI/Output section"
+ count==12 :"!You should have exactly 12 settings in the UEFI/Output section"
  TextRenderer=BuiltinGraphics
  ConsoleMode=""
  Resolution~=.* " **{$setting}** = **{$value}**"
+ ForceResolution=no
  ClearScreenOnModeSwitch=no
  IgnoreTextInGraphics=no
  ProvideConsoleGop=yes
