@@ -166,7 +166,7 @@ NVRAM
  run-efi-updater="No"
  csr-active-config~=.* " **{$setting}** = **{$value}**"
  nvda_drv~=.* "!**{$setting}** = **{$value}** Remove this setting completely. It is no longer used as of OpenCore v0.5.7"
- prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, leave this blank":" **{$setting}** = **{$value} ({@value})**"
+ prev-lang:kbd=72752d52553a323532 "-**{$setting}** = **{$value} ({@value})**. Unless you speak Russian, remove this entry or fill it in with your language":" **{$setting}** = **{$value} ({@value})**"
  SystemAudioVolume~="^\d+$" " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this should be a positive number"
 
 PlatformInfo
@@ -249,7 +249,7 @@ UEFI
  AppleKeyMap=no
  AppleRtcRam=no
  AppleSecureBoot=no
- AppleSmcIo=no " **{$setting}** = **{$value}** If you plan to use FileVault2, please enable this":" **{$setting}** = **{$value}** This is only required if you plan to use FileVault"
+ AppleSmcIo=no
  AppleUserInterfaceTheme=no
  DataHub=no
  DeviceProperties=no
