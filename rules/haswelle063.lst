@@ -91,6 +91,7 @@ Kernel
  ExtendBTFeatureFlags~=.* " **{$setting}** = **{$value}**"
  LegacyCommpage=no
  ExternalDiskIcons~=.* " **{$setting}** = **{$value}**"
+ ForceSecureBootScheme=no
  IncreasePciBarSize=no
  LapicKernelPanic=no " **{$setting}** = **{$value}** If you have an HP laptop, please enable this":" **{$setting}** = **{$value}** This is only required if you have an HP laptop"
  PanicNoKextDump=yes
