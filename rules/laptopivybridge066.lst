@@ -113,6 +113,7 @@ Kernel
  LapicKernelPanic=no " **{$setting}** = **{$value}** If you have an HP laptop, please enable this":" **{$setting}** = **{$value}** This is only required if you have an HP laptop"
  PanicNoKextDump=yes
  PowerTimeoutKernelPanic=yes
+ SetApfsTrimTimeout=-1
  ThirdPartyDrives~=.* " **{$setting}** = **{$value}**"
  XhciPortLimit=yes " **{$setting}** = **{$value}** turn off after USB port mapping":" **{$setting}** = **{$value}** enable if you have USB issues"
 
@@ -200,6 +201,7 @@ PlatformInfo
  AdviseWindows=no
  ProcessorType~=.* " **{$setting}** = **{$value}**"
  SystemMemoryStatus=Auto
+ MaxBIOSVersion=no
  SupportsCsm~=.* "!**{$setting}** was replaced with **AdviseWindows** in OpenCore v0.5.5"
  SystemProductName~="(MacBookAir5,1|MacBookAir5,2|MacBookPro10,1|MacBookPro10,2|Macmini6,1|Macmini6,2)" " **{$setting}** = **{$value}**":"-**{$setting}** = **{$value}** this is not a suggested SMBIOS for Ivy Bridge Laptop systems. See [PlatformInfo Docs][platforminfo]"
  MLB=M000000000001 "!**{$setting}** should be set to your generated board serial. See [PlatformInfo Docs][platforminfo]":" **{$setting}** is set"
@@ -299,6 +301,7 @@ UEFI
 :Quirks
  AvoidHighAlloc~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  DeduplicateBootOrder~=.* "!**{$setting}** was deprecated in OpenCore v0.6.5"
+ DisableSecurityPolicy=no " **{$setting}** = **{$value}** If you have a Microsoft Surface device, please enable this"
  ExitBootServicesDelay=0
  IgnoreInvalidFlexRatio=yes
  ReconnectOnResChange~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See Output/${setting}"
