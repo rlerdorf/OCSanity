@@ -3,6 +3,7 @@
 =# OpenCore v0.6.6 Intel Kaby Lake Laptop Sanity Check
 =https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake.html
 =<hr>
+=[launcheroption]:https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html
 =[kernel]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake#kernel
 =[acpi]:https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake#acpi
 =[kexts]:https://dortania.github.io/OpenCore-Install-Guide/ktext.html#kexts
@@ -127,6 +128,8 @@ Misc
  UsePicker~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6"
  TakeoffDelay=0
  HibernateMode=None
+ LauncherOption~="Disabled|Full|Short" " **{$setting}** = **{$value}** LauncherOption set correctly":"-**{$setting}** = **{$value}** - Invalid LauncherOption. Please read the [Misc -> Boot Docs][boot]"
+ LauncherPath=Default
  PickerMode=Builtin
  HideAuxiliary=no
  PickerAttributes~=.* " **{$setting}** = **{$value}**"
@@ -151,7 +154,7 @@ Misc
  ApECID=0
  AuthRestart=no
  BlacklistAppleUpdate=yes
- BootProtect~=.* " **{$setting}** = **{$value}**"
+ BootProtect~=.* "!**{$setting}** was deprecated in OpenCore v0.6.6 - See **LauncherOption**"
  DmgLoading=Signed
  EnablePassword=no
  RequireSignature~=.* "!**{$setting}** was deprecated in OpenCore v0.5.6 - See **Vault**"
