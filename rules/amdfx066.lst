@@ -94,6 +94,7 @@ Kernel
  count>19 " AMD kernel patches"
  [MatchOS]~=.+ "!You have used Clover patches, not OpenCore"
  [Replace]~=\xbb\xbc\x4f\xea\x78\xe9\x5d\x00\x00\x00\x90 " Catalina 10.15.4 CPUFAMILY_INTEL_PENRYN patch found":"-Catalina 10.15.4 CPUFAMILY_INTEL_PENRYN patch is missing or incorrect"
+ [Replace]~=\xb3\x01\xba\xbc\x4f\xea\x78\xe9\x5d\x00\x00\x00\x00\x90 " Big Sur 11.3 CPUFAMILY_INTEL_PENRYN patch found":"-Big Sur 11.3 CPUFAMILY_INTEL_PENRYN patch is missing or incorrect"
 
 :Emulate
  DummyPowerManagement=yes " **{$setting}** = **{$value}**":"!**{$setting}** = **{$value}** this needs to be enabled"
