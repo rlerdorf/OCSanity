@@ -35,7 +35,7 @@ ACPI
  NormalizeHeaders=no
  RebaseRegions=no
  ResetHwSig=no
- ResetLogoStatus=no
+ ResetLogoStatus~=.* " **{$setting}** = **{$value}**"
 
 Booter
 

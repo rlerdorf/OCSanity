@@ -31,7 +31,7 @@ ACPI
  NormalizeHeaders=no
  RebaseRegions=no
  ResetHwSig=no
- ResetLogoStatus=no
+ ResetLogoStatus~=.* " **{$setting}** = **{$value}**"
 
 Booter
 
@@ -79,9 +79,9 @@ Kernel
  DummyPowerManagement=no
 
 :Quirks
- AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable if you don't plan to boot 10.10 or older":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios and you need to boot 10.10 or older"
- AppleXcpmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
- AppleXcpmExtraMsrs=yes
+ AppleCpuPmCfgLock=yes " **{$setting}** = **{$value}** You should disable CFG-Lock in your bios instead of using this":" **{$setting}** = **{$value}** Make sure CFG-Lock is disabled in your bios"
+ AppleXcpmCfgLock=no
+ AppleXcpmExtraMsrs=no
  AppleXcpmForceBoost=no
  CustomSMBIOSGuid=no " **{$setting}** = **{$value}** If you have a Dell or VIAO motherboard, please enable this":" **{$setting}** = **{$value}** This is only required if you have a Dell or VIAO motherboard"
  DisableIoMapper=yes
@@ -195,8 +195,8 @@ PlatformInfo
 
 UEFI
  ConnectDrivers=yes
- Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "$hfs={$value}; **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
- Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "!**{$value}** you already have **{$hfs}**"
+ Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi|OpenHfsPlus.efi "$hfs={$value}; **{$value}**":"!Need either **VBoxHfs.efi**, **OpenHfsPlus.efi** or **HfsPlus.efi** here"
+ Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi|OpenHfsPlus.efi "!**{$value}** you already have **{$hfs}**"
  Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
  Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OpenCore v0.5.7"
  Drivers==ApfsDriverLoader.efi "!**ApfsDriverLoader.efi** was merged into OpenCore under the UEFI/APFS section as of OpenCore v0.5.8"

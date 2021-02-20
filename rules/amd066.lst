@@ -35,7 +35,7 @@ ACPI
  NormalizeHeaders=no
  RebaseRegions=no
  ResetHwSig=no
- ResetLogoStatus=no
+ ResetLogoStatus~=.* " **{$setting}** = **{$value}**"
 
 :Patch
  count>15 "!You may have added the kernel patches in the wrong section. They should be in the Kernel section. Please review the [Kernel Docs][kernel]"
@@ -216,8 +216,8 @@ PlatformInfo
 
 UEFI
  ConnectDrivers=yes
- Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "$hfs={$value}; **{$value}**":"!Need either **VBoxHfs.efi** or **HFSPlus.efi** here"
- Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi "!**{$value}** you already have **{$hfs}**"
+ Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi|OpenHfsPlus.efi "$hfs={$value}; **{$value}**":"!Need either **VBoxHfs.efi**, **OpenHfsPlus.efi** or **HfsPlus.efi** here"
+ Drivers==VBoxHfs.efi|HFSPlus.efi|HfsPlus.efi|OpenHfsPlus.efi "!**{$value}** you already have **{$hfs}**"
  Drivers==OpenRuntime.efi " **{$value}**":"!**OpenRuntime.efi** is missing"
  Drivers==FwRuntimeServices.efi "!**{$value}** has been replaced by OpenRuntime.efi as of OpenCore v0.5.7"
  Drivers==ApfsDriverLoader.efi "!**ApfsDriverLoader.efi** was merged into OpenCore under the UEFI/APFS section as of OpenCore v0.5.8"
